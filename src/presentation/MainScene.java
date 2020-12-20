@@ -1,12 +1,83 @@
 package presentation;
 
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 
-public class MainScene extends Scene  {
+public class MainScene extends Scene {
+	private Point[][] points;
+	GridPane root;
+
 	public MainScene() throws Exception {
-		super(new BorderPane());
-		BorderPane root = (BorderPane)(this.getRoot());
-		root.setCenter(new ControlMap());
+		super(new GridPane());
+		root = (GridPane) (this.getRoot());
+		// root.setHgap(10);
+		// root.setVgap(10);
+		reset();
 	}
+
+	public void reset() {
+		this.points = new Point[10][10];
+
+		for (int lig = 0; lig < 10; lig++) {
+			for (int col = 0; col < 10; col++) {
+
+				if ((lig == 1 && (col == 4 || col == 5) || (lig == 8 && (col == 4 || col == 5)))) {
+					points[lig][col] = new Point("PORTAL", this);
+				}
+
+				else if (col == 0 || col == 9) {
+					points[lig][col] = new Point("NOTHING", this);
+
+				} else {
+					points[lig][col] = new Point("STANDARD", this);
+
+				}
+			}
+		}
+
+		points[4][0].setType("STANDARD");
+		points[5][0].setType("STANDARD");
+		points[4][9].setType("STANDARD");
+		points[5][9].setType("STANDARD");
+
+		for (int lig = 0; lig < 10; lig++) {
+			for (int col = 0; col < 10; col++) {
+				if (points[lig][col].getType().equals("STANDARD") || points[lig][col].getType().equals("PORTAL")) {
+					root.add(points[lig][col].getN().getLine1(), col, lig);
+					root.add(points[lig][col].getN().getLine2(), col, lig);
+
+					root.add(points[lig][col].getCircle(), col, lig);
+
+				}
+
+			}
+		}
+
+	}
+
+	public void showBack(Point point) {
+		int x = 0, y = 0;
+		for (int lig = 0; lig < 10; lig++) {
+			for (int col = 0; col < 10; col++) {
+				if (points[lig][col] == point) {
+					x = lig;
+					y = col;
+					break;
+				}
+
+			}
+		}
+
+		points[x + 1][y].showBack();
+		points[x - 1][y].showBack();
+		points[x][y + 1].showBack();
+		points[x][y - 1].showBack();
+
+	}
+
+	public void available(presentation.Point square2) {
+		// TODO Auto-generated method stub
+
+	}
+
 }

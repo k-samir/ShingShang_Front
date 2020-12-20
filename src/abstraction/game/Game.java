@@ -1,33 +1,33 @@
 package abstraction.game;
 
-
 import abstraction.board.Board;
 import abstraction.move.Move;
 import abstraction.pawn.Bushi;
-/** 
- *Le jeu Shing Shang
+
+/**
+ * Le jeu Shing Shang
  */
 public class Game {
-	/* * * * * * * * * * *
-	 *	Attributs 
-	 * * * * * * * * * * */
-	
+	/*
+	 * * * * * * * * * * * Attributs * * * * * * * * *
+	 */
+
 	private Player turnPlayer;
 	private int turnNumber;
 	private Board board;
-	
-	/* * * * * * * * * * *
-	 *	Constructeurs 
-	 * * * * * * * * * * */
-	
+
+	/*
+	 * * * * * * * * * * * Constructeurs * * * * * * * * *
+	 */
+
 	public Game() {
 		turnNumber = 1;
 	}
-	
-	/* * * * * * * * * * *
-	 *	Getters & Setters
-	 * * * * * * * * * * */
-	
+
+	/*
+	 * * * * * * * * * * * Getters & Setters * * * * * * * * *
+	 */
+
 	/**
 	 * 
 	 * @return le joueur du tour en cours
@@ -43,7 +43,7 @@ public class Game {
 	public void setTurnPlayer(Player turnPlayer) {
 		this.turnPlayer = turnPlayer;
 	}
-	
+
 	/**
 	 * 
 	 * @return le nombre de tour
@@ -59,7 +59,7 @@ public class Game {
 	public void setTurnNumber(int turnNumber) {
 		this.turnNumber = turnNumber;
 	}
-	
+
 	/**
 	 * 
 	 * @return le plateau de jeu
@@ -67,7 +67,7 @@ public class Game {
 	public Board getBoard() {
 		return board;
 	}
-	
+
 	/**
 	 * 
 	 * @param board le plateau de jeu
@@ -75,172 +75,171 @@ public class Game {
 	public void setBoard(Board board) {
 		this.board = board;
 	}
-	
-	/* * * * * * * * * * *
-	 *	Méthodes
-	 * * * * * * * * * * */
+
+	/*
+	 * * * * * * * * * * * Mï¿½thodes * * * * * * * * *
+	 */
 
 	/**
-	 * Créer un plateau et l'affecte à l'attribut board du jeu
+	 * Crï¿½er un plateau et l'affecte ï¿½ l'attribut board du jeu
 	 */
 	private void createBoard() {
 		String name1 = Console.askName(1);
 		String name2 = Console.askName(2);
-		
+
 		Player p1 = new Player(1, name1);
 		Player p2 = new Player(2, name2);
-		
-		board = new Board(p1,p2);
+
+		board = new Board(p1, p2);
 		turnPlayer = p1;
 	}
-	
+
 	/**
-	 * Démarre le jeu et gère le déroulement de jeu
+	 * Dï¿½marre le jeu et gï¿½re le dï¿½roulement de jeu
 	 */
 	public void start() {
 		showName();
 		createBoard();
-		while(notOver()) {
+		while (notOver()) {
 			playTurn();
 		}
 		end();
 	}
-	
+
 	/**
-	 * Indique si le jeu n'est pas terminé
+	 * Indique si le jeu n'est pas terminï¿½
 	 * 
 	 * @return true si le jeu est toujours en cours
 	 */
 	private boolean notOver() {
 		return !isOver();
 	}
-	
+
 	/**
-	 * Indique si le jeu est terminé en recherchant le nom du gagnant
+	 * Indique si le jeu est terminï¿½ en recherchant le nom du gagnant
 	 * 
 	 * @return true s'il existe un gagnant
 	 */
-	public boolean isOver() { // retirer le static 
+	public boolean isOver() { // retirer le static
 		return (board.winner() != null);
 	}
-	
+
 	/**
-	 * Gère le déroulement d'un tour
+	 * Gï¿½re le dï¿½roulement d'un tour
 	 */
 	public void playTurn() {
 		Bushi selectedBushi;
 		Move selectedMove;
 		boolean yesShowLegalMoves;
-		
+
 		board.show();
-		System.out.println(turnPlayer.getName() + ", à toi de jouer ! :)");
+		System.out.println(turnPlayer.getName() + ", ï¿½ toi de jouer ! :)");
 		selectedBushi = Console.askChoseBushi(this);
-		System.out.println("Pièce séléctionnée : " + selectedBushi.toString());
+		System.out.println("Piï¿½ce sï¿½lï¿½ctionnï¿½e : " + selectedBushi.toString());
 		selectedBushi.calculateLegalMoves();
-		
+
 		yesShowLegalMoves = Console.askShowLegalMoves();
-		if(yesShowLegalMoves)
+		if (yesShowLegalMoves)
 			board.showLegalMoves();
 
 		selectedMove = Console.askChoseMove(board);
 		board.executeMove(selectedMove);
-		if(selectedMove.isShingShang()) {
-			Console.askShingShangChoice(board,selectedMove.getMovedBushi());
+		if (selectedMove.isShingShang()) {
+			Console.askShingShangChoice(board, selectedMove.getMovedBushi());
 		}
-		if(board.isAdditionalTurn()) {
+		if (board.isAdditionalTurn()) {
 			playAdditionnalTurn();
 		}
-		
+
 		nextTurn();
 	}
-	
+
 	/**
-	 * Gère le déroulement d'un tour supplémentaire lors d'un shing shang
+	 * Gï¿½re le dï¿½roulement d'un tour supplï¿½mentaire lors d'un shing shang
 	 */
 	public void playAdditionnalTurn() {
-		
+
 		Bushi selectedBushi;
 		Move selectedMove;
 		boolean playerWantsToContinue = Console.askContinue();
 		boolean yesShowLegalMoves;
-		
-		while(playerWantsToContinue && board.isAdditionalTurn()) {
+
+		while (playerWantsToContinue && board.isAdditionalTurn()) {
 			board.show();
-			System.out.println(turnPlayer.getName() + ", tu peux choisir une autre pièce :)");
+			System.out.println(turnPlayer.getName() + ", tu peux choisir une autre piï¿½ce :)");
 			selectedBushi = Console.askChoseBushi(this);
-			System.out.println("Pièce séléctionnée : " + selectedBushi.toString());			
+			System.out.println("Piï¿½ce sï¿½lï¿½ctionnï¿½e : " + selectedBushi.toString());
 			selectedBushi.calculateLegalMoves();
-			
+
 			yesShowLegalMoves = Console.askShowLegalMoves();
-			if(yesShowLegalMoves)
+			if (yesShowLegalMoves)
 				board.showLegalMoves();
-			
+
 			selectedMove = Console.askChoseMove(board);
 			board.executeMove(selectedMove);
-			
-			if(selectedMove.isShingShang()) {
-				Console.askShingShangChoice(board,selectedMove.getMovedBushi());
+
+			if (selectedMove.isShingShang()) {
+				Console.askShingShangChoice(board, selectedMove.getMovedBushi());
 			}
-			
-			if(board.isAdditionalTurn()) {
+
+			if (board.isAdditionalTurn()) {
 				playerWantsToContinue = Console.askContinue();
 			}
 
 		}
 		board.resetMovedBushis();
 	}
-	
+
 	/**
-	 * Passe au tour suivant et détermine le joueur du tour
+	 * Passe au tour suivant et dï¿½termine le joueur du tour
 	 */
 	public void nextTurn() {
 		turnNumber++;
-		if(turnNumber % 2 == 1) 
+		if (turnNumber % 2 == 1)
 			turnPlayer = board.getPlayer1();
-		else 
+		else
 			turnPlayer = board.getPlayer2();
 	}
-	
+
 	/**
 	 * Indique si ce n'est pas le tour du joueur
+	 * 
 	 * @param p un joueur
-	 * @return true si le joueur du tour est différent du joueur du tour
+	 * @return true si le joueur du tour est diffï¿½rent du joueur du tour
 	 */
 	public boolean isNotTurnPlayer(Player p) {
 		return !turnPlayer.equals(p);
 	}
-	
+
 	/**
 	 * Indique le jeu est fini et affiche le nom du joueur
 	 */
 	private void end() {
-		System.out.println("-- Fin de la partie --\n Le gagnant est " +  board.winner().getName() +".");
+		System.out.println("-- Fin de la partie --\n Le gagnant est " + board.winner().getName() + ".");
 	}
-	
+
 	/**
 	 * Affiche le nom du jeu
 	 */
 	public static void showName() {
 		System.out.println("_______________________________________________________________________________________ ");
-		System.out.println(" d88888b  dP       oo                               dP");                                  
-		System.out.println("88.    \"' 88                                        88");                                  
-		System.out.println("`Y88888b. 88d888b. dP 88d888b. .d8888b.    .d8888b. 88d888b. .d8888b. 88d888b. .d8888b."); 
-		System.out.println("      `8b 88'  `88 88 88'  `88 88'  `88    Y8ooooo. 88'  `88 88'  `88 88'  `88 88'  `88"); 
+		System.out.println(" d88888b  dP       oo                               dP");
+		System.out.println("88.    \"' 88                                        88");
+		System.out.println("`Y88888b. 88d888b. dP 88d888b. .d8888b.    .d8888b. 88d888b. .d8888b. 88d888b. .d8888b.");
+		System.out.println("      `8b 88'  `88 88 88'  `88 88'  `88    Y8ooooo. 88'  `88 88'  `88 88'  `88 88'  `88");
 		System.out.println("d8'   .8P 88    88 88 88    88 88.  .88          88 88    88 88.  .88 88    88 88.  .88 ");
-		System.out.println(" Y88888P  dP    dP dP dP    dP `8888P88    `88888P' dP    dP `88888P8 dP    dP `8888P88"); 
+		System.out.println(" Y88888P  dP    dP dP dP    dP `8888P88    `88888P' dP    dP `88888P8 dP    dP `8888P88");
 		System.out.println("                                   .88                                             .88");
 		System.out.println("                                d8888P                                          d8888P");
 		System.out.println("_______________________________________________________________________________________ ");
 	}
-	
 
-	public static void main(String args[]) {
-		
-		Game shingshang = new Game();
-		shingshang.start();
-		
-	}
-
-	
+	/**
+	 * public static void main(String args[]) {
+	 * 
+	 * Game shingshang = new Game(); shingshang.start();
+	 * 
+	 * }
+	 **/
 
 }
