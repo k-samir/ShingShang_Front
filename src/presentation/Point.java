@@ -14,6 +14,7 @@ public class Point {
 	private MainScene mainScene;
 	private Circle circle;
 	private String type;
+	private Boolean already_clicked = false;
 
 	private Connection N;
 	// , S, E, W, NE, NW, SE, SW;
@@ -48,7 +49,14 @@ public class Point {
 		N = new Connection(mainScen, this);
 
 		circle.setOnMouseClicked(e -> {
-			mainScene.showBack(Point.this);
+			if(!this.already_clicked) {
+				already_clicked = true;
+				mainScene.showBack(Point.this);
+			}
+			else { 
+			already_clicked = false;
+			mainScene.show(Point.this);
+			}
 
 		});
 
@@ -61,6 +69,10 @@ public class Point {
 
 	public void showBack() {
 		this.circle.setStroke(Color.BLUE);
+	}
+	
+	public void show() {
+		this.circle.setStroke(Color.BLACK);
 	}
 
 	public Circle getCircle() {

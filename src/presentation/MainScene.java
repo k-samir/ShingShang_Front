@@ -59,6 +59,7 @@ public class MainScene extends Scene {
 		int x = 0, y = 0;
 		for (int lig = 0; lig < 10; lig++) {
 			for (int col = 0; col < 10; col++) {
+
 				if (points[lig][col] == point) {
 					x = lig;
 					y = col;
@@ -67,11 +68,62 @@ public class MainScene extends Scene {
 
 			}
 		}
+		try {
+			System.out.print("[" + x + " , " + y + "]");
+			points[x + 1][y].showBack();
+		} catch (Exception e) {
+		}
+		try {
+			points[x - 1][y].showBack();
+		} catch (Exception e) {
+		}
+		try {
+			points[x][y + 1].showBack();
+		} catch (Exception e) {
+		}
+		try {
+			points[x][y - 1].showBack();
+		} catch (Exception e) {
+		}
+		try {
+		} catch (Exception e) {
+		}
 
-		points[x + 1][y].showBack();
-		points[x - 1][y].showBack();
-		points[x][y + 1].showBack();
-		points[x][y - 1].showBack();
+	}
+
+	public void show(Point point) {
+		int x = 0, y = 0;
+		for (int lig = 0; lig < 10; lig++) {
+			for (int col = 0; col < 10; col++) {
+
+				if (points[lig][col] == point) {
+					x = lig;
+					y = col;
+					break;
+				}
+
+			}
+		}
+		try {
+			System.out.print("[" + x + " , " + y + "]");
+			points[x + 1][y].show();
+		} catch (Exception e) {
+		}
+		try {
+			points[x - 1][y].show();
+		} catch (Exception e) {
+		}
+		try {
+			points[x][y + 1].show();
+		} catch (Exception e) {
+		}
+		try {
+			points[x][y - 1].show();
+		} catch (Exception e) {
+		}
+		try {
+		} catch (Exception e) {
+		}
 
 	}
 
