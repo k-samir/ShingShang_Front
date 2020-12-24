@@ -43,10 +43,9 @@ public class MainScene extends Scene {
 		for (int lig = 0; lig < 10; lig++) {
 			for (int col = 0; col < 10; col++) {
 				if (points[lig][col].getType().equals("STANDARD") || points[lig][col].getType().equals("PORTAL")) {
-					root.add(points[lig][col].getN().getLine1(), col, lig);
-					root.add(points[lig][col].getN().getLine2(), col, lig);
-
-					root.add(points[lig][col].getCircle(), col, lig);
+					
+				
+					root.add(points[lig][col].getStackPane(), col, lig);
 
 				}
 
