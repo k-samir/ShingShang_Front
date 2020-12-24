@@ -1,38 +1,72 @@
 package presentation;
 
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+import application.Main;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.CycleMethod;
+import javafx.scene.paint.LinearGradient;
+import javafx.scene.paint.Stop;
+import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 
 public class MainScene extends Scene {
 	private Point[][] points;
 	BorderPane root;
 	GridPane board;
 
-	public MainScene() throws Exception {
+	public MainScene(Main main) throws Exception {
+		
+		
 		super(new BorderPane());
 		
 		root = (BorderPane) (this.getRoot());
 		board = new GridPane();
 		
 		StackPane stackPan = new StackPane();
-		Rectangle rBleu = new Rectangle(770,70, Color.GREY);
+	//	Rectangle rBleu = new Rectangle(770,70, Color.GREY);
 		
 		Label label1 = new Label("TEXT INFO");
 	
 		HBox hb = new HBox();
+		Button btn = new Button("BACK");
+		btn.setOnAction(new EventHandler<ActionEvent>() {
+		    @Override public void handle(ActionEvent e) {
+		        try {
+					main.start1();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+		    }
+		});
+		
 		hb.getChildren().add(label1);
 		hb.setSpacing(10);
 		
-		stackPan.getChildren().addAll(rBleu,hb);
+		stackPan.getChildren().addAll(hb,btn);
 		root.setTop(stackPan);
 		root.setCenter(board);		
 	//	root = (GridPane) (this.getRoot());
@@ -41,6 +75,7 @@ public class MainScene extends Scene {
 		reset();
 	}
 
+	
 	public void reset() {
 		this.points = new Point[10][10];
 
