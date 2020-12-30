@@ -210,8 +210,8 @@ public class MainScene extends Scene {
 					Rectangle r = new Rectangle();
 					r.setWidth(75);
 					r.setHeight(75);
-					r.setFill(Color.GREY);
-					r.setStroke(Color.GREY);
+					r.setFill(Color.rgb(192,194,181));
+					r.setStroke(Color.rgb(192,194,181));
 					board.add(r,col,lig);
 				}
 

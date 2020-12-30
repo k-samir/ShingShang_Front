@@ -76,8 +76,8 @@ public class Point {
 		r = new Rectangle();
 		r.setWidth(75);
 		r.setHeight(75);
-		r.setFill(Color.GREY);
-		r.setStroke(Color.GREY);
+		r.setFill(Color.rgb(192,194,181));
+		r.setStroke(Color.rgb(192,194,181));
 		
 	if(border.equals("NOTBORDER")) {
 		north_w = new Line(0,0,35,35);
