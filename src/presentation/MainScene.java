@@ -40,6 +40,11 @@ public class MainScene extends Scene {
 	BorderPane root;
 	GridPane board;
 
+	Boolean first_click = true;
+	Point previous_point;
+
+
+
 	public MainScene(Main main) throws Exception {
 		
 		
@@ -291,5 +296,30 @@ public class MainScene extends Scene {
 		// TODO Auto-generated method stub
 
 	}
+
+
+	public boolean getFirst_click() {
+		return first_click;
+	}
+	
+
+
+	public Point getPrevious_point() {
+		return previous_point;
+	}
+
+
+	public void setPrevious_point(Point previous_text) {
+		this.previous_point = previous_text;
+	}
+
+
+	public void setFirst_click(Boolean first_click) {
+		this.first_click = first_click;
+	}
+
+	
+	
+	
 
 }

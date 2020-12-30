@@ -35,8 +35,20 @@ public class Point {
 	
 	private String border;
 	
+	private Text text = null;
+	private Color color = null;
+	private Boolean used;
 	
 	
+	
+	public Boolean getUsed() {
+		return used;
+	}
+
+	public void setUsed(Boolean used) {
+		this.used = used;
+	}
+
 	private String type;
 	private Boolean already_clicked = false;
 	
@@ -46,6 +58,7 @@ public class Point {
 		this.mainScene = mainScen;
 		this.type = typ;
 		this.border = border;
+		this.used = false;
 
 		stackP = new StackPane();
 		
@@ -402,21 +415,69 @@ public class Point {
 
 	
 		stackP.setOnMouseClicked(e -> {
-			if(!this.already_clicked) {
+			/*if(!this.already_clicked) {
 				already_clicked = true;
 				mainScene.showBack(Point.this);
+				this.circle.setStroke(Color.GOLD);
 			}
 			else { 
 			already_clicked = false;
 			mainScene.show(Point.this);
+			}*/
+			
+		
+			if(mainScene.getFirst_click()) {
+				this.circle.setStroke(Color.GOLD);
+				mainScene.setPrevious_point(this);
+				mainScene.setFirst_click(false);
 			}
+			else {
+				// ECHANGER POINT -> couleur et lettre
+				if(mainScene.getPrevious_point().getUsed() && !this.getUsed()) {
+					ObservableList<Node> childs = 	mainScene.getPrevious_point().stackP.getChildren();
+					ObservableList<Node> childs_me = stackP.getChildren();
+					
+						
+						this.circle.setFill(mainScene.getPrevious_point().color);
+						this.color = mainScene.getPrevious_point().color;
+						this.text = mainScene.getPrevious_point().text;
+						Text text1 = mainScene.getPrevious_point().text;
+						this.stackP.getChildren().addAll(text1);
+						this.stackP.setAlignment(text1,Pos.CENTER);
+					
+					
+					// enlever lettre
+					this.setUsed(true);
+					// reset used & color & letter
+					mainScene.getPrevious_point().reset();
+					
+					mainScene.setFirst_click(true);
+					mainScene.getPrevious_point().text = null;
+					mainScene.getPrevious_point().color = null;
+					mainScene.getPrevious_point().used = false;
+				//	mainScene.getPrevious_point().setUsed(false);
+					mainScene.setPrevious_point(null);
+					//mainScene.getPrevious_point().text = this.text;
+					//UPDATE NEW COLOR AND TEXT
+					
+				
+				}
+				else {
+					System.out.println("Chnage piece");
+					mainScene.getPrevious_point().circle.setStroke(Color.BLACK);
+					mainScene.setFirst_click(true);
+				}
+				}
+			
+				
+			
 
 		});
 
 	}
 
 	public void actionPerformed(java.awt.event.ActionEvent e) {
-		showBack();
+		//showBack();
 
 	}
 
@@ -427,6 +488,17 @@ public class Point {
 	
 	public void show() {
 		this.circle.setStroke(Color.BLACK);
+	}
+	public void reset() {
+		this.color = null;
+		this.text = null;
+		this.used = false;
+		ObservableList<Node> childs = stackP.getChildren();
+		this.stackP.getChildren().remove(childs.size() - 1);	
+		//enlever couleur
+		this.circle.setFill(Color.WHITE);
+		this.circle.setStroke(Color.BLACK);
+		this.stackP.getChildren().addAll(circle);
 	}
 
 	public StackPane getStackPane() {
@@ -767,8 +839,10 @@ public class Point {
 	}
 	
 	public void setBushi(String type) {
+		this.used = true;
 		if(type.equals("MONKEY1")) {
-		
+			
+			this.color = Color.rgb(174, 37, 38);
 			ObservableList<Node> childs = stackP.getChildren();
 			 
 	        if (childs.size() > 1) {
@@ -777,8 +851,8 @@ public class Point {
 	           
 	            Text text = new Text("M");
 				text.setFill(Color.WHITE);
-				text.setFont(Font.font("Arial", FontWeight.SEMI_BOLD,35));
-				
+				text.setFont(Font.font("Tw Cen MT Condensed", FontWeight.SEMI_BOLD,35));
+				this.text = text;
 				this.circle.setFill(Color.rgb(174, 37, 38));
 				
 				stackP.getChildren().addAll(circle,text);
@@ -788,6 +862,7 @@ public class Point {
 		}
 		else if(type.equals("MONKEY2")) {
 			
+			this.color = Color.rgb(6,77,130);
 			ObservableList<Node> childs = stackP.getChildren();
 			 
 	        if (childs.size() > 1) {
@@ -796,8 +871,8 @@ public class Point {
 	           
 	            Text text = new Text("M");
 				text.setFill(Color.WHITE);
-				text.setFont(Font.font("Arial", FontWeight.SEMI_BOLD,35));
-				
+				text.setFont(Font.font("Tw Cen MT Condensed", FontWeight.SEMI_BOLD,35));
+				this.text = text;
 				this.circle.setFill(Color.rgb(6,77,130));
 				
 				stackP.getChildren().addAll(circle,text);
@@ -806,15 +881,16 @@ public class Point {
 	        }
 		}
 		else if(type.equals("LION1")) {ObservableList<Node> childs = stackP.getChildren();
-		 
+		
+		this.color = Color.rgb(174, 37, 38);
         if (childs.size() > 1) {
             
             stackP.getChildren().remove(childs.size()-1);   		
            
             Text text = new Text("L");
 			text.setFill(Color.WHITE);
-			text.setFont(Font.font("Arial", FontWeight.SEMI_BOLD,35));
-			
+			text.setFont(Font.font("Tw Cen MT Condensed", FontWeight.SEMI_BOLD,35));
+			this.text = text;
 			this.circle.setFill(Color.rgb(174, 37, 38));
 			
 			stackP.getChildren().addAll(circle,text);
@@ -822,15 +898,16 @@ public class Point {
 			
         }}
 		else if(type.equals("LION2")) {	ObservableList<Node> childs = stackP.getChildren();
-		 
+		
+		this.color = Color.rgb(6,77,130);
         if (childs.size() > 1) {
             
             stackP.getChildren().remove(childs.size()-1);   		
            
             Text text = new Text("L");
 			text.setFill(Color.WHITE);
-			text.setFont(Font.font("Arial", FontWeight.SEMI_BOLD,35));
-			
+			text.setFont(Font.font("Tw Cen MT Condensed", FontWeight.SEMI_BOLD,35));
+			this.text = text;
 			this.circle.setFill(Color.rgb(6,77,130));
 			
 			stackP.getChildren().addAll(circle,text);
@@ -839,22 +916,27 @@ public class Point {
         }}
 
 		else if(type.equals("DRAGON1")) {ObservableList<Node> childs = stackP.getChildren();
-		 
+		
+		this.color = Color.rgb(174, 37, 38);
         if (childs.size() > 1) {
             
             stackP.getChildren().remove(childs.size()-1);   		
            
             Text text = new Text("Dr");
 			text.setFill(Color.WHITE);
-			text.setFont(Font.font("Arial", FontWeight.SEMI_BOLD,35));
-			
+			text.setFont(Font.font("Tw Cen MT Condensed", FontWeight.SEMI_BOLD,35));
+			this.text = text;
 			this.circle.setFill(Color.rgb(174, 37, 38));
 			
 			stackP.getChildren().addAll(circle,text);
 			stackP.setAlignment(text,Pos.CENTER);
 			
         }}
-		else if(type.equals("DRAGON2")) {	ObservableList<Node> childs = stackP.getChildren();
+		else if(type.equals("DRAGON2")) {	
+			
+		
+		this.color = Color.rgb(6,77,130);
+		ObservableList<Node> childs = stackP.getChildren();
 		 
         if (childs.size() > 1) {
             
@@ -862,8 +944,8 @@ public class Point {
            
             Text text = new Text("Dr");
 			text.setFill(Color.WHITE);
-			text.setFont(Font.font("Arial", FontWeight.SEMI_BOLD,35));
-			
+			text.setFont(Font.font("Tw Cen MT Condensed", FontWeight.SEMI_BOLD,35));
+			this.text = text;
 			this.circle.setFill(Color.rgb(6,77,130));
 			
 			stackP.getChildren().addAll(circle,text);
