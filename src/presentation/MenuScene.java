@@ -118,10 +118,10 @@ public class MenuScene extends Scene {
 	private static class MenuItem extends StackPane {
 		public MenuItem(String name,Main main) {
 			LinearGradient gradient = new LinearGradient(0,0,1,0,true,CycleMethod.NO_CYCLE, new Stop[] {
-					new Stop(0,Color.DARKVIOLET),
+					new Stop(0,Color.SADDLEBROWN),
 					new Stop(0.1,Color.BLACK),
 					new Stop(0.9,Color.BLACK),
-					new Stop(1,Color.DARKVIOLET)
+					new Stop(1,Color.SADDLEBROWN)
 					});
 			Rectangle bg = new Rectangle(200,30);
 			bg.setOpacity(0.4);
@@ -144,7 +144,7 @@ public class MenuScene extends Scene {
 			});
 			
 			setOnMousePressed(event -> {
-				bg.setFill(Color.DARKVIOLET);	
+				bg.setFill(Color.SADDLEBROWN);	
 			});
 			
 			setOnMouseReleased(event -> {

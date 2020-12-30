@@ -82,8 +82,12 @@ public class MainScene extends Scene {
 		for (int lig = 0; lig < 10; lig++) {
 			for (int col = 0; col < 10; col++) {
 
-				if ((lig == 1 && (col == 4 || col == 5) || (lig == 8 && (col == 4 || col == 5)))) {
-					points[lig][col] = new Point("NOTBORDER","PORTAL", this);
+				if (lig == 1 && (col == 4 || col == 5)){
+					
+					points[lig][col] = new Point("NOTBORDER","PORTAL1", this);
+				}
+				else if (lig == 8 && (col == 4 || col == 5)){
+					points[lig][col] = new Point("NOTBORDER","PORTAL2", this);
 				}
 
 				else if (col == 0 || col == 9) {
@@ -110,7 +114,8 @@ public class MainScene extends Scene {
 
 		for (int lig = 0; lig < 10; lig++) {
 			for (int col = 0; col < 10; col++) {
-				if (points[lig][col].getType().equals("STANDARD") || points[lig][col].getType().equals("PORTAL")) {
+				if (points[lig][col].getType().equals("STANDARD") || points[lig][col].getType().equals("PORTAL1")
+						|| points[lig][col].getType().equals("PORTAL2")) {
 					
 				
 					board.add(points[lig][col].getStackPane(), col, lig);
@@ -120,8 +125,8 @@ public class MainScene extends Scene {
 					Rectangle r = new Rectangle();
 					r.setWidth(75);
 					r.setHeight(75);
-					r.setFill(Color.WHITE);
-					r.setStroke(Color.WHITE);
+					r.setFill(Color.GREY);
+					r.setStroke(Color.GREY);
 					board.add(r,col,lig);
 				}
 

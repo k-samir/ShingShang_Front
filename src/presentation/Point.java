@@ -59,8 +59,8 @@ public class Point {
 		r = new Rectangle();
 		r.setWidth(75);
 		r.setHeight(75);
-		r.setFill(Color.WHITE);
-		r.setStroke(Color.WHITE);
+		r.setFill(Color.GREY);
+		r.setStroke(Color.GREY);
 		
 	if(border.equals("NOTBORDER")) {
 		north_w = new Line(0,0,35,35);
@@ -110,17 +110,28 @@ public class Point {
 		 
 	}
 	else { 
-		System.out.println("ok");
+	
 		stackP.getChildren().addAll(r,circle); 
 		stackP.setAlignment(Pos.TOP_LEFT);
 		stackP.setAlignment(circle,Pos.CENTER);
 	 
 	 }
 
-		if (typ.equals("PORTAL")) {
+		if (typ.equals("PORTAL1")) {
 			Image im;
 			try {
 				im = new Image(new FileInputStream("image" + File.separator + "red_portal.jpg"));
+				circle.setFill(new ImagePattern(im));
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
+		else if(typ.equals("PORTAL2")) {
+			Image im;
+			try {
+				im = new Image(new FileInputStream("image" + File.separator + "blue_portal.jpg"));
 				circle.setFill(new ImagePattern(im));
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block

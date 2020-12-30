@@ -234,12 +234,12 @@ public class Game {
 		System.out.println("_______________________________________________________________________________________ ");
 	}
 
-	/**
-	 * public static void main(String args[]) {
-	 * 
-	 * Game shingshang = new Game(); shingshang.start();
-	 * 
-	 * }
-	 **/
+	
+	 /* public static void main(String args[]) {
+	  
+	  Game shingshang = new Game(); shingshang.start();
+	  
+	  }*/
+	
 
 }
