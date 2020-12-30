@@ -16,6 +16,10 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextBoundsType;
 
 public class Point {
 
@@ -109,6 +113,262 @@ public class Point {
 		 stackP.setAlignment(circle,Pos.CENTER);
 		 
 	}
+	else if(border.equals("CORNERUL")) {
+		
+		south_e = new Line(35,35,0,0);
+		south_e.setStrokeWidth(5);
+		
+		
+		east = new Line(0,0,35,0);
+		east.setStrokeWidth(5);
+		
+		south = new Line(0,0,0,35);
+		south.setStrokeWidth(5);
+		
+		
+
+		 stackP.getChildren().addAll(r,south,east,south_e,circle);
+		 
+		 stackP.setAlignment(Pos.TOP_LEFT);
+
+		 stackP.setAlignment(east,Pos.CENTER_RIGHT);
+		 
+		 stackP.setAlignment(south,Pos.BOTTOM_CENTER);
+		 
+		 stackP.setAlignment(south_e,Pos.BOTTOM_RIGHT);
+		 
+		 stackP.setAlignment(circle,Pos.CENTER);
+	}
+	else if(border.equals("CORNERUR")) {
+		
+		
+		
+		south_w = new Line(0,70,35,35);
+		south_w.setStrokeWidth(5);
+		
+		south = new Line(0,0,0,35);
+		south.setStrokeWidth(5);
+		
+		west = new Line(0,0,35,0);
+		west.setStrokeWidth(5);
+		
+
+		 stackP.getChildren().addAll(r,south,west,south_w,circle);
+		 
+		 stackP.setAlignment(Pos.TOP_LEFT);
+		 
+
+		
+		 
+		 stackP.setAlignment(south,Pos.BOTTOM_CENTER);
+		 
+		 stackP.setAlignment(west,Pos.CENTER_LEFT);
+		 
+		 stackP.setAlignment(south_w,Pos.BOTTOM_LEFT);
+		 
+		 stackP.setAlignment(circle,Pos.CENTER);
+	}
+	else if(border.equals("CORNERDR")) {
+		north_w = new Line(0,0,35,35);
+		north_w.setStrokeWidth(5);
+		
+		north = new Line(35,0,35,35);
+		north.setStrokeWidth(5);
+		
+		west = new Line(0,0,35,0);
+		west.setStrokeWidth(5);
+		
+
+		 stackP.getChildren().addAll(r,north,west,north_w,circle);
+		 
+		 stackP.setAlignment(Pos.TOP_LEFT);
+		 
+
+		 stackP.setAlignment(north,Pos.TOP_CENTER);
+		
+		 
+		 stackP.setAlignment(west,Pos.CENTER_LEFT);
+		 
+		 stackP.setAlignment(circle,Pos.CENTER);
+	}
+	else if(border.equals("CORNERDL")) {
+		
+		north_e = new Line(-35,35,0,0);
+		north_e.setStrokeWidth(5);
+		
+		
+		north = new Line(35,0,35,35);
+		north.setStrokeWidth(5);
+		
+		east = new Line(0,0,35,0);
+		east.setStrokeWidth(5);
+		
+		
+		
+
+		 stackP.getChildren().addAll(r,north,east,north_e,circle);
+		 
+		 stackP.setAlignment(Pos.TOP_LEFT);
+		 
+
+		 stackP.setAlignment(north,Pos.TOP_CENTER);
+		 stackP.setAlignment(east,Pos.CENTER_RIGHT);
+		 
+		
+		 stackP.setAlignment(north_e,Pos.TOP_RIGHT);
+	
+		 stackP.setAlignment(circle,Pos.CENTER);
+	}
+	else if(border.equals("UP")) {
+		
+		
+		
+		south_e = new Line(35,35,0,0);
+		south_e.setStrokeWidth(5);
+		
+		south_w = new Line(0,70,35,35);
+		south_w.setStrokeWidth(5);
+		
+		
+		east = new Line(0,0,35,0);
+		east.setStrokeWidth(5);
+		
+		south = new Line(0,0,0,35);
+		south.setStrokeWidth(5);
+		
+		west = new Line(0,0,35,0);
+		west.setStrokeWidth(5);
+		
+
+		 stackP.getChildren().addAll(r,south,east,west,south_e,south_w,circle);
+		 
+		 stackP.setAlignment(Pos.TOP_LEFT);
+		 
+
+		
+		 stackP.setAlignment(east,Pos.CENTER_RIGHT);
+		 
+		 stackP.setAlignment(south,Pos.BOTTOM_CENTER);
+		 
+		 stackP.setAlignment(west,Pos.CENTER_LEFT);
+		 
+		
+		 stackP.setAlignment(south_e,Pos.BOTTOM_RIGHT);
+		 stackP.setAlignment(south_w,Pos.BOTTOM_LEFT);
+		 
+		 stackP.setAlignment(circle,Pos.CENTER);
+	}
+	else if(border.equals("LEFT")) {
+		
+		north_e = new Line(-35,35,0,0);
+		north_e.setStrokeWidth(5);
+		
+		
+		south_e = new Line(35,35,0,0);
+		south_e.setStrokeWidth(5);
+		
+		
+		north = new Line(35,0,35,35);
+		north.setStrokeWidth(5);
+		
+		east = new Line(0,0,35,0);
+		east.setStrokeWidth(5);
+		
+		south = new Line(0,0,0,35);
+		south.setStrokeWidth(5);
+		
+		
+
+		 stackP.getChildren().addAll(r,north,south,east,north_e,south_e,circle);
+		 
+		 stackP.setAlignment(Pos.TOP_LEFT);
+		 
+
+		 stackP.setAlignment(north,Pos.TOP_CENTER);
+		 stackP.setAlignment(east,Pos.CENTER_RIGHT);
+		 
+		 stackP.setAlignment(south,Pos.BOTTOM_CENTER);
+		
+		 
+		 stackP.setAlignment(north_e,Pos.TOP_RIGHT);
+		 stackP.setAlignment(south_e,Pos.BOTTOM_RIGHT);
+		
+		 
+		 stackP.setAlignment(circle,Pos.CENTER);
+	}
+	
+	else if(border.equals("RIGHT")) {
+		
+		north_w = new Line(0,0,35,35);
+		north_w.setStrokeWidth(5);
+		
+		
+		south_w = new Line(0,70,35,35);
+		south_w.setStrokeWidth(5);
+		
+		north = new Line(35,0,35,35);
+		north.setStrokeWidth(5);
+			
+		
+		south = new Line(0,0,0,35);
+		south.setStrokeWidth(5);
+		
+		west = new Line(0,0,35,0);
+		west.setStrokeWidth(5);
+		
+
+		 stackP.getChildren().addAll(r,north,south,west,north_w,south_w,circle);
+		 
+		 stackP.setAlignment(Pos.TOP_LEFT);
+		 
+
+		 stackP.setAlignment(north,Pos.TOP_CENTER);
+		 
+		 stackP.setAlignment(south,Pos.BOTTOM_CENTER);
+		 
+		 stackP.setAlignment(west,Pos.CENTER_LEFT);
+		 
+	
+		 stackP.setAlignment(south_w,Pos.BOTTOM_LEFT);
+		 
+		 stackP.setAlignment(circle,Pos.CENTER);
+	}
+	else if(border.equals("DOWN")) {
+		north_w = new Line(0,0,35,35);
+		north_w.setStrokeWidth(5);
+		north_e = new Line(-35,35,0,0);
+		north_e.setStrokeWidth(5);
+		
+		
+		north = new Line(35,0,35,35);
+		north.setStrokeWidth(5);
+		
+		east = new Line(0,0,35,0);
+		east.setStrokeWidth(5);
+		
+	
+		west = new Line(0,0,35,0);
+		west.setStrokeWidth(5);
+		
+
+		 stackP.getChildren().addAll(r,north,east,west,north_e,north_w,circle);
+		 
+		 stackP.setAlignment(Pos.TOP_LEFT);
+		 
+
+		 stackP.setAlignment(north,Pos.TOP_CENTER);
+		 stackP.setAlignment(east,Pos.CENTER_RIGHT);
+		 
+		
+		 stackP.setAlignment(west,Pos.CENTER_LEFT);
+		 
+		 
+		 stackP.setAlignment(north_e,Pos.TOP_RIGHT);
+	
+		
+		 
+		 stackP.setAlignment(circle,Pos.CENTER);
+	}
 	else { 
 	
 		stackP.getChildren().addAll(r,circle); 
@@ -141,7 +401,7 @@ public class Point {
 		}
 
 	
-		circle.setOnMouseClicked(e -> {
+		stackP.setOnMouseClicked(e -> {
 			if(!this.already_clicked) {
 				already_clicked = true;
 				mainScene.showBack(Point.this);
@@ -247,8 +507,8 @@ public class Point {
 				 stackP.setAlignment(east,Pos.CENTER_RIGHT);
 				 
 				
-				
-				 
+
+					
 				 stackP.setAlignment(north_e,Pos.TOP_RIGHT);
 				 stackP.setAlignment(south_e,Pos.BOTTOM_RIGHT);
 				 
@@ -272,9 +532,7 @@ public class Point {
             north_w = new Line(0,0,35,35);
     		north_w.setStrokeWidth(5);
     		
-    		
-    		
-    		
+ 		
     		south_w = new Line(0,70,35,35);
     		south_w.setStrokeWidth(5);
     		
@@ -313,4 +571,305 @@ public class Point {
 			 stackP.setAlignment(circle,Pos.CENTER);
         }
 	}
+
+	public void setConnectionDL() {
+		ObservableList<Node> childs = stackP.getChildren();
+		 
+        if (childs.size() > 1) {
+            
+            stackP.getChildren().remove(childs.size()-1);   		
+    		south_w = new Line(0,70,35,35);
+    		south_w.setStrokeWidth(5);
+
+			stackP.getChildren().addAll(south_w,circle);
+
+			 stackP.setAlignment(Pos.TOP_LEFT);
+			 
+			 stackP.setAlignment(south_w,Pos.BOTTOM_LEFT);
+			 
+			 stackP.setAlignment(circle,Pos.CENTER);
+        }
+		
+	}
+
+	public void setConnectionL1() {
+		ObservableList<Node> childs = stackP.getChildren();
+		 
+        if (childs.size() > 1) {
+            
+            stackP.getChildren().remove(childs.size()-1);   		
+        	west = new Line(0,0,35,0);
+    		west.setStrokeWidth(5);
+    		south_w = new Line(0,70,35,35);
+    		south_w.setStrokeWidth(5);
+
+			stackP.getChildren().addAll(south_w,west,circle);
+
+			 stackP.setAlignment(Pos.TOP_LEFT);
+			
+			 stackP.setAlignment(west,Pos.CENTER_LEFT);
+			 stackP.setAlignment(south_w,Pos.BOTTOM_LEFT);
+			 
+			 stackP.setAlignment(circle,Pos.CENTER);
+        }
+	
+		
+	}
+	public void setConnectionL2() {
+		ObservableList<Node> childs = stackP.getChildren();
+		 
+        if (childs.size() > 1) {
+            
+            stackP.getChildren().remove(childs.size()-1);   		
+        	west = new Line(0,0,35,0);
+    		west.setStrokeWidth(5);
+    		
+    		   north_w = new Line(0,0,35,35);
+       		north_w.setStrokeWidth(5);
+       		
+
+			stackP.getChildren().addAll(north_w,west,circle);
+
+			 stackP.setAlignment(Pos.TOP_LEFT);
+			
+			 stackP.setAlignment(west,Pos.CENTER_LEFT);
+		 	 
+			 stackP.setAlignment(circle,Pos.CENTER);
+        }
+	
+		
+	}
+
+	public void setConnectionUL() {
+		ObservableList<Node> childs = stackP.getChildren();
+		 
+        if (childs.size() > 1) {
+            
+            stackP.getChildren().remove(childs.size()-1);   		
+            north_w = new Line(0,0,35,35);
+    		north_w.setStrokeWidth(5);
+    		
+
+			stackP.getChildren().addAll(north_w,circle);
+
+			 stackP.setAlignment(Pos.TOP_LEFT);
+			 
+			
+			 
+			 stackP.setAlignment(circle,Pos.CENTER);
+        }
+		
+		
+	}
+
+	public void setConnectionDR() {
+		ObservableList<Node> childs = stackP.getChildren();
+		 
+        if (childs.size() > 1) {
+            
+            stackP.getChildren().remove(childs.size()-1);   		
+            south_e = new Line(35,35,0,0);
+			south_e.setStrokeWidth(5);
+			
+	
+			stackP.getChildren().addAll(south_e,circle);
+
+			 stackP.setAlignment(Pos.TOP_LEFT);
+			 
+
+			 stackP.setAlignment(south_e,Pos.BOTTOM_RIGHT);
+	    		
+
+			 
+			 stackP.setAlignment(circle,Pos.CENTER);
+        }
+		
+		
+	}
+
+	public void setConnectionR1() {
+		ObservableList<Node> childs = stackP.getChildren();
+		 
+        if (childs.size() > 1) {
+            
+            stackP.getChildren().remove(childs.size()-1);   		
+            south_e = new Line(35,35,0,0);
+			south_e.setStrokeWidth(5);
+			
+			east = new Line(0,0,35,0);
+			east.setStrokeWidth(5);
+			
+			
+	
+			stackP.getChildren().addAll(east,south_e,circle);
+
+			 stackP.setAlignment(Pos.TOP_LEFT);
+			 
+
+			 stackP.setAlignment(south_e,Pos.BOTTOM_RIGHT);
+	    		
+			 stackP.setAlignment(east,Pos.CENTER_RIGHT);
+			 	 
+			 stackP.setAlignment(circle,Pos.CENTER);
+        }
+		
+		
+	}
+	public void setConnectionR2() {
+		ObservableList<Node> childs = stackP.getChildren();
+		 
+        if (childs.size() > 1) {
+            
+            stackP.getChildren().remove(childs.size()-1);   		
+           
+			east = new Line(0,0,35,0);
+			east.setStrokeWidth(5);
+
+			north_e = new Line(-35,35,0,0);
+			north_e.setStrokeWidth(5);
+		
+			
+	
+			stackP.getChildren().addAll(east,north_e,circle);
+
+			 stackP.setAlignment(Pos.TOP_LEFT);
+			 
+			 stackP.setAlignment(north_e,Pos.TOP_RIGHT);
+			 stackP.setAlignment(east,Pos.CENTER_RIGHT);
+			 	 
+			 stackP.setAlignment(circle,Pos.CENTER);
+        }
+		
+	}
+
+	public void setConnectionUR() {
+		ObservableList<Node> childs = stackP.getChildren();
+		 
+        if (childs.size() > 1) {
+            
+            stackP.getChildren().remove(childs.size()-1);   		
+           
+			
+			north_e = new Line(-35,35,0,0);
+			north_e.setStrokeWidth(5);
+		
+			
+	
+			stackP.getChildren().addAll(north_e,circle);
+
+			 stackP.setAlignment(Pos.TOP_LEFT);
+			 
+			 stackP.setAlignment(north_e,Pos.TOP_RIGHT);
+			
+			 stackP.setAlignment(circle,Pos.CENTER);
+        }
+		
+	}
+	
+	public void setBushi(String type) {
+		if(type.equals("MONKEY1")) {
+		
+			ObservableList<Node> childs = stackP.getChildren();
+			 
+	        if (childs.size() > 1) {
+	            
+	            stackP.getChildren().remove(childs.size()-1);   		
+	           
+	            Text text = new Text("M");
+				text.setFill(Color.WHITE);
+				text.setFont(Font.font("Arial", FontWeight.SEMI_BOLD,35));
+				
+				this.circle.setFill(Color.rgb(174, 37, 38));
+				
+				stackP.getChildren().addAll(circle,text);
+				stackP.setAlignment(text,Pos.CENTER);
+				
+	        }
+		}
+		else if(type.equals("MONKEY2")) {
+			
+			ObservableList<Node> childs = stackP.getChildren();
+			 
+	        if (childs.size() > 1) {
+	            
+	            stackP.getChildren().remove(childs.size()-1);   		
+	           
+	            Text text = new Text("M");
+				text.setFill(Color.WHITE);
+				text.setFont(Font.font("Arial", FontWeight.SEMI_BOLD,35));
+				
+				this.circle.setFill(Color.rgb(6,77,130));
+				
+				stackP.getChildren().addAll(circle,text);
+				stackP.setAlignment(text,Pos.CENTER);
+				
+	        }
+		}
+		else if(type.equals("LION1")) {ObservableList<Node> childs = stackP.getChildren();
+		 
+        if (childs.size() > 1) {
+            
+            stackP.getChildren().remove(childs.size()-1);   		
+           
+            Text text = new Text("L");
+			text.setFill(Color.WHITE);
+			text.setFont(Font.font("Arial", FontWeight.SEMI_BOLD,35));
+			
+			this.circle.setFill(Color.rgb(174, 37, 38));
+			
+			stackP.getChildren().addAll(circle,text);
+			stackP.setAlignment(text,Pos.CENTER);
+			
+        }}
+		else if(type.equals("LION2")) {	ObservableList<Node> childs = stackP.getChildren();
+		 
+        if (childs.size() > 1) {
+            
+            stackP.getChildren().remove(childs.size()-1);   		
+           
+            Text text = new Text("L");
+			text.setFill(Color.WHITE);
+			text.setFont(Font.font("Arial", FontWeight.SEMI_BOLD,35));
+			
+			this.circle.setFill(Color.rgb(6,77,130));
+			
+			stackP.getChildren().addAll(circle,text);
+			stackP.setAlignment(text,Pos.CENTER);
+			
+        }}
+
+		else if(type.equals("DRAGON1")) {ObservableList<Node> childs = stackP.getChildren();
+		 
+        if (childs.size() > 1) {
+            
+            stackP.getChildren().remove(childs.size()-1);   		
+           
+            Text text = new Text("Dr");
+			text.setFill(Color.WHITE);
+			text.setFont(Font.font("Arial", FontWeight.SEMI_BOLD,35));
+			
+			this.circle.setFill(Color.rgb(174, 37, 38));
+			
+			stackP.getChildren().addAll(circle,text);
+			stackP.setAlignment(text,Pos.CENTER);
+			
+        }}
+		else if(type.equals("DRAGON2")) {	ObservableList<Node> childs = stackP.getChildren();
+		 
+        if (childs.size() > 1) {
+            
+            stackP.getChildren().remove(childs.size()-1);   		
+           
+            Text text = new Text("Dr");
+			text.setFill(Color.WHITE);
+			text.setFont(Font.font("Arial", FontWeight.SEMI_BOLD,35));
+			
+			this.circle.setFill(Color.rgb(6,77,130));
+			
+			stackP.getChildren().addAll(circle,text);
+			stackP.setAlignment(text,Pos.CENTER);
+			
+        }}
+	}
+	
 }

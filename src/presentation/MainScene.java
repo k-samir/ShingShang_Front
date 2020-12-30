@@ -6,6 +6,9 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+import abstraction.pawn.Dragon;
+import abstraction.pawn.Lion;
+import abstraction.pawn.Monkey;
 import application.Main;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -72,20 +75,23 @@ public class MainScene extends Scene {
 	//	root = (GridPane) (this.getRoot());
 		// root.setHgap(10);
 		// root.setVgap(10);
-		reset();
+		init();
 	}
 
 	
-	public void reset() {
+	public void init() {
 		this.points = new Point[10][10];
 
 		for (int lig = 0; lig < 10; lig++) {
 			for (int col = 0; col < 10; col++) {
 
-				if (lig == 1 && (col == 4 || col == 5)){
+				
+				//PORTAL1
+			if (lig == 1 && (col == 4 || col == 5)){
 					
 					points[lig][col] = new Point("NOTBORDER","PORTAL1", this);
 				}
+				// PORTAL2
 				else if (lig == 8 && (col == 4 || col == 5)){
 					points[lig][col] = new Point("NOTBORDER","PORTAL2", this);
 				}
@@ -93,7 +99,36 @@ public class MainScene extends Scene {
 				else if (col == 0 || col == 9) {
 					points[lig][col] = new Point("BORDER","NOTHING", this);
 
-				} else {
+				}
+				
+				// CORNER
+				else if(lig == 0 && col == 1) {
+					points[lig][col] = new Point("CORNERUL","STANDARD", this);
+				}
+				else if(lig == 0 && col == 8) {
+					points[lig][col] = new Point("CORNERUR","STANDARD", this);			
+				}
+				else if(lig == 9 && col == 1) {
+					points[lig][col] = new Point("CORNERDL","STANDARD", this);
+				}
+				else if(lig == 9 && col == 8) {
+					points[lig][col] = new Point("CORNERDR","STANDARD", this);
+				}
+			
+				else if((lig == 0 && col != 0) && (lig == 0 && col != 9)){
+				points[lig][col] = new Point("UP","STANDARD", this);
+			}
+				else if((col == 1 && lig != 0) && (col == 1 && lig != 9)){
+					points[lig][col] = new Point("LEFT","STANDARD", this);
+				}
+				else if((lig == 9 && col != 0) && (lig == 9 && col != 9)){
+					points[lig][col] = new Point("DOWN","STANDARD", this);
+				}
+				else if((col == 8 && lig != 0) && (col == 8 && lig != 9)){
+					points[lig][col] = new Point("RIGHT","STANDARD", this);
+				}
+				
+				else {
 					if(lig == 0 || col == 8 || lig == 9 || col == 1) {
 						points[lig][col] = new Point("BORDER","STANDARD", this);
 					}
@@ -111,6 +146,51 @@ public class MainScene extends Scene {
 		// set extern point of the boardgame west side
 		points[4][9].setExternE(0);
 		points[5][9].setExternE(1);
+		
+		points[3][1].setConnectionDL();
+		points[4][1].setConnectionL1();
+		points[5][1].setConnectionL2();
+		points[6][1].setConnectionUL();
+		
+		points[3][8].setConnectionDR();
+		points[4][8].setConnectionR1();
+		points[5][8].setConnectionR2();
+		points[6][8].setConnectionUR();
+		
+		// PIECE
+		// Player 1
+		points[0][1].setBushi("DRAGON1");
+		points[0][2].setBushi("LION1");
+		points[0][3].setBushi("MONKEY1");
+		points[0][6].setBushi("MONKEY1");
+		points[0][7].setBushi("LION1");
+		points[0][8].setBushi("DRAGON1");
+				
+		points[1][1].setBushi("LION1");
+		points[1][2].setBushi("MONKEY1");
+		points[1][7].setBushi("MONKEY1");
+		points[1][8].setBushi("LION1");
+				
+		points[2][1].setBushi("MONKEY1");
+		points[2][8].setBushi("MONKEY1");
+
+				// Player 2
+				
+		points[7][1].setBushi("MONKEY2");
+		points[7][8].setBushi("MONKEY2");
+				
+		points[8][1].setBushi("LION2");
+		points[8][2].setBushi("MONKEY2");
+		points[8][7].setBushi("MONKEY2");
+		points[8][8].setBushi("LION2");
+				
+		points[9][1].setBushi("DRAGON2");
+		points[9][2].setBushi("LION2");
+		points[9][3].setBushi("MONKEY2");
+		points[9][6].setBushi("MONKEY2");
+		points[9][7].setBushi("LION2");
+		points[9][8].setBushi("DRAGON2");
+		
 
 		for (int lig = 0; lig < 10; lig++) {
 			for (int col = 0; col < 10; col++) {
