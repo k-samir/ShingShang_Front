@@ -1,39 +1,23 @@
 package presentation;
 
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.util.ArrayList;
 
-import abstraction.pawn.Dragon;
-import abstraction.pawn.Lion;
-import abstraction.pawn.Monkey;
 import application.Main;
+import control.ControlChooseBushi;
+import control.ControlMoveBushi;
+import control.Tuple;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.CycleMethod;
-import javafx.scene.paint.LinearGradient;
-import javafx.scene.paint.Stop;
-import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
 
 public class MainScene extends Scene {
 	private Point[][] points;
@@ -42,6 +26,9 @@ public class MainScene extends Scene {
 
 	Boolean first_click = true;
 	Point previous_point;
+	Main main;
+	Label label1;
+	
 
 
 
@@ -49,14 +36,14 @@ public class MainScene extends Scene {
 		
 		
 		super(new BorderPane());
-		
+		this.main = main;
 		root = (BorderPane) (this.getRoot());
 		board = new GridPane();
 		
 		StackPane stackPan = new StackPane();
 	//	Rectangle rBleu = new Rectangle(770,70, Color.GREY);
 		
-		Label label1 = new Label("TEXT INFO");
+		label1 = new Label("TEXT INFO");
 	
 		HBox hb = new HBox();
 		Button btn = new Button("BACK");
@@ -220,6 +207,9 @@ public class MainScene extends Scene {
 
 	}
 
+	public void changeLabel(String text) {
+		this.label1.setText(text);
+	}
 	public void showBack(Point point) {
 		int x = 0, y = 0;
 		for (int lig = 0; lig < 10; lig++) {
@@ -318,6 +308,70 @@ public class MainScene extends Scene {
 		this.first_click = first_click;
 	}
 
+	public void moveBushi(Point p) {
+		int x = 0, y = 0;
+		for (int lig = 0; lig < 10; lig++) {
+			for (int col = 0; col < 10; col++) {
+
+				if (points[lig][col] == p) {
+					x = lig;
+					y = col;
+					break;
+				}
+
+			}
+		}
+		
+		ControlMoveBushi  controlMoveBushi = new ControlMoveBushi(x,y,main.getGame());
+	}
+	
+	public void chooseBushi(Point p) {
+		int x = 0, y = 0;
+		for (int lig = 0; lig < 10; lig++) {
+			for (int col = 0; col < 10; col++) {
+
+				if (points[lig][col] == p) {
+					x = lig;
+					y = col;
+					break;
+				}
+			}
+		}
+		
+		ControlChooseBushi  controlChooseBushi = new ControlChooseBushi(x,y,main.getGame());
+		ArrayList<Tuple> legals = controlChooseBushi.getLegalMoves();
+		
+		for(Tuple m : legals) {
+			try {
+				points[m.getFirst()][m.getSecond()].showBack();
+				
+			} catch (Exception e) {
+			}
+		}
+
+	}
+	// Method to reset stroke of neigbours
+	public void resetStroke(Point p) {
+		int x = 0, y = 0;
+		for (int lig = 0; lig < 10; lig++) {
+			for (int col = 0; col < 10; col++) {
+
+				if (points[lig][col] == p) {
+					x = lig;
+					y = col;
+					break;
+				}
+			}
+		}
+		
+		for(int i = x-3;i<x+3;i++) {
+			for(int j = y+3;j>y-3;j--) {
+				points[i][j].show();
+			}
+		}
+	}
+	
+	
 	
 	
 	

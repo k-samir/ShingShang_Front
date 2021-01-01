@@ -28,6 +28,7 @@ public class Board {
     private ArrayList<Move> legalMoves;
     private ArrayList<Bushi> movedBushis;
     private boolean additionalTurn;
+  
 	
     /* * * * * * * * * * *
 	 *	Constructeurs 
@@ -247,7 +248,10 @@ public class Board {
 		for(int line = 0 ; line < size ; line++) {
 			System.out.print(line);
 			for(int col = 0 ; col < size ; col++) {
-				if(array[line][col].isAccessible()) System.out.print( "    " + "[]");
+				if(array[line][col].isAccessible()) {
+					System.out.print( "    " + "[]");
+					
+				}
 				else System.out.print( "    " + array[line][col].toString());
 			}
 			System.out.print( "    " + line);
@@ -332,6 +336,8 @@ public class Board {
 		}
 		resetLegalModal();
 		
+		System.out.println("moved");
+		
 	}
 	
 	/**
@@ -347,15 +353,15 @@ public class Board {
 		if(yesShowLegalMoves)
 			showLegalMoves();
 		
-		Move move = Console.askChoseMove(this);
+		/*Move move = Console.askChoseMove(this);
 		executeMove(move);
 
 		if(move.isShingShang())
-		Console.askShingShangChoice(this, move.getMovedBushi());
+		Console.askShingShangChoice(this, move.getMovedBushi());*/
 	}
 	
-	/**
-	 * Vide la liste des déplacements possibles
+	
+	 /* Vide la liste des déplacements possibles
 	 */
 	public void resetLegalModal() {
 		for(Move m : legalMoves) {

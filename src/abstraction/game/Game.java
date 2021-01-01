@@ -15,10 +15,30 @@ public class Game {
 	private Player turnPlayer;
 	private int turnNumber;
 	private Board board;
+	private String name1,name2;
+	private Bushi selectedBushi1;
+
+	private Move selectedMove1;
 
 	/*
 	 * * * * * * * * * * * Constructeurs * * * * * * * * *
 	 */
+
+	public Bushi getSelectedBushi1() {
+		return selectedBushi1;
+	}
+
+	public void setSelectedBushi1(Bushi selectedBushi1) {
+		this.selectedBushi1 = selectedBushi1;
+	}
+
+	public Move getSelectedMove1() {
+		return selectedMove1;
+	}
+
+	public void setSelectedMove1(Move selectedMove1) {
+		this.selectedMove1 = selectedMove1;
+	}
 
 	public Game() {
 		turnNumber = 1;
@@ -77,37 +97,44 @@ public class Game {
 	}
 
 	/*
-	 * * * * * * * * * * * Mï¿½thodes * * * * * * * * *
+	 * * * * * * * * * * * Methodes * * * * * * * * *
 	 */
 
 	/**
-	 * Crï¿½er un plateau et l'affecte ï¿½ l'attribut board du jeu
+	 * Creer un plateau et l'affecte e l'attribut board du jeu
 	 */
-	private void createBoard() {
+	public void createBoard() {
+		/* PREVIOUS CODE
 		String name1 = Console.askName(1);
 		String name2 = Console.askName(2);
+		*/
+		String name1 = this.name1;
+		String name2 = this.name2;
 
 		Player p1 = new Player(1, name1);
 		Player p2 = new Player(2, name2);
 
 		board = new Board(p1, p2);
 		turnPlayer = p1;
+		
+	
+		
 	}
 
 	/**
-	 * Dï¿½marre le jeu et gï¿½re le dï¿½roulement de jeu
+	 * Demarre le jeu et gere le deroulement de jeu
 	 */
 	public void start() {
-		showName();
-		createBoard();
-		while (notOver()) {
-			playTurn();
-		}
-		end();
+		//showName();
+	//	createBoard();
+		//while (notOver()) {
+		//	playTurn();
+	//	}
+	//	end();
 	}
 
 	/**
-	 * Indique si le jeu n'est pas terminï¿½
+	 * Indique si le jeu n'est pas termine
 	 * 
 	 * @return true si le jeu est toujours en cours
 	 */
@@ -116,7 +143,7 @@ public class Game {
 	}
 
 	/**
-	 * Indique si le jeu est terminï¿½ en recherchant le nom du gagnant
+	 * Indique si le jeu est termine en recherchant le nom du gagnant
 	 * 
 	 * @return true s'il existe un gagnant
 	 */
@@ -125,37 +152,49 @@ public class Game {
 	}
 
 	/**
-	 * Gï¿½re le dï¿½roulement d'un tour
+	 * Gere le deroulement d'un tour
 	 */
+	
+
 	public void playTurn() {
+		System.out.println("PLAY TURN");
 		Bushi selectedBushi;
 		Move selectedMove;
-		boolean yesShowLegalMoves;
+		//boolean yesShowLegalMoves;
 
-		board.show();
-		System.out.println(turnPlayer.getName() + ", ï¿½ toi de jouer ! :)");
-		selectedBushi = Console.askChoseBushi(this);
-		System.out.println("Piï¿½ce sï¿½lï¿½ctionnï¿½e : " + selectedBushi.toString());
-		selectedBushi.calculateLegalMoves();
+		//board.show();
+		//System.out.println(turnPlayer.getName() + ", e toi de jouer ! :)");
+		selectedBushi = this.selectedBushi1;
+	
+		System.out.println("Piece selectionnee : " + selectedBushi.toString());
+		
+		//selectedBushi.calculateLegalMoves();
+		
+		//yesShowLegalMoves = true;
+		//if (yesShowLegalMoves)
+		//board.showLegalMoves();
 
-		yesShowLegalMoves = Console.askShowLegalMoves();
-		if (yesShowLegalMoves)
-			board.showLegalMoves();
-
-		selectedMove = Console.askChoseMove(board);
+		//	selectedMove = Console.askChoseMove(board);
+		selectedMove = selectedMove1;
+		
+		
 		board.executeMove(selectedMove);
-		if (selectedMove.isShingShang()) {
+		
+		//CHECK IF SHINGSHANG
+		
+		
+		/**if (selectedMove.isShingShang()) {
 			Console.askShingShangChoice(board, selectedMove.getMovedBushi());
 		}
 		if (board.isAdditionalTurn()) {
 			playAdditionnalTurn();
-		}
+		}*/
 
 		nextTurn();
 	}
 
 	/**
-	 * Gï¿½re le dï¿½roulement d'un tour supplï¿½mentaire lors d'un shing shang
+	 * Gere le deroulement d'un tour supplementaire lors d'un shing shang
 	 */
 	public void playAdditionnalTurn() {
 
@@ -166,16 +205,18 @@ public class Game {
 
 		while (playerWantsToContinue && board.isAdditionalTurn()) {
 			board.show();
-			System.out.println(turnPlayer.getName() + ", tu peux choisir une autre piï¿½ce :)");
-			selectedBushi = Console.askChoseBushi(this);
-			System.out.println("Piï¿½ce sï¿½lï¿½ctionnï¿½e : " + selectedBushi.toString());
+			System.out.println(turnPlayer.getName() + ", tu peux choisir une autre piece :)");
+			
+			selectedBushi = selectedBushi1;
+			
+			System.out.println("Piece selectionnee : " + selectedBushi.toString());
 			selectedBushi.calculateLegalMoves();
 
 			yesShowLegalMoves = Console.askShowLegalMoves();
 			if (yesShowLegalMoves)
 				board.showLegalMoves();
 
-			selectedMove = Console.askChoseMove(board);
+			/*selectedMove = Console.askChoseMove(board);
 			board.executeMove(selectedMove);
 
 			if (selectedMove.isShingShang()) {
@@ -184,28 +225,30 @@ public class Game {
 
 			if (board.isAdditionalTurn()) {
 				playerWantsToContinue = Console.askContinue();
-			}
+			}*/
 
 		}
 		board.resetMovedBushis();
 	}
 
 	/**
-	 * Passe au tour suivant et dï¿½termine le joueur du tour
+	 * Passe au tour suivant et determine le joueur du tour
 	 */
 	public void nextTurn() {
+		
 		turnNumber++;
 		if (turnNumber % 2 == 1)
 			turnPlayer = board.getPlayer1();
 		else
 			turnPlayer = board.getPlayer2();
+		System.out.println("Tour à : " + turnPlayer.getNumber());
 	}
 
 	/**
 	 * Indique si ce n'est pas le tour du joueur
 	 * 
 	 * @param p un joueur
-	 * @return true si le joueur du tour est diffï¿½rent du joueur du tour
+	 * @return true si le joueur du tour est different du joueur du tour
 	 */
 	public boolean isNotTurnPlayer(Player p) {
 		return !turnPlayer.equals(p);
@@ -218,28 +261,19 @@ public class Game {
 		System.out.println("-- Fin de la partie --\n Le gagnant est " + board.winner().getName() + ".");
 	}
 
-	/**
-	 * Affiche le nom du jeu
-	 */
-	public static void showName() {
-		System.out.println("_______________________________________________________________________________________ ");
-		System.out.println(" d88888b  dP       oo                               dP");
-		System.out.println("88.    \"' 88                                        88");
-		System.out.println("`Y88888b. 88d888b. dP 88d888b. .d8888b.    .d8888b. 88d888b. .d8888b. 88d888b. .d8888b.");
-		System.out.println("      `8b 88'  `88 88 88'  `88 88'  `88    Y8ooooo. 88'  `88 88'  `88 88'  `88 88'  `88");
-		System.out.println("d8'   .8P 88    88 88 88    88 88.  .88          88 88    88 88.  .88 88    88 88.  .88 ");
-		System.out.println(" Y88888P  dP    dP dP dP    dP `8888P88    `88888P' dP    dP `88888P8 dP    dP `8888P88");
-		System.out.println("                                   .88                                             .88");
-		System.out.println("                                d8888P                                          d8888P");
-		System.out.println("_______________________________________________________________________________________ ");
-	}
-
+	
 	
 	 /* public static void main(String args[]) {
 	  
-	  Game shingshang = new Game(); shingshang.start();
+	  Game shingshang = new Game();
+	  shingshang.start();
 	  
 	  }*/
+	
+	public void setName(String n1, String n2) {
+		this.name1 = n1;
+		this.name2 = n2;
+	}
 	
 
 }

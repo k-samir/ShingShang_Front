@@ -2,22 +2,17 @@ package application;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Optional;
 
+import abstraction.game.Game;
+import control.ControlPlayerName;
 import javafx.application.Application;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-
 import presentation.MainScene;
 import presentation.MenuScene;
 
@@ -26,8 +21,12 @@ public class Main extends Application {
 	private MenuScene mainScene;
 	private MainScene mainScene3;
 	private Stage stage;
+	private Game game;
 
+	@Override
 	public void start(Stage stage) throws Exception {
+		Game shingshang = new Game();
+		this.game = shingshang;
 		this.stage = stage;
 		this.mainScene = new MenuScene(this);
 		stage.setTitle("SHINGSHANG_IHM");
@@ -37,6 +36,8 @@ public class Main extends Application {
 		stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2);
 		stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 2);
 		stage.setResizable(false);
+		
+		
 
 	}
 
@@ -46,9 +47,19 @@ public class Main extends Application {
 
 	public void start2() throws Exception {
 		String[] players = askPlayersName();
+		
+		
+		
+		
 		if (players[0] == "" || players[1] == "") {
 			start1();
 		} else {
+			
+			// CALL CONTROLLER
+			ControlPlayerName controlPlayerName = new ControlPlayerName(players[0],players[1],game);
+			
+			
+			
 			stage.setTitle("SHINGSHANG_IHM");
 			this.mainScene3 = new MainScene(this);
 			stage.setScene(this.mainScene3);
@@ -58,6 +69,9 @@ public class Main extends Application {
 			stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 2);
 
 			stage.setResizable(false);
+			game.createBoard();
+			mainScene3.changeLabel("C'est le tour de : " + game.getTurnPlayer().getNumber());
+		
 		}
 
 	}
@@ -114,8 +128,13 @@ public class Main extends Application {
 		return player;
 
 	}
+	
+	public Game getGame() {
+		return game;
+	}
 
 	public static void main(String[] args) {
+	//	shingshang.start();
 		launch();
 	}
 }
