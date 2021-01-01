@@ -51,7 +51,7 @@ public class MenuItem extends StackPane {
 				}
 				else if(name.equals("2 PLAYER GAME")) {
 					try {
-						main.start2();
+						main.start3();
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();

@@ -391,26 +391,11 @@ public class Point {
 	 }
 
 		if (typ.equals("PORTAL1")) {
-			Image im;
-			try {
-				im = new Image(new FileInputStream("image" + File.separator + "red_portal.jpg"));
-				circle.setFill(new ImagePattern(im));
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			setImagePortal1();
 
 		}
 		else if(typ.equals("PORTAL2")) {
-			Image im;
-			try {
-				im = new Image(new FileInputStream("image" + File.separator + "blue_portal.jpg"));
-				circle.setFill(new ImagePattern(im));
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
+			setImagePortal2();
 		}
 
 	
@@ -430,8 +415,10 @@ public class Point {
 				this.circle.setStroke(Color.GOLD);
 				mainScene.setPrevious_point(this);
 				mainScene.setFirst_click(false);
+			
 			}
 			else {
+			
 				// ECHANGER POINT -> couleur et lettre
 				if(mainScene.getPrevious_point().getUsed() && !this.getUsed()) {
 					ObservableList<Node> childs = 	mainScene.getPrevious_point().stackP.getChildren();
@@ -448,9 +435,19 @@ public class Point {
 					
 					// enlever lettre
 					this.setUsed(true);
+					
+					
+					//IF PORTAL RESET IMAGE PORTAL
+					if(mainScene.getPrevious_point().type.equals("PORTAL1")) {
+						mainScene.getPrevious_point().resetP1();
+					}
+					else if(mainScene.getPrevious_point().type.equals("PORTAL2")) {
+						mainScene.getPrevious_point().resetP2();
+					}
+					else {
 					// reset used & color & letter
 					mainScene.getPrevious_point().reset();
-					
+					}
 					mainScene.setFirst_click(true);
 					mainScene.getPrevious_point().text = null;
 					mainScene.getPrevious_point().color = null;
@@ -463,7 +460,7 @@ public class Point {
 				
 				}
 				else {
-					System.out.println("Chnage piece");
+					System.out.println("Change piece");
 					mainScene.getPrevious_point().circle.setStroke(Color.BLACK);
 					mainScene.setFirst_click(true);
 				}
@@ -476,6 +473,26 @@ public class Point {
 
 	}
 
+	public void setImagePortal1() {
+		Image im;
+		try {
+			im = new Image(new FileInputStream("image" + File.separator + "red_portal.jpg"));
+			circle.setFill(new ImagePattern(im));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	public void setImagePortal2() {
+		Image im;
+		try {
+			im = new Image(new FileInputStream("image" + File.separator + "blue_portal.jpg"));
+			circle.setFill(new ImagePattern(im));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	public void actionPerformed(java.awt.event.ActionEvent e) {
 		//showBack();
 
@@ -489,10 +506,13 @@ public class Point {
 	public void show() {
 		this.circle.setStroke(Color.BLACK);
 	}
-	public void reset() {
+	public void preReset() {
 		this.color = null;
 		this.text = null;
 		this.used = false;
+	}
+	public void reset() {
+		preReset();
 		ObservableList<Node> childs = stackP.getChildren();
 		this.stackP.getChildren().remove(childs.size() - 1);	
 		//enlever couleur
@@ -500,6 +520,26 @@ public class Point {
 		this.circle.setStroke(Color.BLACK);
 		this.stackP.getChildren().addAll(circle);
 	}
+	public void resetP1() {
+		preReset();
+		ObservableList<Node> childs = stackP.getChildren();
+		this.stackP.getChildren().remove(childs.size() - 1);	
+		//enlever couleur
+		setImagePortal1();
+		this.circle.setStroke(Color.BLACK);
+		this.stackP.getChildren().addAll(circle);
+	}
+
+	public void resetP2() {
+		preReset();
+		ObservableList<Node> childs = stackP.getChildren();
+		this.stackP.getChildren().remove(childs.size() - 1);	
+		//enlever couleur
+		setImagePortal2();
+		this.circle.setStroke(Color.BLACK);
+		this.stackP.getChildren().addAll(circle);
+	}
+
 
 	public StackPane getStackPane() {
 		return stackP;

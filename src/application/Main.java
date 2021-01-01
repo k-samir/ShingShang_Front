@@ -18,7 +18,8 @@ import presentation.MenuScene;
 public class Main extends Application {
 
 	private MenuScene mainScene;
-	private MainScene mainScene2;
+	//private MainPlayerName mainScene2;
+	private MainScene mainScene3;
 	private Stage stage;
 
 	public void start(Stage stage) throws Exception {
@@ -37,13 +38,24 @@ public class Main extends Application {
 	public void start1() throws Exception{
 		start(stage);
 	}
-	
-	public void start2() throws Exception {
+	public void start2() throws Exception{
+		
+		stage.setTitle("SHINGSHANG_IHM");
+		//this.mainScene2 = new MainScene(this);
+		//stage.setScene(this.mainScene2);
+		stage.show();
+		Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
+		stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2);
+		stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 2);
+		
+		stage.setResizable(false);
+	}
+	public void start3() throws Exception {
 		
 		
 		stage.setTitle("SHINGSHANG_IHM");
-		this.mainScene2 = new MainScene(this);
-		stage.setScene(this.mainScene2);
+		this.mainScene3 = new MainScene(this);
+		stage.setScene(this.mainScene3);
 		stage.show();
 		Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
 		stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2);
