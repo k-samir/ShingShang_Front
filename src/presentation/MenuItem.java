@@ -51,11 +51,14 @@ public class MenuItem extends StackPane {
 				}
 				else if(name.equals("2 PLAYER GAME")) {
 					try {
-						main.start3();
+						main.start2();
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
+				}
+				else if(name.equals("1 PLAYER VS A.I")) {
+					
 				}
 				bg.setFill(gradient);	
 			});
