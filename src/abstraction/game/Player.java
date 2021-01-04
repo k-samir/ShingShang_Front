@@ -72,6 +72,7 @@ public class Player {
 	 */
 	public void loseDragon() {
 		lostDragons++;
+		System.out.println("loose dragon");
 	}
 
 	/**
