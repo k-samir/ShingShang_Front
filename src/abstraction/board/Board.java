@@ -3,7 +3,6 @@ package abstraction.board;
 import java.util.ArrayList;
 import java.util.List;
 
-import abstraction.game.Console;
 import abstraction.game.Player;
 import abstraction.move.Jump;
 import abstraction.move.Move;
@@ -11,6 +10,7 @@ import abstraction.pawn.Bushi;
 import abstraction.pawn.Dragon;
 import abstraction.pawn.Lion;
 import abstraction.pawn.Monkey;
+import control.Tuple;
 
 /**
  * Le plateau de jeu
@@ -28,6 +28,8 @@ public class Board {
     private ArrayList<Move> legalMoves;
     private ArrayList<Bushi> movedBushis;
     private boolean additionalTurn;
+    
+    private ArrayList<Tuple<?,?>> caughtBushi = new ArrayList<Tuple<?,?>>(); 
   
 	
     /* * * * * * * * * * *
@@ -319,13 +321,20 @@ public class Board {
 		
 		//gestion du saut
 		if (move instanceof Jump) {
-			Jump jump = ((Jump)move);
+			System.out.println("jump");
+			Jump jump = ((Jump)move); 
 			if(jump.isJumpEnemy()) {
 				
 				if(jump.getCaughtBushi() instanceof Dragon) 
 					jump.getCaughtBushi().getPlayer().loseDragon();
 				
+				// AJOUT LISTE CAUGHT PIECE
+				Tuple caught = new Tuple(jump.getCaughtBushi().getRow(),jump.getCaughtBushi().getCol());
+				this.caughtBushi.add(caught);
+				
 				removeBushi(jump.getCaughtBushi());
+				
+				
 				move.getMovedBushi().setHasMoved(true);
 				movedBushis.add(move.getMovedBushi());
 				setAdditionalTurn(true);
@@ -340,18 +349,26 @@ public class Board {
 		
 	}
 	
+	public ArrayList<Tuple<?, ?>> getCaughtBushi() {
+		return caughtBushi;
+	}
+
+	public void setCaughtBushi(ArrayList<Tuple<?, ?>> caughtBushi) {
+		this.caughtBushi = caughtBushi;
+	}
+
 	/**
 	 * Execute un déplacement propre à un shing shang
 	 *  
 	 * @param bushi la pièce courante pouvant effectuer le shing shang
 	 */
 	public void executeShingShang(Bushi bushi) {
-		boolean yesShowLegalMoves;
+	//	boolean yesShowLegalMoves;
 		bushi.calculateLegalJump();
 		
-		yesShowLegalMoves = Console.askShowLegalMoves();
-		if(yesShowLegalMoves)
-			showLegalMoves();
+	//	yesShowLegalMoves = Console.askShowLegalMoves();
+	//	if(yesShowLegalMoves)
+	//		showLegalMoves();
 		
 		/*Move move = Console.askChoseMove(this);
 		executeMove(move);

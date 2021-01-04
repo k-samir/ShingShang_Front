@@ -183,14 +183,19 @@ public class Game {
 		//CHECK IF SHINGSHANG
 		
 		
-		/**if (selectedMove.isShingShang()) {
-			Console.askShingShangChoice(board, selectedMove.getMovedBushi());
+		if (selectedMove.isShingShang()) {
+			//Console.askShingShangChoice(board, selectedMove.getMovedBushi());
+			System.out.println("SHINGSHANG");
+			board.executeShingShang(selectedMove.getMovedBushi());
 		}
+		
+		
+		/**
 		if (board.isAdditionalTurn()) {
 			playAdditionnalTurn();
 		}*/
 
-		nextTurn();
+		//nextTurn();
 	}
 
 	/**
@@ -242,6 +247,7 @@ public class Game {
 		else
 			turnPlayer = board.getPlayer2();
 		System.out.println("Tour à : " + turnPlayer.getNumber());
+		this.board.resetLegalModal();
 	}
 
 	/**

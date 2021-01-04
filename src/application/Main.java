@@ -80,8 +80,8 @@ public class Main extends Application {
 
 		String[] player = { " ", "" };
 
-		TextInputDialog dialog = new TextInputDialog("Nantes");
-		TextInputDialog dialog2 = new TextInputDialog("Nantes");
+		TextInputDialog dialog = new TextInputDialog("P1");
+		TextInputDialog dialog2 = new TextInputDialog("P2");
 		dialog.setTitle("Name Player 1");
 		dialog.setHeaderText("Choose a name for the player 1");
 		dialog.setContentText("Name PLAYER 1 :");
