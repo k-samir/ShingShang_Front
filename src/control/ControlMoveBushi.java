@@ -26,8 +26,15 @@ public class ControlMoveBushi {
 	public void play() {
 		game.setSelectedMove1(Console.askChoseMove(game.getBoard(), row, col));
 		game.playTurn();
-
+	
 	}
+	
+	public void playAdditionalTurn() {
+		game.setSelectedMove1(Console.askChoseMove(game.getBoard(), row, col));
+		game.playAdditionnalTurn();
+	}
+	
+	
 	public boolean checkShingshang() {
 		boolean ret = false;
 		if (game.getSelectedMove1().isShingShang()) {
@@ -57,6 +64,11 @@ public class ControlMoveBushi {
 	
 	public Bushi getMove() {
 		return game.getSelectedMove1().getMovedBushi();
+	}
+	
+	public boolean isAdditionalTurn() {
+		return game.getBoard().isAdditionalTurn();
+		
 	}
 	
 

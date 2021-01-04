@@ -32,14 +32,22 @@ public class MainScene extends Scene {
 	Label label1;
 	Bushi shingshang_Bushi;
 	int sizeCaughtList = 0;
+	Boolean additionalTurn = false;
 
 	public void resetCaught() {
 
 		int sizeCaught = getCaught().size();
 		if(getSizeCaughtList() < sizeCaught) {
 			setSizeCaughtList(sizeCaught);
-			Tuple<?,?> bushi = getCaught().get(sizeCaught-1);
-			points[bushi.getFirst()][bushi.getSecond()].reset();
+			Tuple<?,?> bushi = getCaught().get(sizeCaught -1);
+		
+			if (points[bushi.getFirst()][bushi.getSecond()].getType().equals("PORTAL1")) {
+				points[bushi.getFirst()][bushi.getSecond()].resetP1();
+			} else if (points[bushi.getFirst()][bushi.getSecond()].getType().equals("PORTAL2")) {
+				points[bushi.getFirst()][bushi.getSecond()].resetP2();
+			} else {
+				points[bushi.getFirst()][bushi.getSecond()].reset();
+			}
 		}
 		
 			
@@ -88,6 +96,7 @@ public class MainScene extends Scene {
 			@Override
 			public void handle(ActionEvent e) {
 				try {
+					main.getGame().playTurn();
 					main.getGame().nextTurn();
 					setFirst_click(true);
 					setPrevious_point(null);
@@ -259,41 +268,6 @@ public class MainScene extends Scene {
 		this.label1.setText(text);
 	}
 
-	public void showBack(Point point) {
-		int x = 0, y = 0;
-		for (int lig = 0; lig < 10; lig++) {
-			for (int col = 0; col < 10; col++) {
-
-				if (points[lig][col] == point) {
-					x = lig;
-					y = col;
-					break;
-				}
-
-			}
-		}
-		try {
-			System.out.print("[" + x + " , " + y + "]");
-			points[x + 1][y].showBack();
-		} catch (Exception e) {
-		}
-		try {
-			points[x - 1][y].showBack();
-		} catch (Exception e) {
-		}
-		try {
-			points[x][y + 1].showBack();
-		} catch (Exception e) {
-		}
-		try {
-			points[x][y - 1].showBack();
-		} catch (Exception e) {
-		}
-		try {
-		} catch (Exception e) {
-		}
-
-	}
 
 	public void show(Point point) {
 		int x = 0, y = 0;
@@ -370,6 +344,37 @@ public class MainScene extends Scene {
 		return controlMoveBushi.checkMove();
 	}
 
+	public boolean checkPieceAdditionalTurn(Point p) {
+		boolean ret = true;
+		int x = 0, y = 0;
+		for (int lig = 0; lig < 10; lig++) {
+			for (int col = 0; col < 10; col++) {
+
+				if (points[lig][col] == p) {
+					x = lig;
+					y = col;
+					break;
+				}
+
+			}
+		}
+		try {
+			
+		if(this.shingshang && this.getShingshang_move().getRow() == x && this.getShingshang_move().getCol() == y) {
+			ret = false;
+		}
+		
+		}catch(Exception e) {}
+		
+		if(!this.additionalTurn) {
+			ret = false;
+		}
+			
+			
+		return ret;
+	}
+	
+	
 	public boolean checkPieceShingShang(Point p) {
 		boolean ret = false;
 		int x = 0, y = 0;
@@ -385,11 +390,13 @@ public class MainScene extends Scene {
 			}
 		}
 		try {
-		if(this.getShingshang_move().getRow() == x && this.getShingshang_move().getCol() == y) {
+			
+		if(this.shingshang && this.getShingshang_move().getRow() == x && this.getShingshang_move().getCol() == y) {
 			ret = true;
 		}
 		
 		}catch(Exception e) {}
+		
 		if(!this.shingshang) {
 			ret = true;
 		}
@@ -412,17 +419,28 @@ public class MainScene extends Scene {
 		}
 
 		ControlMoveBushi controlMoveBushi = new ControlMoveBushi(x, y, main.getGame());
-		controlMoveBushi.play();
+		if(!this.additionalTurn) {
+			controlMoveBushi.play();
+		}
+		else {
+			controlMoveBushi.playAdditionalTurn();
+		}
+		
 		this.shingshang = controlMoveBushi.checkShingshang();
-		System.out.println(this.shingshang);
+		this.additionalTurn = controlMoveBushi.isAdditionalTurn();
+		
 
-		if (!this.shingshang) {
+		if (!this.shingshang && !this.additionalTurn) {
 			controlMoveBushi.nextTurn();
 			this.changeLabel("C'est le tour de : " + main.getGame().getTurnPlayer().getNumber() );
-		} else {
+		} else if(this.shingshang){
 			this.changeLabel("SHINGSHANG YOU HAVE AN ADDITIONAL MOVE");
 			this.setShingshang_move(controlMoveBushi.getMove());
 
+		}
+		else if(this.additionalTurn) {
+			this.changeLabel("SHINGSHANG ADDITIONAL YOU HAVE AN ADDITIONAL MOVE");
+			this.setShingshang_move(controlMoveBushi.getMove());
 		}
 
 	}
@@ -478,8 +496,21 @@ public class MainScene extends Scene {
 		}
 	}
 	
+	public Boolean getAdditionalTurn() {
+		return additionalTurn;
+	}
+	public void setAdditionalTurn(Boolean additionalTurn) {
+		this.additionalTurn = additionalTurn;
+	}
 	public void updateLabel() {
 		this.changeLabel("C'est le tour de : " + this.main.getGame().getTurnPlayer().getNumber());
+	}
+	
+	public boolean isOver() {
+		return this.main.getGame().getBoard().isOver();
+	}
+	public void end() {
+		this.main.getGame().end();
 	}
 
 	/**

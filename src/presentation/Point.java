@@ -351,31 +351,26 @@ public class Point {
 			// PREMIER CLICK CHOIX PION
 			
 			
-			
+			if(!mainScene.isOver()) {
 			
 			if (mainScene.getFirst_click()) {
 				
 				if (mainScene.main.getGame().getTurnPlayer().getNumber() == this.player && 
-						mainScene.checkPieceShingShang(this)) {
-					if (this.used) {
+						mainScene.checkPieceShingShang(this) && this.used && !mainScene.checkPieceAdditionalTurn(this)) {
+					
 						this.circle.setStroke(Color.GOLD);
 						mainScene.setPrevious_point(this);
 						mainScene.setFirst_click(false);
 
 						// Choose the First Piece to Move
 						try {
-							if(mainScene.getShingshang()) {
-								
 								mainScene.chooseBushi(this);
-								
-							}else {
-								mainScene.chooseBushi(this);
-							}
-							}
+						}
 							catch(Exception e2) {}
 						
-					}
+					
 				}
+			
 
 			else {
 
@@ -390,6 +385,8 @@ public class Point {
 
 					mainScene.setFirst_click(true);
 					mainScene.setPrevious_point(null);
+					mainScene.setAdditionalTurn(false);
+					mainScene.setShingshang(false);
 				}
 
 			}
@@ -397,11 +394,18 @@ public class Point {
 			// SECOND CLICK CHOIX MOVE
 			else {
 				mainScene.resetStroke(this);
+				
+				// CHECK IF SAME POINT CLICKED
+				if(this.equals(mainScene.previous_point)) { 	
+						mainScene.setFirst_click(true);
+						mainScene.setPrevious_point(null);}
+				else {
 				// ECHANGER POINT -> couleur et lettre
 				if (mainScene.getPrevious_point().getUsed() && !this.getUsed() && mainScene.main.getGame()
 						.getTurnPlayer().getNumber() == mainScene.getPrevious_point().player) {
 
 					if (mainScene.checkMove(this)) {
+						
 						mainScene.moveBushi(this);
 
 						// Reset stroke black for neighbor
@@ -423,13 +427,10 @@ public class Point {
 						} else if (mainScene.getPrevious_point().type.equals("PORTAL2")) {
 							mainScene.getPrevious_point().resetP2();
 						} else {
-							// reset used & color & letter
+						// reset used & color & letter
 							mainScene.getPrevious_point().reset();
-							
-							
-								
-								mainScene.resetCaught();								
-							
+						// RESET IF CAUGHT		
+							mainScene.resetCaught();								
 							
 						}
 						mainScene.setFirst_click(true);
@@ -457,11 +458,17 @@ public class Point {
 					
 					
 					
+					}
 				}
 			}
 		
 			mainScene.updateLabel();
 
+		}
+			else{
+				mainScene.end();
+			}
+			
 		});
 
 	}

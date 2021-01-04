@@ -338,6 +338,7 @@ public class Board {
 				move.getMovedBushi().setHasMoved(true);
 				movedBushis.add(move.getMovedBushi());
 				setAdditionalTurn(true);
+				System.out.println("TRUEEEEEEEEEEEEEEE");
 				
 			}
 		} else {
@@ -362,7 +363,7 @@ public class Board {
 	 *  
 	 * @param bushi la pièce courante pouvant effectuer le shing shang
 	 */
-	public void executeShingShang(Bushi bushi) {
+	public void executeShingShang(Bushi bushi,Move shingshang_move) {
 	//	boolean yesShowLegalMoves;
 		bushi.calculateLegalJump();
 		
@@ -370,10 +371,10 @@ public class Board {
 	//	if(yesShowLegalMoves)
 	//		showLegalMoves();
 		
-		/*Move move = Console.askChoseMove(this);
+		Move move = shingshang_move;
 		executeMove(move);
 
-		if(move.isShingShang())
+		/**if(move.isShingShang())
 		Console.askShingShangChoice(this, move.getMovedBushi());*/
 	}
 	

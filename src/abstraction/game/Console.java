@@ -184,8 +184,8 @@ public class Console {
 	public static void askShingShangChoice(Board board, Bushi bushi) {
 		boolean keepGoing = askContinue();
 		
-		if(keepGoing)
-			board.executeShingShang(bushi);
+		if(keepGoing) {}
+		//	board.executeShingShang(bushi);
 	}
 
 	/**

@@ -162,7 +162,7 @@ public class Game {
 		Move selectedMove;
 		//boolean yesShowLegalMoves;
 
-		//board.show();
+		
 		//System.out.println(turnPlayer.getName() + ", e toi de jouer ! :)");
 		selectedBushi = this.selectedBushi1;
 	
@@ -186,12 +186,12 @@ public class Game {
 		if (selectedMove.isShingShang()) {
 			//Console.askShingShangChoice(board, selectedMove.getMovedBushi());
 			System.out.println("SHINGSHANG");
-			board.executeShingShang(selectedMove.getMovedBushi());
+			board.executeShingShang(selectedMove.getMovedBushi(),selectedMove);
 		}
 		
+		board.show();
 		
-		/**
-		if (board.isAdditionalTurn()) {
+		/*if (board.isAdditionalTurn()) {
 			playAdditionnalTurn();
 		}*/
 
@@ -203,37 +203,38 @@ public class Game {
 	 */
 	public void playAdditionnalTurn() {
 
-		Bushi selectedBushi;
-		Move selectedMove;
-		boolean playerWantsToContinue = Console.askContinue();
-		boolean yesShowLegalMoves;
+		Bushi selectedBushi1;
+		Move selectedMove1;
+		
+		selectedBushi1 = this.selectedBushi1;
+		selectedMove1 = this.selectedMove1;
+		
+		//boolean playerWantsToContinue = Console.askContinue();
+		//boolean yesShowLegalMoves;
 
-		while (playerWantsToContinue && board.isAdditionalTurn()) {
+		/**while (board.isAdditionalTurn()) {
 			board.show();
 			System.out.println(turnPlayer.getName() + ", tu peux choisir une autre piece :)");
 			
-			selectedBushi = selectedBushi1;
+			selectedBushi1 = selectedBushi1;
 			
-			System.out.println("Piece selectionnee : " + selectedBushi.toString());
-			selectedBushi.calculateLegalMoves();
+			System.out.println("Piece selectionnee : " + selectedBushi1.toString());**/
+			selectedBushi1.calculateLegalMoves();
 
-			yesShowLegalMoves = Console.askShowLegalMoves();
-			if (yesShowLegalMoves)
-				board.showLegalMoves();
-
-			/*selectedMove = Console.askChoseMove(board);
-			board.executeMove(selectedMove);
-
+			
+			//selectedMove = Console.askChoseMove(board);
+			board.executeMove(selectedMove1);
+/**
 			if (selectedMove.isShingShang()) {
 				Console.askShingShangChoice(board, selectedMove.getMovedBushi());
 			}
 
 			if (board.isAdditionalTurn()) {
 				playerWantsToContinue = Console.askContinue();
-			}*/
+			}
 
-		}
-		board.resetMovedBushis();
+		}*/
+			board.resetMovedBushis();
 	}
 
 	/**
@@ -241,6 +242,10 @@ public class Game {
 	 */
 	public void nextTurn() {
 		
+		if(!notOver()) {
+			end();
+			
+		}else {
 		turnNumber++;
 		if (turnNumber % 2 == 1)
 			turnPlayer = board.getPlayer1();
@@ -248,6 +253,7 @@ public class Game {
 			turnPlayer = board.getPlayer2();
 		System.out.println("Tour à : " + turnPlayer.getNumber());
 		this.board.resetLegalModal();
+		}
 	}
 
 	/**
@@ -263,7 +269,7 @@ public class Game {
 	/**
 	 * Indique le jeu est fini et affiche le nom du joueur
 	 */
-	private void end() {
+	public void end() {
 		System.out.println("-- Fin de la partie --\n Le gagnant est " + board.winner().getName() + ".");
 	}
 
