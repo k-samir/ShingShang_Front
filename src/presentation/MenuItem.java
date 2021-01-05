@@ -26,23 +26,37 @@ public class MenuItem extends StackPane {
 			
 			Text text = new Text(name);
 			text.setFill(Color.DARKGREY);
+			if(name.equals("1 PLAYER VS A.I")) {
+				bg.setOpacity(0.2);
+				text.setOpacity(0.2);
+			}
 			text.setFont(Font.font("Tw Cen MT Condensed", FontWeight.SEMI_BOLD,22));
 			
 			setAlignment(Pos.CENTER);
 			getChildren().addAll(bg,text);
 			
 			setOnMouseEntered(event -> {
+if(name.equals("1 PLAYER VS A.I")) {
+					
+				}else {
 				bg.setFill(gradient);
-				text.setFill(Color.WHITE);
+				text.setFill(Color.WHITE);}
 			});
 			
 			setOnMouseExited(event -> {
+if(name.equals("1 PLAYER VS A.I")) {
+					
+				}else {
 				bg.setFill(Color.BLACK);
-				text.setFill(Color.DARKGREY);
+				text.setFill(Color.DARKGREY);}
 			});
 			
 			setOnMousePressed(event -> {
-				bg.setFill(Color.SADDLEBROWN);	
+				if(name.equals("1 PLAYER VS A.I")) {
+					
+				}else {
+					
+				bg.setFill(Color.SADDLEBROWN);}	
 			});
 			
 			setOnMouseReleased(event -> {

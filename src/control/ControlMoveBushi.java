@@ -26,9 +26,13 @@ public class ControlMoveBushi {
 	public void play() {
 		game.setSelectedMove1(Console.askChoseMove(game.getBoard(), row, col));
 		game.playTurn();
-	
+		
 	}
 	
+	public boolean checkAdditionalMove() {
+		return game.getBoard().isAdditionalTurn();
+
+	}
 	public void playAdditionalTurn() {
 		game.setSelectedMove1(Console.askChoseMove(game.getBoard(), row, col));
 		game.playAdditionnalTurn();
@@ -63,13 +67,10 @@ public class ControlMoveBushi {
 	}
 	
 	public Bushi getMove() {
+	
 		return game.getSelectedMove1().getMovedBushi();
 	}
 	
-	public boolean isAdditionalTurn() {
-		return game.getBoard().isAdditionalTurn();
-		
-	}
 	
 
 	

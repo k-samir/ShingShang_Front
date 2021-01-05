@@ -338,7 +338,7 @@ public class Board {
 				move.getMovedBushi().setHasMoved(true);
 				movedBushis.add(move.getMovedBushi());
 				setAdditionalTurn(true);
-				System.out.println("TRUEEEEEEEEEEEEEEE");
+				System.out.println("EATING");
 				
 			}
 		} else {

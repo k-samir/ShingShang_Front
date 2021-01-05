@@ -356,37 +356,62 @@ public class Point {
 			if (mainScene.getFirst_click()) {
 				
 				if (mainScene.main.getGame().getTurnPlayer().getNumber() == this.player && 
-						mainScene.checkPieceShingShang(this) && this.used && !mainScene.checkPieceAdditionalTurn(this)) {
-					
-						this.circle.setStroke(Color.GOLD);
-						mainScene.setPrevious_point(this);
-						mainScene.setFirst_click(false);
-
-						// Choose the First Piece to Move
-						try {
-								mainScene.chooseBushi(this);
+						 this.used) {
+						if (mainScene.getAdditionalTurn()){
+							System.out.println("KSDFLFJLKSFJLSJD");
+							if(mainScene.checkPieceAdditionalTurn(this)) {
+								this.circle.setStroke(Color.GOLD);
+								mainScene.setPrevious_point(this);
+								mainScene.setFirst_click(false);
+								// Choose the First Piece to Move
+								try {
+									mainScene.chooseBushi(this);
+								}
+									catch(Exception e2) {}
+							}
+							else { blink();}
 						}
-							catch(Exception e2) {}
+						else if(mainScene.getShingshang()) {
+							if(mainScene.checkPieceShingShang(this)){
+								this.circle.setStroke(Color.GOLD);
+								mainScene.setPrevious_point(this);
+								mainScene.setFirst_click(false);
+								// Choose the First Piece to Move
+								try {
+									mainScene.chooseBushi(this);
+								}
+									catch(Exception e2) {}
+							}
+							else {blink();}
+							
+						}
+						else  {
+							this.circle.setStroke(Color.GOLD);
+							mainScene.setPrevious_point(this);
+							mainScene.setFirst_click(false);
+							// Choose the First Piece to Move
+							try {
+								mainScene.chooseBushi(this);
+							}
+								catch(Exception e2) {}
 						
+						
+						}
+								
 					
+						
 				}
 			
 
 			else {
 
 					// BLINK IN RED IF FIRST POINT IS EMPTY
-					KeyFrame kfP = new KeyFrame(Duration.seconds(0.5),
-							new KeyValue(circle.strokeProperty(), Color.RED));
-					Timeline TIMER = new Timeline();
-					TIMER.getKeyFrames().add(kfP);
-					TIMER.setCycleCount(6);
-					TIMER.setAutoReverse(true);
-					TIMER.play();
-
+					
+					blink();
 					mainScene.setFirst_click(true);
-					mainScene.setPrevious_point(null);
-					mainScene.setAdditionalTurn(false);
-					mainScene.setShingshang(false);
+					//mainScene.setPrevious_point(null);
+					//mainScene.setAdditionalTurn(false);
+					//mainScene.setShingshang(false);
 				}
 
 			}
@@ -398,7 +423,9 @@ public class Point {
 				// CHECK IF SAME POINT CLICKED
 				if(this.equals(mainScene.previous_point)) { 	
 						mainScene.setFirst_click(true);
-						mainScene.setPrevious_point(null);}
+						mainScene.setPrevious_point(null);
+						
+				}
 				else {
 				// ECHANGER POINT -> couleur et lettre
 				if (mainScene.getPrevious_point().getUsed() && !this.getUsed() && mainScene.main.getGame()
@@ -500,6 +527,15 @@ public class Point {
 
 	}
 
+	public void blink() {
+		KeyFrame kfP = new KeyFrame(Duration.seconds(0.5), new KeyValue(circle.strokeProperty(), Color.RED));
+		Timeline TIMER = new Timeline();
+		TIMER.getKeyFrames().add(kfP);
+		TIMER.setCycleCount(6);
+		TIMER.setAutoReverse(true);
+		TIMER.play();
+	}
+
 	public void showBack() {
 		// this.north.setStroke(Color.GOLD);
 		this.circle.setStroke(Color.GOLD);
@@ -523,8 +559,11 @@ public class Point {
 		// enlever couleur
 		this.player = 0;
 		this.circle.setFill(Color.WHITE);
-		this.circle.setStroke(Color.BLACK);try {
-		this.stackP.getChildren().addAll(circle);}catch(Exception e) {}
+		this.circle.setStroke(Color.BLACK);
+		try {
+			this.stackP.getChildren().addAll(circle);
+		} catch (Exception e) {
+		}
 	}
 
 	public void resetP1() {
@@ -535,7 +574,10 @@ public class Point {
 
 		setImagePortal1();
 		this.circle.setStroke(Color.BLACK);
-		this.stackP.getChildren().addAll(circle);
+		try {
+			this.stackP.getChildren().addAll(circle);
+		} catch (Exception e) {
+		}
 	}
 
 	public void resetP2() {
@@ -546,7 +588,10 @@ public class Point {
 
 		setImagePortal2();
 		this.circle.setStroke(Color.BLACK);
-		this.stackP.getChildren().addAll(circle);
+		try {
+			this.stackP.getChildren().addAll(circle);
+		} catch (Exception e) {
+		}
 	}
 
 	public StackPane getStackPane() {

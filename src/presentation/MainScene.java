@@ -101,7 +101,7 @@ public class MainScene extends Scene {
 					setFirst_click(true);
 					setPrevious_point(null);
 					setShingshang(false);
-					
+										
 					updateLabel();
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
@@ -360,7 +360,7 @@ public class MainScene extends Scene {
 		}
 		try {
 			
-		if(this.shingshang && this.getShingshang_move().getRow() == x && this.getShingshang_move().getCol() == y) {
+		if(this.additionalTurn && this.getShingshang_move().getRow() == x && this.getShingshang_move().getCol() == y) {
 			ret = false;
 		}
 		
@@ -421,13 +421,19 @@ public class MainScene extends Scene {
 		ControlMoveBushi controlMoveBushi = new ControlMoveBushi(x, y, main.getGame());
 		if(!this.additionalTurn) {
 			controlMoveBushi.play();
+			
 		}
 		else {
 			controlMoveBushi.playAdditionalTurn();
+			this.additionalTurn = false;
+			this.shingshang_Bushi = null;
 		}
 		
+		
+		this.additionalTurn = controlMoveBushi.checkAdditionalMove();
+		
 		this.shingshang = controlMoveBushi.checkShingshang();
-		this.additionalTurn = controlMoveBushi.isAdditionalTurn();
+	
 		
 
 		if (!this.shingshang && !this.additionalTurn) {
@@ -439,8 +445,11 @@ public class MainScene extends Scene {
 
 		}
 		else if(this.additionalTurn) {
-			this.changeLabel("SHINGSHANG ADDITIONAL YOU HAVE AN ADDITIONAL MOVE");
+			this.changeLabel("YOU'VE EATEN AN ENNEMY, EXTRA TURN FOR OTHER PIECE");
 			this.setShingshang_move(controlMoveBushi.getMove());
+			
+			System.out.println(this.getShingshang_move().getRow() + " " +this.getShingshang_move().getCol() );
+		
 		}
 
 	}
