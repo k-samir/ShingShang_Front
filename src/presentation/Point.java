@@ -83,7 +83,8 @@ public class Point {
 		r.setHeight(75);
 		r.setFill(Color.rgb(192, 194, 181));
 		r.setStroke(Color.rgb(192, 194, 181));
-
+		//Color.rgb(2, 148, 137)
+		//Color.rgb(2, 148, 137)
 		if (border.equals("NOTBORDER")) {
 			north_w = new Line(0, 0, 35, 35);
 			north_w.setStrokeWidth(5);
@@ -345,13 +346,27 @@ public class Point {
 			setImagePortal2();
 		}
 
+		stackP.setOnMouseEntered(e ->{
+			if(this.text != null) {
+				
+				circle.setStroke(Color.MEDIUMAQUAMARINE);
+			}
+			
+		});
+	
+		stackP.setOnMouseExited(e->{
+			if(this.text != null) {
+				circle.setStroke(Color.BLACK);
+			}
+		});
+		
 		stackP.setOnMouseClicked(e -> {
+			
 			// TODO Auto-generated catch block
 
 			// PREMIER CLICK CHOIX PION
 			
-			
-			if(!mainScene.isOver()) {
+			this.circle.setStroke(Color.BLACK);
 			
 			if (mainScene.getFirst_click()) {
 				
@@ -424,6 +439,7 @@ public class Point {
 				if(this.equals(mainScene.previous_point)) { 	
 						mainScene.setFirst_click(true);
 						mainScene.setPrevious_point(null);
+						mainScene.resetLegalMoves();
 						
 				}
 				else {
@@ -467,6 +483,10 @@ public class Point {
 						// mainScene.getPrevious_point().setUsed(false);
 						mainScene.setPrevious_point(null);
 						
+						if(mainScene.isOver()) {
+							mainScene.end();
+						}
+						
 						
 						// mainScene.getPrevious_point().text = this.text;
 						// UPDATE NEW COLOR AND TEXT
@@ -491,10 +511,8 @@ public class Point {
 		
 			mainScene.updateLabel();
 
-		}
-			else{
-				mainScene.end();
-			}
+		
+			
 			
 		});
 

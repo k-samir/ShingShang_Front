@@ -1,5 +1,7 @@
 package presentation;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.ArrayList;
 
 import abstraction.pawn.Bushi;
@@ -13,12 +15,15 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 
 public class MainScene extends Scene {
 	private Point[][] points;
@@ -33,7 +38,102 @@ public class MainScene extends Scene {
 	Bushi shingshang_Bushi;
 	int sizeCaughtList = 0;
 	Boolean additionalTurn = false;
+	
+	private Rectangle redBoard;
+	private Rectangle blueBoard;
 
+	public MainScene(Main main) throws Exception {
+
+		super(new BorderPane());
+		this.main = main;
+		root = (BorderPane) (this.getRoot());
+		board = new GridPane();
+		BorderPane borderTop = new BorderPane();
+		// Rectangle rBleu = new Rectangle(770,70, Color.GREY);
+
+		label1 = new Label("TEXT INFO");
+		label1.setTextFill(Color.BLACK);
+		label1.setFont(Font.font("Tw Cen MT Condensed", FontWeight.SEMI_BOLD,30));
+
+		HBox hb1 = new HBox();
+		Button btn = new Button();
+		Button btn2 = new Button("PASS");
+		
+		redBoard = new Rectangle(50, 50, 100, 50); 
+		blueBoard = new Rectangle(50, 50, 100, 50); 
+		redBoard.setArcHeight(10.0d); 
+		redBoard.setArcWidth(10.0d);
+		
+		blueBoard.setArcHeight(10.0d); 
+		blueBoard.setArcWidth(10.0d);
+		
+		redBoard.setFill(Color.RED);
+		blueBoard.setFill(Color.GREY);
+		blueBoard.setOpacity(0.6);
+		
+		ImageView view = new ImageView();
+		Image arrow = new Image(new FileInputStream("image" + File.separator + "arrow-back-icon.png"));
+		view.setImage(arrow);
+		view.setFitWidth(35);
+		view.setFitHeight(35);
+		btn.setGraphic(view);
+		
+		btn.setStyle("-fx-focus-color: transparent;");
+		btn2.setStyle("-fx-background-color: linear-gradient(#ffd65b, #e68400),linear-gradient(#ffef84, #f2ba44)," + 
+        "linear-gradient(#ffea6a, #efaa22),linear-gradient(#ffe657 0%, #f8c202 50%, #eea10b 100%),linear-gradient(" + 
+		"from 0% 0% to 15% 50%, rgba(255,255,255,0.9), rgba(255,255,255,0));-fx-background-radius: 30;-fx-background-insets:" +
+        "0,1,2,3,0;-fx-text-fill: #654b00;-fx-font-weight: bold;-fx-font-size: 14px;-fx-padding: 10 20 10 20;");
+		btn2.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				try {
+					main.getGame().playTurn();
+					main.getGame().nextTurn();
+					setFirst_click(true);
+					setPrevious_point(null);
+					setShingshang(false);
+										
+					updateLabel();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		
+		
+		btn.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				try {
+					main.start1();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		hb1.setSpacing(20);
+		hb1.getChildren().addAll(redBoard,label1,blueBoard);
+		hb1.setAlignment(Pos.CENTER);
+
+		//stackPan.setAlignment(btn2, Pos.TOP_RIGHT);
+		
+		borderTop.setLeft(btn);
+		borderTop.setCenter(hb1);
+		borderTop.setRight(btn2);
+		borderTop.setAlignment(btn, Pos.CENTER);
+
+		borderTop.setAlignment(btn2, Pos.CENTER);
+			
+		root.setTop(borderTop);
+		root.setCenter(board);
+		// root = (GridPane) (this.getRoot());
+		// root.setHgap(10);
+		// root.setVgap(10);
+		init();
+	}
+	
 	public void resetCaught() {
 
 		int sizeCaught = getCaught().size();
@@ -76,65 +176,7 @@ public class MainScene extends Scene {
 		this.shingshang = shingshang;
 	}
 
-	public MainScene(Main main) throws Exception {
-
-		super(new BorderPane());
-		this.main = main;
-		root = (BorderPane) (this.getRoot());
-		board = new GridPane();
-
-		StackPane stackPan = new StackPane();
-		// Rectangle rBleu = new Rectangle(770,70, Color.GREY);
-
-		label1 = new Label("TEXT INFO");
-
-		HBox hb = new HBox();
-		Button btn = new Button("BACK");
-		Button btn2 = new Button("PASS");
-		
-		btn2.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent e) {
-				try {
-					main.getGame().playTurn();
-					main.getGame().nextTurn();
-					setFirst_click(true);
-					setPrevious_point(null);
-					setShingshang(false);
-										
-					updateLabel();
-				} catch (Exception e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			}
-		});
-		
-		
-		btn.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent e) {
-				try {
-					main.start1();
-				} catch (Exception e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			}
-		});
-
-		hb.getChildren().add(label1);
-		hb.setSpacing(10);
-
-		stackPan.getChildren().addAll(hb,btn,btn2);
-		stackPan.setAlignment(btn2, Pos.TOP_RIGHT);
-		root.setTop(stackPan);
-		root.setCenter(board);
-		// root = (GridPane) (this.getRoot());
-		// root.setHgap(10);
-		// root.setVgap(10);
-		init();
-	}
+	
 	
 	public ArrayList<Tuple<?,?>> getCaught() {
 		return this.main.getGame().getBoard().getCaughtBushi();
@@ -142,6 +184,7 @@ public class MainScene extends Scene {
 	
 	public void init() {
 		this.points = new Point[10][10];
+		
 
 		for (int lig = 0; lig < 10; lig++) {
 			for (int col = 0; col < 10; col++) {
@@ -256,11 +299,14 @@ public class MainScene extends Scene {
 					r.setHeight(75);
 					r.setFill(Color.rgb(192, 194, 181));
 					r.setStroke(Color.rgb(192, 194, 181));
+					//r.setFill(Color.rgb(2, 148, 137));
+					//r.setStroke(Color.rgb(2, 148, 137));
 					board.add(r, col, lig);
 				}
 
 			}
 		}
+		
 
 	}
 
@@ -438,7 +484,8 @@ public class MainScene extends Scene {
 
 		if (!this.shingshang && !this.additionalTurn) {
 			controlMoveBushi.nextTurn();
-			this.changeLabel("C'est le tour de : " + main.getGame().getTurnPlayer().getNumber() );
+			this.changeLabel("It is now the turn of " + main.getGame().getTurnPlayer().getName()
+					 + " / Player " + main.getGame().getTurnPlayer().getNumber() );
 		} else if(this.shingshang){
 			this.changeLabel("SHINGSHANG YOU HAVE AN ADDITIONAL MOVE");
 			this.setShingshang_move(controlMoveBushi.getMove());
@@ -512,7 +559,23 @@ public class MainScene extends Scene {
 		this.additionalTurn = additionalTurn;
 	}
 	public void updateLabel() {
-		this.changeLabel("C'est le tour de : " + this.main.getGame().getTurnPlayer().getNumber());
+		int number = main.getGame().getTurnPlayer().getNumber();
+		if(number == 1) {
+			this.redBoard.setOpacity(1);
+			this.redBoard.setFill(Color.RED);
+			
+			this.blueBoard.setOpacity(0.6);
+			this.blueBoard.setFill(Color.GREY);
+		}
+		else {
+			this.blueBoard.setOpacity(1);
+			this.blueBoard.setFill(Color.BLUE);
+			
+			this.redBoard.setOpacity(0.6);
+			this.redBoard.setFill(Color.GREY);
+		}
+		this.changeLabel("It is now the turn of " + main.getGame().getTurnPlayer().getName()
+				 + "/ Player " + number  );
 	}
 	
 	public boolean isOver() {
@@ -520,12 +583,9 @@ public class MainScene extends Scene {
 	}
 	public void end() {
 		this.main.getGame().end();
+		this.main.announceWinner(main.getGame().getBoard().winner().getName(),main.getGame().getBoard().winner().getNumber());
 	}
 
-	/**
-	 * for(int i = x-3;i<x+3;i++) { for(int j = y+3;j>y-3;j--) {
-	 * 
-	 * }
-	 **/
+
 
 }
