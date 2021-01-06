@@ -236,16 +236,18 @@ public class Main extends Application {
 		rootItem.setExpanded(true);
 
 		// JSP Item
+		TreeItem<String> controls = new TreeItem<>("Controls");
 		TreeItem<String> base = new TreeItem<String>("Base");
 		TreeItem<String> moves = new TreeItem<>("Moves");
 		TreeItem<String> shingshang_sequence = new TreeItem<>("ShingShang Sequence");
 		TreeItem<String> special_rules = new TreeItem<>("Special Rules");
 		TreeItem<String> end_game = new TreeItem<>("End of Game");
+		
 
 		// Spring Item
 
 		// Add to Root
-		rootItem.getChildren().addAll(base, moves, shingshang_sequence, special_rules, end_game);
+		rootItem.getChildren().addAll(controls,base, moves, shingshang_sequence, special_rules, end_game);
 
 		TreeView<String> tree = new TreeView<String>(rootItem);
 
@@ -256,7 +258,7 @@ public class Main extends Application {
 		tree.getSelectionModel().selectedItemProperty()
 				.addListener((observable, oldValue, newValue) -> updateTextArea(newValue.getValue(), textArea));
 
-		textArea.setText("RULES OF THE GAME WILL BE HERE, PLEASE CHOOSE A RUL CATEGORY");
+		textArea.setText("Welcome to the Rule Page, click any category to continue ...");
 
 		textArea.setStyle("-fx-text-alignment: center;");
 		textArea.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
@@ -267,7 +269,7 @@ public class Main extends Application {
 		BorderPane treeBP = new BorderPane();
 		treeBP.setCenter(tree);
 
-		treeBP.setMaxHeight(150);
+		treeBP.setMaxHeight(180);
 		grid.setTop(treeBP);
 
 		grid.setBottom(textArea);
@@ -277,7 +279,7 @@ public class Main extends Application {
 		Image imageIcon;
 		try {
 			
-				imageIcon = new Image(new FileInputStream("image" + File.separator + "brown_portal.jpg"),200,160,false,false);
+				imageIcon = new Image(new FileInputStream("image" + File.separator + "rules.png"),200,160,false,false);
 				Stage stage = (Stage) dialog.getDialogPane().getScene().getWindow();
 				stage.getIcons().add(imageIcon);
 
@@ -311,20 +313,20 @@ public class Main extends Application {
 		// TODO Auto-generated method stub
 		if (value.equals("Base")) {
 			textArea.setText("Players take turns performing one of the following two actions:\r\n" + "\r\n"
-					+ "a player can move one of his pieces on the board to another square on the board.\r\n" + "\r\n"
-					+ "a player may jump over another piece if it is smaller or the same size as the jumper's piece.");
+					+ " - a player can move one of his pieces on the board to another square on the board.\r\n" + "\r\n"
+					+ " - a player may jump over another piece if it is smaller or the same size as the jumper's piece.");
 		} else if (value.equals("Moves")) {
-			textArea.setText("To move a piece on the board, it is necessary that the destination square is free.\r\n"
+			textArea.setText("To move a piece on the board, it is necessary that the destination point is free.\r\n"
 					+ "\r\n" + "You can move horizontally, vertically or diagonally, both forwards and backwards.\r\n"
 					+ "\r\n"
-					+ "To jump, the jumper's piece must be on a square adjacent to a square occupied by one of its own pieces or by the opposing player's piece.\r\n"
+					+ "To jump, the jumper's piece must be on a square adjacent to a point occupied by one of its own pieces or by the opposing player's piece.\r\n"
 					+ "\r\n"
 					+ "The jump may be made vertically, horizontally or diagonally, provided that the next square is empty.\r\n");
 		} else if (value.equals("Special Rules")) {
-			textArea.setText("Monkeys can move one or two squares in any direction,"
-					+ "horizontally, vertically or diagonally, but without changing direction during the turn."
-					+ " Lions can move one square in any direction, horizontally, vertically or diagonally."
-					+ "Dragons can only move by jumping.");
+			textArea.setText(" - Monkeys can move one or two point in any direction,"  
+					+ "horizontally, vertically or diagonally, but without changing direction during the turn.\r\n\n" 
+					+ " - Lions can move one square in any direction, horizontally, vertically or diagonally."+ "\r\n\n"
+					+  "- Dragons can only move by jumping.");
 		}
 	else if(value.equals("ShingShang Sequence"))
 	{
@@ -334,8 +336,14 @@ public class Main extends Application {
 						+ "and the opponent's piece is removed from the board. However, you win an extra turn with another piece.");
 	}else if(value.equals("End of Game"))
 	{
-		textArea.setText("A player wins the game when he manages to bring one of his dragons"+
-	"to one of his opponent's portals (special boxes) or captures both of his opponent's dragons.");
+		textArea.setText("A player wins the game when : \r\n\n - He manages to bring one of his dragons"+
+	" to one of his opponent's portals (special boxes). \r\n\n OR \r\n\n  - Captures both of his opponent's dragons.");
+	}
+	else if(value.equals("Controls"))
+	{
+		textArea.setText("To Play you can use your mouse to first, click on the piece you want to move. Then the possible moves are displayed." + 
+	" you can then click on the destination point to move your piece. \r\n\n You can Pass your turn by clicking the PASS Button or press the 'S' KEY to pass. \r\n\n" + 
+				" If you want to read the rules there is a RULE Button at the top of the screen.");
 	}
 
 	}
