@@ -28,7 +28,7 @@ public class Board {
     private ArrayList<Move> legalMoves;
     private ArrayList<Bushi> movedBushis;
     private boolean additionalTurn;
-    
+    private Player winner;
     private ArrayList<Tuple<?,?>> caughtBushi = new ArrayList<Tuple<?,?>>(); 
   
 	
@@ -321,7 +321,7 @@ public class Board {
 		
 		//gestion du saut
 		if (move instanceof Jump) {
-			System.out.println("jump");
+			
 			Jump jump = ((Jump)move); 
 			if(jump.isJumpEnemy()) {
 				
@@ -337,8 +337,9 @@ public class Board {
 				
 				move.getMovedBushi().setHasMoved(true);
 				movedBushis.add(move.getMovedBushi());
+				jump.setCaughtBushi(null);
 				setAdditionalTurn(true);
-				System.out.println("EATING");
+				
 				
 			}
 		} else {
@@ -346,7 +347,6 @@ public class Board {
 		}
 		resetLegalModal();
 		
-		System.out.println("moved");
 		
 	}
 	
@@ -432,10 +432,14 @@ public class Board {
 	 * 
 	 * @param p le joueur propriétaire des portails
 	 * 
-	 * @return true si le nombre de portails occupés est égal à 2
+	 * @return true si le nombre de portails occupés est égal à 1
 	 */
 	public boolean allPortalsOccupied(Player p) {
-		return counterOccupiedPortals(p) == 1 ;
+		if( counterOccupiedPortals(p) == 1 ) {	
+			return true;
+		}
+		return false;
+		
 	}
 
 	/**
@@ -453,9 +457,13 @@ public class Board {
 			for(int j = 0 ; j < size ; j++) {
 				if(array[i][j] instanceof Portal) {
 					portal = (Portal) array[i][j];
+					if(portal.getOwner() == p) {
 					if(portal.isOccupiedByEnemy()) {
 						counter++;
-					}
+						
+						
+						break;
+					}}
 				}
 			}
 		}
@@ -472,10 +480,10 @@ public class Board {
 	 */
 	
 	public Player winner() {
-		if(player2.getLostDragons() == 2 || allPortalsOccupied(player2))
-			return player1;
-		if(player1.getLostDragons() == 2 || allPortalsOccupied(player1))
-			return player2;
+		if((player1.getLostDragons() == 2) || (allPortalsOccupied(player1))) {
+			return player2;}
+		else if((player2.getLostDragons() == 2) || (allPortalsOccupied(player2))) {
+			return player1;}
 		return null; 
 	}
 	/**

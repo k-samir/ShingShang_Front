@@ -152,6 +152,8 @@ public class Main extends Application {
 
 		if (result.get().getText().toString() == "Yes") {
 			try {
+				this.game = new Game();
+				this.start1();
 				this.start2();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
@@ -162,7 +164,9 @@ public class Main extends Application {
 		}
 
 	}
-
+	
+	public void setGame(Game m) {this.game = m;}
+	
 	public String[] askPlayersName() throws Exception {
 
 		String[] player = { " ", "" };

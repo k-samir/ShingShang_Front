@@ -17,8 +17,6 @@ public class Credit extends StackPane {
 			this.getChildren().add(text);
 			this.getChildren().get(0).setTranslateY(570);
 			this.getChildren().get(0).setTranslateX(10);
-		//	this.setAlignment(text, Pos.BOTTOM_LEFT);
-			
 		
 		}
 }

@@ -58,7 +58,6 @@ public class Point {
 	}
 
 	private String type;
-	private Boolean already_clicked = false;
 
 	@SuppressWarnings("static-access")
 	public Point(String border, String typ, MainScene mainScen) {
@@ -83,259 +82,42 @@ public class Point {
 		r.setHeight(75);
 		r.setFill(Color.rgb(192, 194, 181));
 		r.setStroke(Color.rgb(192, 194, 181));
-		//Color.rgb(2, 148, 137)
-		//Color.rgb(2, 148, 137)
+
 		if (border.equals("NOTBORDER")) {
-			north_w = new Line(0, 0, 35, 35);
-			north_w.setStrokeWidth(5);
+			setNotBorder();
 
-			north_e = new Line(-35, 35, 0, 0);
-			north_e.setStrokeWidth(5);
+		}
+		// corner UP LEFT
+		else if (border.equals("CORNERUL")) {
+			setCornerUL();
 
-			south_e = new Line(35, 35, 0, 0);
-			south_e.setStrokeWidth(5);
-
-			south_w = new Line(0, 70, 35, 35);
-			south_w.setStrokeWidth(5);
-
-			north = new Line(35, 0, 35, 35);
-			north.setStrokeWidth(5);
-
-			east = new Line(0, 0, 35, 0);
-			east.setStrokeWidth(5);
-
-			south = new Line(0, 0, 0, 35);
-			south.setStrokeWidth(5);
-
-			west = new Line(0, 0, 35, 0);
-			west.setStrokeWidth(5);
-
-			stackP.getChildren().addAll(r, north, south, east, west, north_e, north_w, south_e, south_w, circle);
-
-			stackP.setAlignment(Pos.TOP_LEFT);
-
-			stackP.setAlignment(north, Pos.TOP_CENTER);
-			stackP.setAlignment(east, Pos.CENTER_RIGHT);
-
-			stackP.setAlignment(south, Pos.BOTTOM_CENTER);
-
-			stackP.setAlignment(west, Pos.CENTER_LEFT);
-
-			stackP.setAlignment(north_e, Pos.TOP_RIGHT);
-			stackP.setAlignment(south_e, Pos.BOTTOM_RIGHT);
-			stackP.setAlignment(south_w, Pos.BOTTOM_LEFT);
-
-			stackP.setAlignment(circle, Pos.CENTER);
-
-		} else if (border.equals("CORNERUL")) {
-
-			south_e = new Line(35, 35, 0, 0);
-			south_e.setStrokeWidth(5);
-
-			east = new Line(0, 0, 35, 0);
-			east.setStrokeWidth(5);
-
-			south = new Line(0, 0, 0, 35);
-			south.setStrokeWidth(5);
-
-			stackP.getChildren().addAll(r, south, east, south_e, circle);
-
-			stackP.setAlignment(Pos.TOP_LEFT);
-
-			stackP.setAlignment(east, Pos.CENTER_RIGHT);
-
-			stackP.setAlignment(south, Pos.BOTTOM_CENTER);
-
-			stackP.setAlignment(south_e, Pos.BOTTOM_RIGHT);
-
-			stackP.setAlignment(circle, Pos.CENTER);
 		} else if (border.equals("CORNERUR")) {
-
-			south_w = new Line(0, 70, 35, 35);
-			south_w.setStrokeWidth(5);
-
-			south = new Line(0, 0, 0, 35);
-			south.setStrokeWidth(5);
-
-			west = new Line(0, 0, 35, 0);
-			west.setStrokeWidth(5);
-
-			stackP.getChildren().addAll(r, south, west, south_w, circle);
-
-			stackP.setAlignment(Pos.TOP_LEFT);
-
-			stackP.setAlignment(south, Pos.BOTTOM_CENTER);
-
-			stackP.setAlignment(west, Pos.CENTER_LEFT);
-
-			stackP.setAlignment(south_w, Pos.BOTTOM_LEFT);
-
-			stackP.setAlignment(circle, Pos.CENTER);
+			setCornerUR();
 		} else if (border.equals("CORNERDR")) {
-			north_w = new Line(0, 0, 35, 35);
-			north_w.setStrokeWidth(5);
-
-			north = new Line(35, 0, 35, 35);
-			north.setStrokeWidth(5);
-
-			west = new Line(0, 0, 35, 0);
-			west.setStrokeWidth(5);
-
-			stackP.getChildren().addAll(r, north, west, north_w, circle);
-
-			stackP.setAlignment(Pos.TOP_LEFT);
-
-			stackP.setAlignment(north, Pos.TOP_CENTER);
-
-			stackP.setAlignment(west, Pos.CENTER_LEFT);
-
-			stackP.setAlignment(circle, Pos.CENTER);
+			setCornerDR();
 		} else if (border.equals("CORNERDL")) {
+			setCornerDL();
 
-			north_e = new Line(-35, 35, 0, 0);
-			north_e.setStrokeWidth(5);
-
-			north = new Line(35, 0, 35, 35);
-			north.setStrokeWidth(5);
-
-			east = new Line(0, 0, 35, 0);
-			east.setStrokeWidth(5);
-
-			stackP.getChildren().addAll(r, north, east, north_e, circle);
-
-			stackP.setAlignment(Pos.TOP_LEFT);
-
-			stackP.setAlignment(north, Pos.TOP_CENTER);
-			stackP.setAlignment(east, Pos.CENTER_RIGHT);
-
-			stackP.setAlignment(north_e, Pos.TOP_RIGHT);
-
-			stackP.setAlignment(circle, Pos.CENTER);
 		} else if (border.equals("UP")) {
+			setUp();
 
-			south_e = new Line(35, 35, 0, 0);
-			south_e.setStrokeWidth(5);
-
-			south_w = new Line(0, 70, 35, 35);
-			south_w.setStrokeWidth(5);
-
-			east = new Line(0, 0, 35, 0);
-			east.setStrokeWidth(5);
-
-			south = new Line(0, 0, 0, 35);
-			south.setStrokeWidth(5);
-
-			west = new Line(0, 0, 35, 0);
-			west.setStrokeWidth(5);
-
-			stackP.getChildren().addAll(r, south, east, west, south_e, south_w, circle);
-
-			stackP.setAlignment(Pos.TOP_LEFT);
-
-			stackP.setAlignment(east, Pos.CENTER_RIGHT);
-
-			stackP.setAlignment(south, Pos.BOTTOM_CENTER);
-
-			stackP.setAlignment(west, Pos.CENTER_LEFT);
-
-			stackP.setAlignment(south_e, Pos.BOTTOM_RIGHT);
-			stackP.setAlignment(south_w, Pos.BOTTOM_LEFT);
-
-			stackP.setAlignment(circle, Pos.CENTER);
 		} else if (border.equals("LEFT")) {
+			setLeft();
 
-			north_e = new Line(-35, 35, 0, 0);
-			north_e.setStrokeWidth(5);
-
-			south_e = new Line(35, 35, 0, 0);
-			south_e.setStrokeWidth(5);
-
-			north = new Line(35, 0, 35, 35);
-			north.setStrokeWidth(5);
-
-			east = new Line(0, 0, 35, 0);
-			east.setStrokeWidth(5);
-
-			south = new Line(0, 0, 0, 35);
-			south.setStrokeWidth(5);
-
-			stackP.getChildren().addAll(r, north, south, east, north_e, south_e, circle);
-
-			stackP.setAlignment(Pos.TOP_LEFT);
-
-			stackP.setAlignment(north, Pos.TOP_CENTER);
-			stackP.setAlignment(east, Pos.CENTER_RIGHT);
-
-			stackP.setAlignment(south, Pos.BOTTOM_CENTER);
-
-			stackP.setAlignment(north_e, Pos.TOP_RIGHT);
-			stackP.setAlignment(south_e, Pos.BOTTOM_RIGHT);
-
-			stackP.setAlignment(circle, Pos.CENTER);
 		}
 
 		else if (border.equals("RIGHT")) {
+			setRight();
 
-			north_w = new Line(0, 0, 35, 35);
-			north_w.setStrokeWidth(5);
-
-			south_w = new Line(0, 70, 35, 35);
-			south_w.setStrokeWidth(5);
-
-			north = new Line(35, 0, 35, 35);
-			north.setStrokeWidth(5);
-
-			south = new Line(0, 0, 0, 35);
-			south.setStrokeWidth(5);
-
-			west = new Line(0, 0, 35, 0);
-			west.setStrokeWidth(5);
-
-			stackP.getChildren().addAll(r, north, south, west, north_w, south_w, circle);
-
-			stackP.setAlignment(Pos.TOP_LEFT);
-
-			stackP.setAlignment(north, Pos.TOP_CENTER);
-
-			stackP.setAlignment(south, Pos.BOTTOM_CENTER);
-
-			stackP.setAlignment(west, Pos.CENTER_LEFT);
-
-			stackP.setAlignment(south_w, Pos.BOTTOM_LEFT);
-
-			stackP.setAlignment(circle, Pos.CENTER);
+			StackPane.setAlignment(circle, Pos.CENTER);
 		} else if (border.equals("DOWN")) {
-			north_w = new Line(0, 0, 35, 35);
-			north_w.setStrokeWidth(5);
-			north_e = new Line(-35, 35, 0, 0);
-			north_e.setStrokeWidth(5);
+			setDown();
 
-			north = new Line(35, 0, 35, 35);
-			north.setStrokeWidth(5);
-
-			east = new Line(0, 0, 35, 0);
-			east.setStrokeWidth(5);
-
-			west = new Line(0, 0, 35, 0);
-			west.setStrokeWidth(5);
-
-			stackP.getChildren().addAll(r, north, east, west, north_e, north_w, circle);
-
-			stackP.setAlignment(Pos.TOP_LEFT);
-
-			stackP.setAlignment(north, Pos.TOP_CENTER);
-			stackP.setAlignment(east, Pos.CENTER_RIGHT);
-
-			stackP.setAlignment(west, Pos.CENTER_LEFT);
-
-			stackP.setAlignment(north_e, Pos.TOP_RIGHT);
-
-			stackP.setAlignment(circle, Pos.CENTER);
 		} else {
 
 			stackP.getChildren().addAll(r, circle);
 			stackP.setAlignment(Pos.TOP_LEFT);
-			stackP.setAlignment(circle, Pos.CENTER);
+			StackPane.setAlignment(circle, Pos.CENTER);
 
 		}
 
@@ -346,78 +128,64 @@ public class Point {
 			setImagePortal2();
 		}
 
-		stackP.setOnMouseEntered(e ->{
-			if(this.text != null) {
-				
-				circle.setStroke(Color.MEDIUMAQUAMARINE);
+		stackP.setOnMouseEntered(e -> {
+			if (this.text != null) {
+				circle.setStroke(Color.YELLOW);
 			}
-			
+
 		});
-	
-		stackP.setOnMouseExited(e->{
-			if(this.text != null) {
+
+		stackP.setOnMouseExited(e -> {
+			if (this.text != null) {
 				circle.setStroke(Color.BLACK);
 			}
 		});
-		
+
 		stackP.setOnMouseClicked(e -> {
-			
-			// TODO Auto-generated catch block
 
 			// First Click
-			
+
 			this.circle.setStroke(Color.BLACK);
-			
+
 			if (mainScene.getFirst_click()) {
-				
-				if (mainScene.main.getGame().getTurnPlayer().getNumber() == this.player && 
-						 this.used) {
-						if (mainScene.getAdditionalTurn()){
-							if(mainScene.checkPieceAdditionalTurn(this)) {
-									firstClick();
-								// Choose the First Piece to Move
-								try {
-									mainScene.chooseBushi(this);
-								}
-									catch(Exception e2) {}
-							}
-							else { blink();}
-						}
-						else if(mainScene.getShingshang()) {
-							if(mainScene.checkPieceShingShang(this)){
-								firstClick();
-								// Choose the First Piece to Move
-								try {
-									mainScene.chooseBushi(this);
-								}
-									catch(Exception e2) {}
-							}
-							else {blink();}
-							
-						}
-						else  {
+
+				if (mainScene.main.getGame().getTurnPlayer().getNumber() == this.player && this.used) {
+					if (mainScene.getAdditionalTurn()) {
+						if (mainScene.checkPieceAdditionalTurn(this)) {
 							firstClick();
 							// Choose the First Piece to Move
 							try {
 								mainScene.chooseBushi(this);
+							} catch (Exception e2) {
 							}
-								catch(Exception e2) {}
-						
-						
+						} else {
+							blink();
 						}
-								
-					
-						
+					} else if (mainScene.getShingshang()) {
+						if (mainScene.checkPieceShingShang(this)) {
+							firstClick();
+							// Choose the First Piece to Move
+							try {
+								mainScene.chooseBushi(this);
+							} catch (Exception e2) {
+							}
+						} else {
+							blink();
+						}
+
+					} else {
+						firstClick();
+						// Choose the First Piece to Move
+						try {
+							mainScene.chooseBushi(this);
+						} catch (Exception e2) {
+						}
+					}
 				}
-			
-
-			else {
-
+				else {
 					// BLINK IN RED IF FIRST POINT IS EMPTY
-					
 					blink();
 					mainScene.setFirst_click(true);
-					
 				}
 
 			}
@@ -425,66 +193,312 @@ public class Point {
 			// SECOND CLICK CHOIX MOVE
 			else {
 				mainScene.resetStroke(this);
-				
+
 				// CHECK IF SAME POINT CLICKED
-				if(this.equals(mainScene.previous_point)) { 	
-					clickSamePoint();		
-				}
-				else {
-				// ECHANGER POINT -> couleur et lettre
-				if (mainScene.getPrevious_point().getUsed() && !this.getUsed() && mainScene.main.getGame()
-						.getTurnPlayer().getNumber() == mainScene.getPrevious_point().player) {
-
-					if (mainScene.checkMove(this)) {
-						
-						mainScene.moveBushi(this);
-
-						// Reset stroke black for neighbor
-						resetStrokeNeighbour();
-						
-						// IF PORTAL RESET IMAGE PORTAL
-						if (mainScene.getPrevious_point().type.equals("PORTAL1")) {
-							mainScene.getPrevious_point().resetP1();
-						} else if (mainScene.getPrevious_point().type.equals("PORTAL2")) {
-							mainScene.getPrevious_point().resetP2();
-						} else {
-						// reset used & color & letter
-							mainScene.getPrevious_point().reset();
-						// RESET IF CAUGHT		
-							mainScene.resetCaught();								
-							
-						}
-						
-						resetValuesPoint();
-						
-						if(mainScene.isOver()) {
-							mainScene.end();
-						}
-						
-						
-						// mainScene.getPrevious_point().text = this.text;
-						// UPDATE NEW COLOR AND TEXT
-					}
-					System.out.println("Change move");
-					mainScene.setFirst_click(true);
+				if (this.equals(mainScene.previous_point)) {
+					clickSamePoint();
 				} else {
-					System.out.println("Change piece");
-					changePiece();
-					
-					
-					
+					// ECHANGER POINT -> couleur et lettre
+					if (mainScene.getPrevious_point().getUsed() && !this.getUsed() && mainScene.main.getGame()
+							.getTurnPlayer().getNumber() == mainScene.getPrevious_point().player) {
+
+						if (mainScene.checkMove(this)) {
+
+							mainScene.moveBushi(this);
+
+							// Reset stroke black for neighbor
+							resetStrokeNeighbour();
+
+							// IF PORTAL RESET IMAGE PORTAL
+							if (mainScene.getPrevious_point().type.equals("PORTAL1")) {
+								mainScene.getPrevious_point().resetP1();
+							} else if (mainScene.getPrevious_point().type.equals("PORTAL2")) {
+								mainScene.getPrevious_point().resetP2();
+							} else {
+								// reset used & color & letter
+								mainScene.getPrevious_point().reset();
+								// RESET IF CAUGHT
+								mainScene.resetCaught();
+
+							}
+
+							resetValuesPoint();
+
+							if (mainScene.isOver()) {
+								mainScene.end();
+							}
+
+							// UPDATE NEW COLOR AND TEXT
+						}
+						//System.out.println("Change move");
+						mainScene.setFirst_click(true);
+					} else {
+						//System.out.println("Change piece");
+						changePiece();
+
 					}
 				}
 			}
-		
+
 			mainScene.updateBoard();
 
-		
-			
-			
 		});
 
 	}
+
+	public void setUp() {
+		south_e = new Line(35, 35, 0, 0);
+		south_e.setStrokeWidth(5);
+
+		south_w = new Line(0, 70, 35, 35);
+		south_w.setStrokeWidth(5);
+
+		east = new Line(0, 0, 35, 0);
+		east.setStrokeWidth(5);
+
+		south = new Line(0, 0, 0, 35);
+		south.setStrokeWidth(5);
+
+		west = new Line(0, 0, 35, 0);
+		west.setStrokeWidth(5);
+
+		stackP.getChildren().addAll(r, south, east, west, south_e, south_w, circle);
+
+		stackP.setAlignment(Pos.TOP_LEFT);
+
+		StackPane.setAlignment(east, Pos.CENTER_RIGHT);
+
+		StackPane.setAlignment(south, Pos.BOTTOM_CENTER);
+
+		StackPane.setAlignment(west, Pos.CENTER_LEFT);
+
+		StackPane.setAlignment(south_e, Pos.BOTTOM_RIGHT);
+		StackPane.setAlignment(south_w, Pos.BOTTOM_LEFT);
+
+		StackPane.setAlignment(circle, Pos.CENTER);
+	}
+
+	public void setDown() {
+		north_w = new Line(0, 0, 35, 35);
+		north_w.setStrokeWidth(5);
+		north_e = new Line(-35, 35, 0, 0);
+		north_e.setStrokeWidth(5);
+
+		north = new Line(35, 0, 35, 35);
+		north.setStrokeWidth(5);
+
+		east = new Line(0, 0, 35, 0);
+		east.setStrokeWidth(5);
+
+		west = new Line(0, 0, 35, 0);
+		west.setStrokeWidth(5);
+
+		stackP.getChildren().addAll(r, north, east, west, north_e, north_w, circle);
+
+		stackP.setAlignment(Pos.TOP_LEFT);
+
+		StackPane.setAlignment(north, Pos.TOP_CENTER);
+		StackPane.setAlignment(east, Pos.CENTER_RIGHT);
+
+		StackPane.setAlignment(west, Pos.CENTER_LEFT);
+
+		StackPane.setAlignment(north_e, Pos.TOP_RIGHT);
+
+		StackPane.setAlignment(circle, Pos.CENTER);
+	}
+
+	public void setLeft() {
+		north_e = new Line(-35, 35, 0, 0);
+		north_e.setStrokeWidth(5);
+
+		south_e = new Line(35, 35, 0, 0);
+		south_e.setStrokeWidth(5);
+
+		north = new Line(35, 0, 35, 35);
+		north.setStrokeWidth(5);
+
+		east = new Line(0, 0, 35, 0);
+		east.setStrokeWidth(5);
+
+		south = new Line(0, 0, 0, 35);
+		south.setStrokeWidth(5);
+
+		stackP.getChildren().addAll(r, north, south, east, north_e, south_e, circle);
+
+		stackP.setAlignment(Pos.TOP_LEFT);
+
+		StackPane.setAlignment(north, Pos.TOP_CENTER);
+		StackPane.setAlignment(east, Pos.CENTER_RIGHT);
+
+		StackPane.setAlignment(south, Pos.BOTTOM_CENTER);
+
+		StackPane.setAlignment(north_e, Pos.TOP_RIGHT);
+		StackPane.setAlignment(south_e, Pos.BOTTOM_RIGHT);
+
+		StackPane.setAlignment(circle, Pos.CENTER);
+	}
+
+	public void setRight() {
+		north_w = new Line(0, 0, 35, 35);
+		north_w.setStrokeWidth(5);
+
+		south_w = new Line(0, 70, 35, 35);
+		south_w.setStrokeWidth(5);
+
+		north = new Line(35, 0, 35, 35);
+		north.setStrokeWidth(5);
+
+		south = new Line(0, 0, 0, 35);
+		south.setStrokeWidth(5);
+
+		west = new Line(0, 0, 35, 0);
+		west.setStrokeWidth(5);
+
+		stackP.getChildren().addAll(r, north, south, west, north_w, south_w, circle);
+
+		stackP.setAlignment(Pos.TOP_LEFT);
+
+		StackPane.setAlignment(north, Pos.TOP_CENTER);
+
+		StackPane.setAlignment(south, Pos.BOTTOM_CENTER);
+
+		StackPane.setAlignment(west, Pos.CENTER_LEFT);
+
+		StackPane.setAlignment(south_w, Pos.BOTTOM_LEFT);
+	}
+
+	public void setCornerDL() {
+		north_e = new Line(-35, 35, 0, 0);
+		north_e.setStrokeWidth(5);
+
+		north = new Line(35, 0, 35, 35);
+		north.setStrokeWidth(5);
+
+		east = new Line(0, 0, 35, 0);
+		east.setStrokeWidth(5);
+
+		stackP.getChildren().addAll(r, north, east, north_e, circle);
+
+		stackP.setAlignment(Pos.TOP_LEFT);
+
+		StackPane.setAlignment(north, Pos.TOP_CENTER);
+		StackPane.setAlignment(east, Pos.CENTER_RIGHT);
+
+		StackPane.setAlignment(north_e, Pos.TOP_RIGHT);
+
+		StackPane.setAlignment(circle, Pos.CENTER);
+	}
+
+	public void setCornerDR() {
+		north_w = new Line(0, 0, 35, 35);
+		north_w.setStrokeWidth(5);
+
+		north = new Line(35, 0, 35, 35);
+		north.setStrokeWidth(5);
+
+		west = new Line(0, 0, 35, 0);
+		west.setStrokeWidth(5);
+
+		stackP.getChildren().addAll(r, north, west, north_w, circle);
+
+		stackP.setAlignment(Pos.TOP_LEFT);
+
+		StackPane.setAlignment(north, Pos.TOP_CENTER);
+
+		StackPane.setAlignment(west, Pos.CENTER_LEFT);
+
+		StackPane.setAlignment(circle, Pos.CENTER);
+	}
+
+	public void setCornerUR() {
+		south_w = new Line(0, 70, 35, 35);
+		south_w.setStrokeWidth(5);
+
+		south = new Line(0, 0, 0, 35);
+		south.setStrokeWidth(5);
+
+		west = new Line(0, 0, 35, 0);
+		west.setStrokeWidth(5);
+
+		stackP.getChildren().addAll(r, south, west, south_w, circle);
+
+		stackP.setAlignment(Pos.TOP_LEFT);
+
+		StackPane.setAlignment(south, Pos.BOTTOM_CENTER);
+
+		StackPane.setAlignment(west, Pos.CENTER_LEFT);
+
+		StackPane.setAlignment(south_w, Pos.BOTTOM_LEFT);
+
+		StackPane.setAlignment(circle, Pos.CENTER);
+	}
+
+	public void setCornerUL() {
+		south_e = new Line(35, 35, 0, 0);
+		south_e.setStrokeWidth(5);
+
+		east = new Line(0, 0, 35, 0);
+		east.setStrokeWidth(5);
+
+		south = new Line(0, 0, 0, 35);
+		south.setStrokeWidth(5);
+
+		stackP.getChildren().addAll(r, south, east, south_e, circle);
+
+		stackP.setAlignment(Pos.TOP_LEFT);
+
+		StackPane.setAlignment(east, Pos.CENTER_RIGHT);
+
+		StackPane.setAlignment(south, Pos.BOTTOM_CENTER);
+
+		StackPane.setAlignment(south_e, Pos.BOTTOM_RIGHT);
+
+		StackPane.setAlignment(circle, Pos.CENTER);
+	}
+
+	public void setNotBorder() {
+		north_w = new Line(0, 0, 35, 35);
+		north_w.setStrokeWidth(5);
+
+		north_e = new Line(-35, 35, 0, 0);
+		north_e.setStrokeWidth(5);
+
+		south_e = new Line(35, 35, 0, 0);
+		south_e.setStrokeWidth(5);
+
+		south_w = new Line(0, 70, 35, 35);
+		south_w.setStrokeWidth(5);
+
+		north = new Line(35, 0, 35, 35);
+		north.setStrokeWidth(5);
+
+		east = new Line(0, 0, 35, 0);
+		east.setStrokeWidth(5);
+
+		south = new Line(0, 0, 0, 35);
+		south.setStrokeWidth(5);
+
+		west = new Line(0, 0, 35, 0);
+		west.setStrokeWidth(5);
+
+		stackP.getChildren().addAll(r, north, south, east, west, north_e, north_w, south_e, south_w, circle);
+
+		stackP.setAlignment(Pos.TOP_LEFT);
+
+		StackPane.setAlignment(north, Pos.TOP_CENTER);
+		StackPane.setAlignment(east, Pos.CENTER_RIGHT);
+
+		StackPane.setAlignment(south, Pos.BOTTOM_CENTER);
+
+		StackPane.setAlignment(west, Pos.CENTER_LEFT);
+
+		StackPane.setAlignment(north_e, Pos.TOP_RIGHT);
+		StackPane.setAlignment(south_e, Pos.BOTTOM_RIGHT);
+		StackPane.setAlignment(south_w, Pos.BOTTOM_LEFT);
+
+		StackPane.setAlignment(circle, Pos.CENTER);
+	}
+
 	public void changePiece() {
 
 		mainScene.getPrevious_point().circle.setStroke(Color.BLACK);
@@ -493,16 +507,19 @@ public class Point {
 		mainScene.setShingshang_move(null);
 		mainScene.resetLegalMoves();
 	}
+
 	public void clickSamePoint() {
 		mainScene.setFirst_click(true);
 		mainScene.setPrevious_point(null);
 		mainScene.resetLegalMoves();
 	}
-public void firstClick() {
-	this.circle.setStroke(Color.GOLD);
-	mainScene.setPrevious_point(this);
-	mainScene.setFirst_click(false);
-}
+
+	public void firstClick() {
+		this.circle.setStroke(Color.GOLD);
+		mainScene.setPrevious_point(this);
+		mainScene.setFirst_click(false);
+	}
+
 	public void resetValuesPoint() {
 
 		mainScene.setFirst_click(true);
@@ -511,8 +528,9 @@ public void firstClick() {
 		mainScene.getPrevious_point().used = false;
 		// mainScene.getPrevious_point().setUsed(false);
 		mainScene.setPrevious_point(null);
-		
+
 	}
+
 	public void resetStrokeNeighbour() {
 
 		this.circle.setFill(mainScene.getPrevious_point().color);
@@ -521,12 +539,13 @@ public void firstClick() {
 		this.text = mainScene.getPrevious_point().text;
 		Text text1 = mainScene.getPrevious_point().text;
 		this.stackP.getChildren().addAll(text1);
-		this.stackP.setAlignment(text1, Pos.CENTER);
+		StackPane.setAlignment(text1, Pos.CENTER);
 
 		// enlever lettre
 		this.setUsed(true);
 
 	}
+
 	public void setImagePortal1() {
 		Image im;
 		try {
@@ -564,8 +583,7 @@ public void firstClick() {
 	}
 
 	public void showBack() {
-		// this.north.setStroke(Color.GOLD);
-		this.circle.setStroke(Color.GOLD);
+		this.circle.setStroke(Color.YELLOW);
 	}
 
 	public void show() {
@@ -680,20 +698,20 @@ public void firstClick() {
 			if (pos == 0) {
 
 				stackP.getChildren().addAll(south, east, north_e, south_e, circle);
-				stackP.setAlignment(south, Pos.BOTTOM_CENTER);
+				StackPane.setAlignment(south, Pos.BOTTOM_CENTER);
 			} else if (pos == 1) {
 				stackP.getChildren().addAll(north, east, north_e, south_e, circle);
-				stackP.setAlignment(north, Pos.TOP_CENTER);
+				StackPane.setAlignment(north, Pos.TOP_CENTER);
 			}
 
 			stackP.setAlignment(Pos.TOP_LEFT);
 
-			stackP.setAlignment(east, Pos.CENTER_RIGHT);
+			StackPane.setAlignment(east, Pos.CENTER_RIGHT);
 
-			stackP.setAlignment(north_e, Pos.TOP_RIGHT);
-			stackP.setAlignment(south_e, Pos.BOTTOM_RIGHT);
+			StackPane.setAlignment(north_e, Pos.TOP_RIGHT);
+			StackPane.setAlignment(south_e, Pos.BOTTOM_RIGHT);
 
-			stackP.setAlignment(circle, Pos.CENTER);
+			StackPane.setAlignment(circle, Pos.CENTER);
 		}
 
 	}
@@ -726,22 +744,22 @@ public void firstClick() {
 			if (pos == 0) {
 
 				stackP.getChildren().addAll(south, west, north_w, south_w, circle);
-				stackP.setAlignment(south, Pos.BOTTOM_CENTER);
+				StackPane.setAlignment(south, Pos.BOTTOM_CENTER);
 			} else if (pos == 1) {
 				stackP.getChildren().addAll(north, west, north_w, south_w, circle);
-				stackP.setAlignment(north, Pos.TOP_CENTER);
+				StackPane.setAlignment(north, Pos.TOP_CENTER);
 			}
 
 			stackP.setAlignment(Pos.TOP_LEFT);
 
-			stackP.setAlignment(north, Pos.TOP_CENTER);
-			stackP.setAlignment(south, Pos.BOTTOM_CENTER);
+			StackPane.setAlignment(north, Pos.TOP_CENTER);
+			StackPane.setAlignment(south, Pos.BOTTOM_CENTER);
 
-			stackP.setAlignment(west, Pos.CENTER_LEFT);
+			StackPane.setAlignment(west, Pos.CENTER_LEFT);
 
-			stackP.setAlignment(south_w, Pos.BOTTOM_LEFT);
+			StackPane.setAlignment(south_w, Pos.BOTTOM_LEFT);
 
-			stackP.setAlignment(circle, Pos.CENTER);
+			StackPane.setAlignment(circle, Pos.CENTER);
 		}
 	}
 
@@ -758,9 +776,9 @@ public void firstClick() {
 
 			stackP.setAlignment(Pos.TOP_LEFT);
 
-			stackP.setAlignment(south_w, Pos.BOTTOM_LEFT);
+			StackPane.setAlignment(south_w, Pos.BOTTOM_LEFT);
 
-			stackP.setAlignment(circle, Pos.CENTER);
+			StackPane.setAlignment(circle, Pos.CENTER);
 		}
 
 	}
@@ -780,10 +798,10 @@ public void firstClick() {
 
 			stackP.setAlignment(Pos.TOP_LEFT);
 
-			stackP.setAlignment(west, Pos.CENTER_LEFT);
-			stackP.setAlignment(south_w, Pos.BOTTOM_LEFT);
+			StackPane.setAlignment(west, Pos.CENTER_LEFT);
+			StackPane.setAlignment(south_w, Pos.BOTTOM_LEFT);
 
-			stackP.setAlignment(circle, Pos.CENTER);
+			StackPane.setAlignment(circle, Pos.CENTER);
 		}
 
 	}
@@ -804,9 +822,9 @@ public void firstClick() {
 
 			stackP.setAlignment(Pos.TOP_LEFT);
 
-			stackP.setAlignment(west, Pos.CENTER_LEFT);
+			StackPane.setAlignment(west, Pos.CENTER_LEFT);
 
-			stackP.setAlignment(circle, Pos.CENTER);
+			StackPane.setAlignment(circle, Pos.CENTER);
 		}
 
 	}
@@ -824,7 +842,7 @@ public void firstClick() {
 
 			stackP.setAlignment(Pos.TOP_LEFT);
 
-			stackP.setAlignment(circle, Pos.CENTER);
+			StackPane.setAlignment(circle, Pos.CENTER);
 		}
 
 	}
@@ -842,9 +860,9 @@ public void firstClick() {
 
 			stackP.setAlignment(Pos.TOP_LEFT);
 
-			stackP.setAlignment(south_e, Pos.BOTTOM_RIGHT);
+			StackPane.setAlignment(south_e, Pos.BOTTOM_RIGHT);
 
-			stackP.setAlignment(circle, Pos.CENTER);
+			StackPane.setAlignment(circle, Pos.CENTER);
 		}
 
 	}
@@ -865,11 +883,11 @@ public void firstClick() {
 
 			stackP.setAlignment(Pos.TOP_LEFT);
 
-			stackP.setAlignment(south_e, Pos.BOTTOM_RIGHT);
+			StackPane.setAlignment(south_e, Pos.BOTTOM_RIGHT);
 
-			stackP.setAlignment(east, Pos.CENTER_RIGHT);
+			StackPane.setAlignment(east, Pos.CENTER_RIGHT);
 
-			stackP.setAlignment(circle, Pos.CENTER);
+			StackPane.setAlignment(circle, Pos.CENTER);
 		}
 
 	}
@@ -891,10 +909,10 @@ public void firstClick() {
 
 			stackP.setAlignment(Pos.TOP_LEFT);
 
-			stackP.setAlignment(north_e, Pos.TOP_RIGHT);
-			stackP.setAlignment(east, Pos.CENTER_RIGHT);
+			StackPane.setAlignment(north_e, Pos.TOP_RIGHT);
+			StackPane.setAlignment(east, Pos.CENTER_RIGHT);
 
-			stackP.setAlignment(circle, Pos.CENTER);
+			StackPane.setAlignment(circle, Pos.CENTER);
 		}
 
 	}
@@ -913,9 +931,9 @@ public void firstClick() {
 
 			stackP.setAlignment(Pos.TOP_LEFT);
 
-			stackP.setAlignment(north_e, Pos.TOP_RIGHT);
+			StackPane.setAlignment(north_e, Pos.TOP_RIGHT);
 
-			stackP.setAlignment(circle, Pos.CENTER);
+			StackPane.setAlignment(circle, Pos.CENTER);
 		}
 
 	}
@@ -939,7 +957,7 @@ public void firstClick() {
 				this.circle.setFill(Color.rgb(174, 37, 38));
 
 				stackP.getChildren().addAll(circle, text);
-				stackP.setAlignment(text, Pos.CENTER);
+				StackPane.setAlignment(text, Pos.CENTER);
 
 			}
 		} else if (type.equals("MONKEY2")) {
@@ -958,7 +976,7 @@ public void firstClick() {
 				this.circle.setFill(Color.rgb(6, 77, 130));
 
 				stackP.getChildren().addAll(circle, text);
-				stackP.setAlignment(text, Pos.CENTER);
+				StackPane.setAlignment(text, Pos.CENTER);
 
 			}
 		} else if (type.equals("LION1")) {
@@ -976,7 +994,7 @@ public void firstClick() {
 				this.circle.setFill(Color.rgb(174, 37, 38));
 
 				stackP.getChildren().addAll(circle, text);
-				stackP.setAlignment(text, Pos.CENTER);
+				StackPane.setAlignment(text, Pos.CENTER);
 
 			}
 		} else if (type.equals("LION2")) {
@@ -994,7 +1012,7 @@ public void firstClick() {
 				this.circle.setFill(Color.rgb(6, 77, 130));
 
 				stackP.getChildren().addAll(circle, text);
-				stackP.setAlignment(text, Pos.CENTER);
+				StackPane.setAlignment(text, Pos.CENTER);
 
 			}
 		}
@@ -1015,7 +1033,7 @@ public void firstClick() {
 				this.circle.setFill(Color.rgb(174, 37, 38));
 
 				stackP.getChildren().addAll(circle, text);
-				stackP.setAlignment(text, Pos.CENTER);
+				StackPane.setAlignment(text, Pos.CENTER);
 
 			}
 		} else if (type.equals("DRAGON2")) {
@@ -1035,7 +1053,7 @@ public void firstClick() {
 				this.circle.setFill(Color.rgb(6, 77, 130));
 
 				stackP.getChildren().addAll(circle, text);
-				stackP.setAlignment(text, Pos.CENTER);
+				StackPane.setAlignment(text, Pos.CENTER);
 
 			}
 		}

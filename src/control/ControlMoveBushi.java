@@ -16,8 +16,7 @@ public class ControlMoveBushi {
 		this.row = row;
 		this.col = col;
 		this.game = game;
-		
-
+	
 	}
 	
 	public void nextTurn() {
@@ -42,12 +41,9 @@ public class ControlMoveBushi {
 	public boolean checkShingshang() {
 		boolean ret = false;
 		if (game.getSelectedMove1().isShingShang()) {
-			System.out.println("SHINGSHANG");
+			
 			ret = true;
 		}
-	/**if (board.isAdditionalTurn()) {
-		playAdditionnalTurn();
-	}*/
 		return ret;
 	}
 	public boolean checkMove() {

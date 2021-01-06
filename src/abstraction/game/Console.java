@@ -27,35 +27,6 @@ public class Console {
 		boolean ok = false;
 		boolean isInt;
 		
-		/*while(!ok) {
-			//System.out.println("Choisissez une pièce.");
-			//do {
-			//	isInt = true;
-			//	System.out.println("numéro de ligne : ");
-			//	try {
-			//	row = keyboard.nextInt();
-			//	} catch (InputMismatchException e) {
-			//		System.out.println("Erreur - La valeur saisie doit être un entier.");
-			//		keyboard.nextLine();
-			//		isInt = false;
-			//	}				
-			}*/
-		/*while(isInt == false);
-			
-			do {
-				isInt = true;
-				System.out.println("numéro de colonne : ");
-				try {
-				col = keyboard.nextInt();
-				} catch (InputMismatchException e) {
-					System.out.println("Erreur - La valeur saisie doit être un entier.");
-					keyboard.nextLine();
-					isInt = false;
-				}				
-			} */
-		
-		//while(isInt == false);
-		
 			try {
 				 
 				TypingValidator.checkBushiChoice(game, row, col);
@@ -74,9 +45,7 @@ public class Console {
 				System.out.println(e.getMessage()  + " : " + board.getSquare(row, col).getBushi());
 				return null;
 			}
-		
 
-		//}
 			
 		return  board.getSquare(row, col).getBushi();
 	}
@@ -92,32 +61,6 @@ public class Console {
 		boolean ok = false;
 		boolean isInt;
 		
-		/**while(!ok) {
-			System.out.println("Choisissez une case d'arrivée. ");
-			do {
-				isInt = true;
-				System.out.println("numéro de ligne : ");
-				try {
-				row = keyboard.nextInt();
-				} catch (InputMismatchException e) {
-					System.out.println("Erreur - La valeur saisie doit être un entier.");
-					keyboard.nextLine();
-					isInt = false;
-				}				
-			} while(isInt == false);
-			
-			do {
-				isInt = true;
-				System.out.println("numéro de colonne : ");
-				try {
-				col = keyboard.nextInt();
-				} catch (InputMismatchException e) {
-					System.out.println("Erreur - La valeur saisie doit être un entier.");
-					keyboard.nextLine();
-					isInt = false;
-				}				
-			} while(isInt == false);
-**/
 			try {
 				
 			TypingValidator.checkMoveChoice(board, row, col);	

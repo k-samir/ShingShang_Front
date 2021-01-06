@@ -104,10 +104,7 @@ public class Game {
 	 * Creer un plateau et l'affecte e l'attribut board du jeu
 	 */
 	public void createBoard() {
-		/* PREVIOUS CODE
-		String name1 = Console.askName(1);
-		String name2 = Console.askName(2);
-		*/
+	
 		String name1 = this.name1;
 		String name2 = this.name2;
 
@@ -121,17 +118,6 @@ public class Game {
 		
 	}
 
-	/**
-	 * Demarre le jeu et gere le deroulement de jeu
-	 */
-	public void start() {
-		//showName();
-	//	createBoard();
-		//while (notOver()) {
-		//	playTurn();
-	//	}
-	//	end();
-	}
 
 	/**
 	 * Indique si le jeu n'est pas termine
@@ -157,45 +143,25 @@ public class Game {
 	
 
 	public void playTurn() {
-		System.out.println("PLAY TURN");
+		
 		Bushi selectedBushi;
 		Move selectedMove;
-		//boolean yesShowLegalMoves;
-
-		
-		//System.out.println(turnPlayer.getName() + ", e toi de jouer ! :)");
+			
 		selectedBushi = this.selectedBushi1;
-	
-		System.out.println("Piece selectionnee : " + selectedBushi.toString());
-		
-		//selectedBushi.calculateLegalMoves();
-		
-		//yesShowLegalMoves = true;
-		//if (yesShowLegalMoves)
-		//board.showLegalMoves();
-
-		//	selectedMove = Console.askChoseMove(board);
 		selectedMove = selectedMove1;
-		
-		
+				
+		try {
 		board.executeMove(selectedMove);
+		}
+		catch(Exception e) {}
 		
-		//CHECK IF SHINGSHANG
-		
-		
+		//CHECK IF SHINGSHANG	
+		try {
 		if (selectedMove.isShingShang()) {
-			//Console.askShingShangChoice(board, selectedMove.getMovedBushi());
-			System.out.println("SHINGSHANG");
 			board.executeShingShang(selectedMove.getMovedBushi(),selectedMove);
 		}
-		
+		}catch(Exception e) {}
 		board.show();
-		
-		/*if (board.isAdditionalTurn()) {
-			playAdditionnalTurn();
-		}*/
-
-		//nextTurn();
 	}
 
 	/**
@@ -209,32 +175,9 @@ public class Game {
 		selectedBushi1 = this.selectedBushi1;
 		selectedMove1 = this.selectedMove1;
 		
-		//boolean playerWantsToContinue = Console.askContinue();
-		//boolean yesShowLegalMoves;
-
-		/**while (board.isAdditionalTurn()) {
-			board.show();
-			System.out.println(turnPlayer.getName() + ", tu peux choisir une autre piece :)");
-			
-			selectedBushi1 = selectedBushi1;
-			
-			System.out.println("Piece selectionnee : " + selectedBushi1.toString());**/
-			selectedBushi1.calculateLegalMoves();
-
-			
-			//selectedMove = Console.askChoseMove(board);
-			board.executeMove(selectedMove1);
-/**
-			if (selectedMove.isShingShang()) {
-				Console.askShingShangChoice(board, selectedMove.getMovedBushi());
-			}
-
-			if (board.isAdditionalTurn()) {
-				playerWantsToContinue = Console.askContinue();
-			}
-
-		}*/
-			board.resetMovedBushis();
+		selectedBushi1.calculateLegalMoves();
+		board.executeMove(selectedMove1);
+		board.resetMovedBushis();
 	}
 
 	/**
@@ -251,7 +194,7 @@ public class Game {
 			turnPlayer = board.getPlayer1();
 		else
 			turnPlayer = board.getPlayer2();
-		System.out.println("Tour à : " + turnPlayer.getNumber());
+		
 		this.board.resetLegalModal();
 		}
 	}
@@ -273,14 +216,6 @@ public class Game {
 		System.out.println("-- Fin de la partie --\n Le gagnant est " + board.winner().getName() + ".");
 	}
 
-	
-	
-	 /* public static void main(String args[]) {
-	  
-	  Game shingshang = new Game();
-	  shingshang.start();
-	  
-	  }*/
 	
 	public void setName(String n1, String n2) {
 		this.name1 = n1;

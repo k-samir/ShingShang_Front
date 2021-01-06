@@ -21,8 +21,7 @@ public class MenuScene extends Scene {
 		super(new Pane());
 		this.main = main;
 		root = (Pane) (this.getRoot());
-		
-	//	Pane root = new Pane();
+	
 		root.setPrefSize(860,600);
 		
 		try ( InputStream is = Files.newInputStream(Paths.get("image/menu_bg.jpg"))) {
@@ -46,19 +45,12 @@ public class MenuScene extends Scene {
 				new MenuItem("1 PLAYER VS A.I",main),
 				new MenuItem("RULES",main),
 				new MenuItem("EXIT",main));
-				
-		
-		
+						
 		menu.setTranslateX(100);
 		menu.setTranslateY(300);
 		
-		
-				
-				
 		root.getChildren().addAll(title,menu);
-		
-		
-		
+	
 			
 	}
 

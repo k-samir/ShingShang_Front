@@ -47,6 +47,7 @@ public class MainScene extends Scene {
 	private Rectangle redBoard;
 	private Rectangle blueBoard;
 
+	@SuppressWarnings("static-access")
 	public MainScene(Main main) throws Exception {
 
 		super(new BorderPane());
@@ -106,7 +107,6 @@ public class MainScene extends Scene {
 	            	try {
 						pass();
 					} catch (Exception e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 	            }
@@ -118,7 +118,6 @@ public class MainScene extends Scene {
 				try {
 					pass();
 				} catch (Exception e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -139,7 +138,6 @@ public class MainScene extends Scene {
 				try {
 					main.start1();
 				} catch (Exception e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -148,8 +146,6 @@ public class MainScene extends Scene {
 		hb1.getChildren().addAll(redBoard,label1,blueBoard);
 		hb1.setAlignment(Pos.CENTER);
 
-		//stackPan.setAlignment(btn2, Pos.TOP_RIGHT);
-		
 		borderTop.setLeft(btn);
 		borderTop.setCenter(hb1);
 		
@@ -170,14 +166,10 @@ public class MainScene extends Scene {
 		borderTop.setAlignment(btn, Pos.CENTER);
 
 		borderTop.setAlignment(buttonBP, Pos.CENTER);
-	
-
-			
+		
 		root.setTop(borderTop);
 		root.setCenter(board);
-		// root = (GridPane) (this.getRoot());
-		// root.setHgap(10);
-		// root.setVgap(10);
+		
 		init();
 	}
 	public void pass() {
@@ -185,7 +177,12 @@ public class MainScene extends Scene {
 		main.getGame().nextTurn();
 		setFirst_click(true);
 		setPrevious_point(null);
-		setShingshang(false);							
+		setShingshang(false);	
+		this.setAdditionalTurn(false);
+		this.setShingshang_move(null);
+		main.getGame().getBoard().setAdditionalTurn(false);
+		main.getGame().setSelectedBushi1(null);
+		
 		updateLabel();
 		updateBoard();
 	}
@@ -354,8 +351,6 @@ public class MainScene extends Scene {
 					r.setHeight(75);
 					r.setFill(Color.rgb(192, 194, 181));
 					r.setStroke(Color.rgb(192, 194, 181));
-					//r.setFill(Color.rgb(2, 148, 137));
-					//r.setStroke(Color.rgb(2, 148, 137));
 					board.add(r, col, lig);
 				}
 
@@ -370,47 +365,7 @@ public class MainScene extends Scene {
 	}
 
 
-	public void show(Point point) {
-		int x = 0, y = 0;
-		for (int lig = 0; lig < 10; lig++) {
-			for (int col = 0; col < 10; col++) {
-
-				if (points[lig][col] == point) {
-					x = lig;
-					y = col;
-					break;
-				}
-
-			}
-		}
-		try {
-			System.out.print("[" + x + " , " + y + "]");
-			points[x + 1][y].show();
-		} catch (Exception e) {
-		}
-		try {
-			points[x - 1][y].show();
-		} catch (Exception e) {
-		}
-		try {
-			points[x][y + 1].show();
-		} catch (Exception e) {
-		}
-		try {
-			points[x][y - 1].show();
-		} catch (Exception e) {
-		}
-		try {
-		} catch (Exception e) {
-		}
-
-	}
-
-	public void available(presentation.Point square2) {
-		// TODO Auto-generated method stub
-
-	}
-
+	
 	public boolean getFirst_click() {
 		return first_click;
 	}
@@ -549,9 +504,6 @@ public class MainScene extends Scene {
 		else if(this.additionalTurn) {
 			this.changeLabel("Extra turn for another piece");
 			this.setShingshang_move(controlMoveBushi.getMove());
-			
-			System.out.println(this.getShingshang_move().getRow() + " " +this.getShingshang_move().getCol() );
-		
 		}
 		else {
 			this.updateLabel();
@@ -602,10 +554,7 @@ public class MainScene extends Scene {
 					points[lig][col].show();
 				} catch (Exception e) {
 				}
-				/**
-				 * if (points[lig][col] == p) { x = lig; y = col;
-				 **/
-
+				
 			}
 		}
 	}
@@ -636,9 +585,8 @@ public class MainScene extends Scene {
 		catch(Exception e) {}
 	}
 	public void updateLabel() {
-		
 		this.changeLabel("It is now the turn of " + main.getGame().getTurnPlayer().getName()
-				);
+		);
 	}
 	
 	public boolean isOver() {
@@ -646,7 +594,9 @@ public class MainScene extends Scene {
 	}
 	public void end() {
 		this.main.getGame().end();
+	
 		this.main.announceWinner(main.getGame().getBoard().winner().getName(),main.getGame().getBoard().winner().getNumber());
+		
 	}
 
 

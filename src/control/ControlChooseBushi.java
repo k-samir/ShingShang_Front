@@ -18,16 +18,12 @@ public class ControlChooseBushi {
 		this.col = col;
 		this.game = game;
 		
-		
-		
 		Bushi b = Console.askChoseBushi(game, row, col);
 			
 		if(b != null) {
 			game.setSelectedBushi1(b);
 			game.getSelectedBushi1().calculateLegalMoves();
 		}
-		
-		//game.playTurn();
 		
 		
 	}
