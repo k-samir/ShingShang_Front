@@ -435,7 +435,7 @@ public class Board {
 	 * @return true si le nombre de portails occupés est égal à 2
 	 */
 	public boolean allPortalsOccupied(Player p) {
-		return counterOccupiedPortals(p) == 2 ;
+		return counterOccupiedPortals(p) == 1 ;
 	}
 
 	/**

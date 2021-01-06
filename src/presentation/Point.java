@@ -364,7 +364,7 @@ public class Point {
 			
 			// TODO Auto-generated catch block
 
-			// PREMIER CLICK CHOIX PION
+			// First Click
 			
 			this.circle.setStroke(Color.BLACK);
 			
@@ -373,11 +373,8 @@ public class Point {
 				if (mainScene.main.getGame().getTurnPlayer().getNumber() == this.player && 
 						 this.used) {
 						if (mainScene.getAdditionalTurn()){
-							System.out.println("KSDFLFJLKSFJLSJD");
 							if(mainScene.checkPieceAdditionalTurn(this)) {
-								this.circle.setStroke(Color.GOLD);
-								mainScene.setPrevious_point(this);
-								mainScene.setFirst_click(false);
+									firstClick();
 								// Choose the First Piece to Move
 								try {
 									mainScene.chooseBushi(this);
@@ -388,9 +385,7 @@ public class Point {
 						}
 						else if(mainScene.getShingshang()) {
 							if(mainScene.checkPieceShingShang(this)){
-								this.circle.setStroke(Color.GOLD);
-								mainScene.setPrevious_point(this);
-								mainScene.setFirst_click(false);
+								firstClick();
 								// Choose the First Piece to Move
 								try {
 									mainScene.chooseBushi(this);
@@ -401,9 +396,7 @@ public class Point {
 							
 						}
 						else  {
-							this.circle.setStroke(Color.GOLD);
-							mainScene.setPrevious_point(this);
-							mainScene.setFirst_click(false);
+							firstClick();
 							// Choose the First Piece to Move
 							try {
 								mainScene.chooseBushi(this);
@@ -424,9 +417,7 @@ public class Point {
 					
 					blink();
 					mainScene.setFirst_click(true);
-					//mainScene.setPrevious_point(null);
-					//mainScene.setAdditionalTurn(false);
-					//mainScene.setShingshang(false);
+					
 				}
 
 			}
@@ -437,10 +428,7 @@ public class Point {
 				
 				// CHECK IF SAME POINT CLICKED
 				if(this.equals(mainScene.previous_point)) { 	
-						mainScene.setFirst_click(true);
-						mainScene.setPrevious_point(null);
-						mainScene.resetLegalMoves();
-						
+					clickSamePoint();		
 				}
 				else {
 				// ECHANGER POINT -> couleur et lettre
@@ -452,18 +440,8 @@ public class Point {
 						mainScene.moveBushi(this);
 
 						// Reset stroke black for neighbor
-
-						this.circle.setFill(mainScene.getPrevious_point().color);
-						this.player = mainScene.getPrevious_point().player;
-						this.color = mainScene.getPrevious_point().color;
-						this.text = mainScene.getPrevious_point().text;
-						Text text1 = mainScene.getPrevious_point().text;
-						this.stackP.getChildren().addAll(text1);
-						this.stackP.setAlignment(text1, Pos.CENTER);
-
-						// enlever lettre
-						this.setUsed(true);
-
+						resetStrokeNeighbour();
+						
 						// IF PORTAL RESET IMAGE PORTAL
 						if (mainScene.getPrevious_point().type.equals("PORTAL1")) {
 							mainScene.getPrevious_point().resetP1();
@@ -476,12 +454,8 @@ public class Point {
 							mainScene.resetCaught();								
 							
 						}
-						mainScene.setFirst_click(true);
-						mainScene.getPrevious_point().text = null;
-						mainScene.getPrevious_point().color = null;
-						mainScene.getPrevious_point().used = false;
-						// mainScene.getPrevious_point().setUsed(false);
-						mainScene.setPrevious_point(null);
+						
+						resetValuesPoint();
 						
 						if(mainScene.isOver()) {
 							mainScene.end();
@@ -495,13 +469,7 @@ public class Point {
 					mainScene.setFirst_click(true);
 				} else {
 					System.out.println("Change piece");
-					
-					mainScene.getPrevious_point().circle.setStroke(Color.BLACK);
-					mainScene.setFirst_click(true);
-					mainScene.setShingshang(false);
-					mainScene.setShingshang_move(null);
-					mainScene.resetLegalMoves();
-					
+					changePiece();
 					
 					
 					
@@ -517,7 +485,48 @@ public class Point {
 		});
 
 	}
+	public void changePiece() {
 
+		mainScene.getPrevious_point().circle.setStroke(Color.BLACK);
+		mainScene.setFirst_click(true);
+		mainScene.setShingshang(false);
+		mainScene.setShingshang_move(null);
+		mainScene.resetLegalMoves();
+	}
+	public void clickSamePoint() {
+		mainScene.setFirst_click(true);
+		mainScene.setPrevious_point(null);
+		mainScene.resetLegalMoves();
+	}
+public void firstClick() {
+	this.circle.setStroke(Color.GOLD);
+	mainScene.setPrevious_point(this);
+	mainScene.setFirst_click(false);
+}
+	public void resetValuesPoint() {
+
+		mainScene.setFirst_click(true);
+		mainScene.getPrevious_point().text = null;
+		mainScene.getPrevious_point().color = null;
+		mainScene.getPrevious_point().used = false;
+		// mainScene.getPrevious_point().setUsed(false);
+		mainScene.setPrevious_point(null);
+		
+	}
+	public void resetStrokeNeighbour() {
+
+		this.circle.setFill(mainScene.getPrevious_point().color);
+		this.player = mainScene.getPrevious_point().player;
+		this.color = mainScene.getPrevious_point().color;
+		this.text = mainScene.getPrevious_point().text;
+		Text text1 = mainScene.getPrevious_point().text;
+		this.stackP.getChildren().addAll(text1);
+		this.stackP.setAlignment(text1, Pos.CENTER);
+
+		// enlever lettre
+		this.setUsed(true);
+
+	}
 	public void setImagePortal1() {
 		Image im;
 		try {

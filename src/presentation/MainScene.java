@@ -11,12 +11,15 @@ import control.ControlMoveBushi;
 import control.Tuple;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -49,18 +52,20 @@ public class MainScene extends Scene {
 		root = (BorderPane) (this.getRoot());
 		board = new GridPane();
 		BorderPane borderTop = new BorderPane();
+		BorderPane buttonBP = new BorderPane();
 		// Rectangle rBleu = new Rectangle(770,70, Color.GREY);
 
 		label1 = new Label("TEXT INFO");
 		label1.setTextFill(Color.BLACK);
-		label1.setFont(Font.font("Tw Cen MT Condensed", FontWeight.SEMI_BOLD,30));
+		label1.setFont(Font.font("Tw Cen MT Condensed", FontWeight.SEMI_BOLD,25));
 
 		HBox hb1 = new HBox();
 		Button btn = new Button();
 		Button btn2 = new Button("PASS");
+		Button btn3 = new Button("RULES");
 		
-		redBoard = new Rectangle(50, 50, 100, 50); 
-		blueBoard = new Rectangle(50, 50, 100, 50); 
+		redBoard = new Rectangle(40, 40, 100, 40); 
+		blueBoard = new Rectangle(40, 40, 100, 40); 
 		redBoard.setArcHeight(10.0d); 
 		redBoard.setArcWidth(10.0d);
 		
@@ -83,6 +88,16 @@ public class MainScene extends Scene {
         "linear-gradient(#ffea6a, #efaa22),linear-gradient(#ffe657 0%, #f8c202 50%, #eea10b 100%),linear-gradient(" + 
 		"from 0% 0% to 15% 50%, rgba(255,255,255,0.9), rgba(255,255,255,0));-fx-background-radius: 30;-fx-background-insets:" +
         "0,1,2,3,0;-fx-text-fill: #654b00;-fx-font-weight: bold;-fx-font-size: 14px;-fx-padding: 10 20 10 20;");
+		
+		
+		btn3.setStyle(" -fx-background-color: linear-gradient(#006aff, #006aff);\r\n"
+				+ "    ;\r\n"
+				+ "    -fx-background-insets: 0;\r\n"
+				+ "    -fx-text-fill: white;");
+		
+		btn3.setMaxSize(60,30);
+		btn3.setPadding(new Insets(10));
+		
 		btn2.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
@@ -98,6 +113,14 @@ public class MainScene extends Scene {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
+			}
+		});
+		
+		btn3.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				main.showRules();
+				
 			}
 		});
 		
@@ -121,10 +144,26 @@ public class MainScene extends Scene {
 		
 		borderTop.setLeft(btn);
 		borderTop.setCenter(hb1);
-		borderTop.setRight(btn2);
+		
+		buttonBP.setRight(btn2);
+		Rectangle tempRect = new Rectangle(15,1);
+		tempRect.setFill(Color.WHITE);
+		tempRect.setStroke(Color.WHITE);
+		
+		borderTop.setBackground(new Background(new BackgroundFill(Color.WHITE, null, Insets.EMPTY)));
+		  
+		   
+		buttonBP.setCenter(tempRect);
+		buttonBP.setLeft(btn3);
+		buttonBP.setAlignment(btn2, Pos.CENTER);
+		buttonBP.setAlignment(btn3, Pos.CENTER);
+		
+		borderTop.setRight(buttonBP);
 		borderTop.setAlignment(btn, Pos.CENTER);
 
-		borderTop.setAlignment(btn2, Pos.CENTER);
+		borderTop.setAlignment(buttonBP, Pos.CENTER);
+	
+
 			
 		root.setTop(borderTop);
 		root.setCenter(board);
@@ -484,8 +523,8 @@ public class MainScene extends Scene {
 
 		if (!this.shingshang && !this.additionalTurn) {
 			controlMoveBushi.nextTurn();
-			this.changeLabel("It is now the turn of " + main.getGame().getTurnPlayer().getName()
-					 + " / Player " + main.getGame().getTurnPlayer().getNumber() );
+			this.changeLabel("It is now the turn of " + main.getGame().getTurnPlayer().getName());
+					 ;
 		} else if(this.shingshang){
 			this.changeLabel("SHINGSHANG YOU HAVE AN ADDITIONAL MOVE");
 			this.setShingshang_move(controlMoveBushi.getMove());
@@ -575,7 +614,7 @@ public class MainScene extends Scene {
 			this.redBoard.setFill(Color.GREY);
 		}
 		this.changeLabel("It is now the turn of " + main.getGame().getTurnPlayer().getName()
-				 + "/ Player " + number  );
+				);
 	}
 	
 	public boolean isOver() {
