@@ -477,7 +477,7 @@ public class Point {
 				}
 			}
 		
-			mainScene.updateLabel();
+			mainScene.updateBoard();
 
 		
 			

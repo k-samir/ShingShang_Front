@@ -12,6 +12,9 @@ public class MenuBox extends VBox {
 			for(MenuItem item : items) {
 				getChildren().addAll(item,createSeparator());
 			}
+		
+			
+			
 		}
 		
 		private Line createSeparator() {

@@ -76,8 +76,9 @@ public class Main extends Application {
 
 			stage.setResizable(false);
 			game.createBoard();
-			mainScene3.changeLabel("It is now the turn of " + this.getGame().getTurnPlayer().getName() + "/ Player "
-					+ this.getGame().getTurnPlayer().getNumber());
+			mainScene3.updateLabel();
+			//mainScene3.changeLabel("It is now the turn of " + this.getGame().getTurnPlayer().getName() + "/ Player "
+				//	+ this.getGame().getTurnPlayer().getNumber());
 
 		}
 

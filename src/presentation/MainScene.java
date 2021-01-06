@@ -18,6 +18,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
@@ -83,6 +85,7 @@ public class MainScene extends Scene {
 		view.setFitHeight(35);
 		btn.setGraphic(view);
 		
+		
 		btn.setStyle("-fx-focus-color: transparent;");
 		btn2.setStyle("-fx-background-color: linear-gradient(#ffd65b, #e68400),linear-gradient(#ffef84, #f2ba44)," + 
         "linear-gradient(#ffea6a, #efaa22),linear-gradient(#ffe657 0%, #f8c202 50%, #eea10b 100%),linear-gradient(" + 
@@ -98,17 +101,22 @@ public class MainScene extends Scene {
 		btn3.setMaxSize(60,30);
 		btn3.setPadding(new Insets(10));
 		
+		root.addEventFilter(KeyEvent.KEY_PRESSED, event->{
+	            if (event.getCode() == KeyCode.S) {
+	            	try {
+						pass();
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+	            }
+	        });
+		
 		btn2.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
 				try {
-					main.getGame().playTurn();
-					main.getGame().nextTurn();
-					setFirst_click(true);
-					setPrevious_point(null);
-					setShingshang(false);
-										
-					updateLabel();
+					pass();
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -172,7 +180,15 @@ public class MainScene extends Scene {
 		// root.setVgap(10);
 		init();
 	}
-	
+	public void pass() {
+		main.getGame().playTurn();
+		main.getGame().nextTurn();
+		setFirst_click(true);
+		setPrevious_point(null);
+		setShingshang(false);							
+		updateLabel();
+		updateBoard();
+	}
 	public void resetCaught() {
 
 		int sizeCaught = getCaught().size();
@@ -524,18 +540,21 @@ public class MainScene extends Scene {
 		if (!this.shingshang && !this.additionalTurn) {
 			controlMoveBushi.nextTurn();
 			this.changeLabel("It is now the turn of " + main.getGame().getTurnPlayer().getName());
-					 ;
+					 
 		} else if(this.shingshang){
-			this.changeLabel("SHINGSHANG YOU HAVE AN ADDITIONAL MOVE");
+			this.changeLabel("ShingShang you have 1 extra turn");
 			this.setShingshang_move(controlMoveBushi.getMove());
 
 		}
 		else if(this.additionalTurn) {
-			this.changeLabel("YOU'VE EATEN AN ENNEMY, EXTRA TURN FOR OTHER PIECE");
+			this.changeLabel("Extra turn for another piece");
 			this.setShingshang_move(controlMoveBushi.getMove());
 			
 			System.out.println(this.getShingshang_move().getRow() + " " +this.getShingshang_move().getCol() );
 		
+		}
+		else {
+			this.updateLabel();
 		}
 
 	}
@@ -597,7 +616,8 @@ public class MainScene extends Scene {
 	public void setAdditionalTurn(Boolean additionalTurn) {
 		this.additionalTurn = additionalTurn;
 	}
-	public void updateLabel() {
+	public void updateBoard() {
+		try {
 		int number = main.getGame().getTurnPlayer().getNumber();
 		if(number == 1) {
 			this.redBoard.setOpacity(1);
@@ -612,7 +632,11 @@ public class MainScene extends Scene {
 			
 			this.redBoard.setOpacity(0.6);
 			this.redBoard.setFill(Color.GREY);
-		}
+		}}
+		catch(Exception e) {}
+	}
+	public void updateLabel() {
+		
 		this.changeLabel("It is now the turn of " + main.getGame().getTurnPlayer().getName()
 				);
 	}

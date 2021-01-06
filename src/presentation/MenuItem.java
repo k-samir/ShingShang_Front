@@ -75,6 +75,9 @@ if(name.equals("1 PLAYER VS A.I")) {
 				else if(name.equals("1 PLAYER VS A.I")) {
 					
 				}
+else if(name.equals("RULES")) {
+					main.showRules();
+				}
 				bg.setFill(gradient);	
 			});
 			
