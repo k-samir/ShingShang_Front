@@ -1,6 +1,5 @@
 package presentation;
 
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -12,10 +11,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
-
 public class MenuScene extends Scene {
 	Pane root;
 	Main main;
+
 	public MenuScene(Main main) throws Exception {	
 		
 	
@@ -53,6 +52,9 @@ public class MenuScene extends Scene {
 		menu.setTranslateX(100);
 		menu.setTranslateY(300);
 		
+		
+				
+				
 		root.getChildren().addAll(title,menu);
 		
 		
@@ -60,6 +62,4 @@ public class MenuScene extends Scene {
 			
 	}
 
-
-	
 }

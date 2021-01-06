@@ -44,6 +44,19 @@ public class Main extends Application {
 		this.mainScene = new MenuScene(this);
 		stage.setTitle("SHINGSHANG_IHM");
 		stage.setScene(this.mainScene);
+		// dialog.initModality(Modality.WINDOW_MODAL);
+		Image imageIcon;
+		try {
+			
+				imageIcon = new Image(new FileInputStream("image" + File.separator + "brown_portal.jpg"),200,160,false,false);
+				stage.getIcons().add(imageIcon);
+
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		
 		stage.show();
 		Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
 		stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2);
@@ -261,6 +274,18 @@ public class Main extends Application {
 
 		// grid.getChildren().add(tree);
 
+		Image imageIcon;
+		try {
+			
+				imageIcon = new Image(new FileInputStream("image" + File.separator + "brown_portal.jpg"),200,160,false,false);
+				Stage stage = (Stage) dialog.getDialogPane().getScene().getWindow();
+				stage.getIcons().add(imageIcon);
+
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
 		dialog.getDialogPane().getButtonTypes().addAll(back);
 
 		dialog.getDialogPane().setContent(grid);
