@@ -57,9 +57,10 @@ public class Console {
 	 * @param board un plateau de jeu
 	 */
 	public static Move askChoseMove(Board board,int row,int col) {
-		//int row = 0, col = 0;
+		
+		@SuppressWarnings("unused")
 		boolean ok = false;
-		boolean isInt;
+	
 		
 			try {
 				
@@ -71,7 +72,7 @@ public class Console {
 			} catch (IllegalMoveException e) {
 				System.out.println(e.getMessage() + " (row = " + row + ", col = " + col + ")"  );
 			}
-		//}
+		
 		
 		return  board.findMove(row, col);
 	}

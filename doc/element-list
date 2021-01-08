@@ -3,3 +3,6 @@ abstraction.exceptions
 abstraction.game
 abstraction.move
 abstraction.pawn
+application
+control
+presentation

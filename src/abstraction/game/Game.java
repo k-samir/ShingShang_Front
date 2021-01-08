@@ -144,6 +144,7 @@ public class Game {
 
 	public void playTurn() {
 		
+		@SuppressWarnings("unused")
 		Bushi selectedBushi;
 		Move selectedMove;
 			
@@ -161,7 +162,8 @@ public class Game {
 			board.executeShingShang(selectedMove.getMovedBushi(),selectedMove);
 		}
 		}catch(Exception e) {}
-		board.show();
+		// Board Show to debug : can see if gui board is the same as the console one
+		//board.show();
 	}
 
 	/**

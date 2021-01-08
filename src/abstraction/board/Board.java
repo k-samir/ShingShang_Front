@@ -28,7 +28,8 @@ public class Board {
     private ArrayList<Move> legalMoves;
     private ArrayList<Bushi> movedBushis;
     private boolean additionalTurn;
-    private Player winner;
+    @SuppressWarnings("unused")
+	private Player winner;
     private ArrayList<Tuple<?,?>> caughtBushi = new ArrayList<Tuple<?,?>>(); 
   
 	
@@ -328,7 +329,8 @@ public class Board {
 				if(jump.getCaughtBushi() instanceof Dragon) 
 					jump.getCaughtBushi().getPlayer().loseDragon();
 				
-				// AJOUT LISTE CAUGHT PIECE
+				// ADD LISTE CAUGHT PIECES
+				@SuppressWarnings("rawtypes")
 				Tuple caught = new Tuple(jump.getCaughtBushi().getRow(),jump.getCaughtBushi().getCol());
 				this.caughtBushi.add(caught);
 				

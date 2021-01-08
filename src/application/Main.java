@@ -44,7 +44,6 @@ public class Main extends Application {
 		this.mainScene = new MenuScene(this);
 		stage.setTitle("SHINGSHANG_IHM");
 		stage.setScene(this.mainScene);
-		// dialog.initModality(Modality.WINDOW_MODAL);
 		Image imageIcon;
 		try {
 			
@@ -52,7 +51,6 @@ public class Main extends Application {
 				stage.getIcons().add(imageIcon);
 
 		} catch (FileNotFoundException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		
@@ -69,6 +67,7 @@ public class Main extends Application {
 		start(stage);
 	}
 
+	@SuppressWarnings("unused")
 	public void start2() throws Exception {
 		String[] players = askPlayersName();
 
@@ -90,15 +89,15 @@ public class Main extends Application {
 			stage.setResizable(false);
 			game.createBoard();
 			mainScene3.updateLabel();
-			//mainScene3.changeLabel("It is now the turn of " + this.getGame().getTurnPlayer().getName() + "/ Player "
-				//	+ this.getGame().getTurnPlayer().getNumber());
-
+			
 		}
 
 	}
 
 	public void announceWinner(String winner, int winnerNumber) {
+		@SuppressWarnings("unused")
 		String action = "";
+		@SuppressWarnings("rawtypes")
 		Dialog dialog = new Dialog();
 
 		dialog.setTitle("Winner");
@@ -115,7 +114,7 @@ public class Main extends Application {
 
 		dialog.getDialogPane().setContent(grid);
 
-		// dialog.initModality(Modality.WINDOW_MODAL);
+
 		ImageView imageV = new ImageView();
 		try {
 			if (winnerNumber == 1) {
@@ -129,7 +128,7 @@ public class Main extends Application {
 			}
 
 		} catch (FileNotFoundException e1) {
-			// TODO Auto-generated catch block
+			
 			e1.printStackTrace();
 		}
 		dialog.setGraphic(imageV);
@@ -143,10 +142,11 @@ public class Main extends Application {
 			}
 
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 
+		@SuppressWarnings("unchecked")
 		Optional<ButtonType> result = dialog.showAndWait();
 		System.out.println(result.get().getText().toString());
 
@@ -156,7 +156,7 @@ public class Main extends Application {
 				this.start1();
 				this.start2();
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
+				
 				e.printStackTrace();
 			}
 		} else if (result.get().getText().toString() == "No") {
@@ -169,6 +169,8 @@ public class Main extends Application {
 	
 	public String[] askPlayersName() throws Exception {
 
+		// Popup asking Players Name
+		
 		String[] player = { " ", "" };
 
 		TextInputDialog dialog = new TextInputDialog("P1");
@@ -192,8 +194,7 @@ public class Main extends Application {
 		Optional<String> reponse = dialog.showAndWait();
 		if (reponse.isPresent()) {
 			player[0] = reponse.get();
-			System.out.println("PLAYER 1 => " + reponse.get());
-
+			
 			Optional<String> reponse1 = dialog2.showAndWait();
 			if (reponse1.isPresent()) {
 
@@ -202,18 +203,14 @@ public class Main extends Application {
 
 				} else {
 					player[1] = reponse1.get();
-					System.out.println("PLAYER 2 => " + reponse1.get());
+					
 				}
 			}
 
 			else {
-				System.out.println("Vous avez ferme sans repondre...");
-
 			}
 
 		} else {
-			System.out.println("Vous avez ferme sans repondre...");
-
 		}
 		return player;
 
@@ -222,16 +219,13 @@ public class Main extends Application {
 	@SuppressWarnings("unchecked")
 	public void showRules() {
 
+		@SuppressWarnings("rawtypes")
 		Dialog dialog = new Dialog();
 
 		dialog.setTitle("RULES");
 
 		BorderPane grid = new BorderPane();
 
-		// (10);
-		// grid.setVgap(10);
-
-		// grid.setPadding(new Insets(20, 150, 10, 10));
 		grid.setMaxSize(100, 100);
 		ButtonType back = new ButtonType("Back to game");
 
@@ -239,7 +233,7 @@ public class Main extends Application {
 		TreeItem<String> rootItem = new TreeItem<String>("RULES");
 		rootItem.setExpanded(true);
 
-		// JSP Item
+		
 		TreeItem<String> controls = new TreeItem<>("Controls");
 		TreeItem<String> base = new TreeItem<String>("Base");
 		TreeItem<String> moves = new TreeItem<>("Moves");
@@ -247,8 +241,6 @@ public class Main extends Application {
 		TreeItem<String> special_rules = new TreeItem<>("Special Rules");
 		TreeItem<String> end_game = new TreeItem<>("End of Game");
 		
-
-		// Spring Item
 
 		// Add to Root
 		rootItem.getChildren().addAll(controls,base, moves, shingshang_sequence, special_rules, end_game);
@@ -268,7 +260,6 @@ public class Main extends Application {
 		textArea.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
 		textArea.setWrapText(true);
 
-		// StackPane root2 = new StackPane();
 		grid.setPadding(new Insets(5));
 		BorderPane treeBP = new BorderPane();
 		treeBP.setCenter(tree);
@@ -278,8 +269,6 @@ public class Main extends Application {
 
 		grid.setBottom(textArea);
 
-		// grid.getChildren().add(tree);
-
 		Image imageIcon;
 		try {
 			
@@ -288,7 +277,7 @@ public class Main extends Application {
 				stage.getIcons().add(imageIcon);
 
 		} catch (FileNotFoundException e1) {
-			// TODO Auto-generated catch block
+
 			e1.printStackTrace();
 		}
 		
@@ -298,13 +287,12 @@ public class Main extends Application {
 
 		Optional<ButtonType> result = dialog.showAndWait();
 		try {
-			System.out.println(result.get().getText().toString());
+			
 
 			if (result.get().getText().toString() == "Back to game") {
 				try {
 					dialog.close();
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -314,7 +302,7 @@ public class Main extends Application {
 	}
 
 	private void updateTextArea(String value, TextArea textArea) {
-		// TODO Auto-generated method stub
+		
 		if (value.equals("Base")) {
 			textArea.setText("Players take turns performing one of the following two actions:\r\n" + "\r\n"
 					+ " - a player can move one of his pieces on the board to another square on the board.\r\n" + "\r\n"
@@ -357,7 +345,6 @@ public class Main extends Application {
 	}
 
 	public static void main(String[] args) {
-	//	shingshang.start();
 		launch();
 	}
 }

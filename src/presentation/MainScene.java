@@ -513,6 +513,7 @@ public class MainScene extends Scene {
 	
 	
 
+	@SuppressWarnings("rawtypes")
 	public void chooseBushi(Point p) {
 
 		int x = 0, y = 0;
@@ -527,8 +528,8 @@ public class MainScene extends Scene {
 			}
 		}
 
-		
 			ControlChooseBushi controlChooseBushi = new ControlChooseBushi(x, y, main.getGame());
+			
 			ArrayList<Tuple> legals = controlChooseBushi.getLegalMoves();
 
 			for (Tuple m : legals) {

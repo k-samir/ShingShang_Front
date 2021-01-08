@@ -59,7 +59,6 @@ public class Point {
 
 	private String type;
 
-	@SuppressWarnings("static-access")
 	public Point(String border, String typ, MainScene mainScen) {
 		this.mainScene = mainScen;
 		this.type = typ;
@@ -142,9 +141,7 @@ public class Point {
 		});
 
 		stackP.setOnMouseClicked(e -> {
-
 			// First Click
-
 			this.circle.setStroke(Color.BLACK);
 
 			if (mainScene.getFirst_click()) {
@@ -156,12 +153,15 @@ public class Point {
 							// Choose the First Piece to Move
 							try {
 								mainScene.chooseBushi(this);
-							} catch (Exception e2) {
 							}
-						} else {
+							catch (Exception e2) {
+							}
+						}
+						else {
 							blink();
 						}
-					} else if (mainScene.getShingshang()) {
+					}
+					else if (mainScene.getShingshang()) {
 						if (mainScene.checkPieceShingShang(this)) {
 							firstClick();
 							// Choose the First Piece to Move
@@ -172,13 +172,14 @@ public class Point {
 						} else {
 							blink();
 						}
-
-					} else {
+					}
+					else {
 						firstClick();
 						// Choose the First Piece to Move
 						try {
 							mainScene.chooseBushi(this);
-						} catch (Exception e2) {
+						}
+						catch (Exception e2) {
 						}
 					}
 				}
@@ -187,23 +188,20 @@ public class Point {
 					blink();
 					mainScene.setFirst_click(true);
 				}
-
 			}
 
 			// SECOND CLICK CHOIX MOVE
 			else {
 				mainScene.resetStroke(this);
-
 				// CHECK IF SAME POINT CLICKED
 				if (this.equals(mainScene.previous_point)) {
 					clickSamePoint();
 				} else {
-					// ECHANGER POINT -> couleur et lettre
+					// Check for move
 					if (mainScene.getPrevious_point().getUsed() && !this.getUsed() && mainScene.main.getGame()
 							.getTurnPlayer().getNumber() == mainScene.getPrevious_point().player) {
 
 						if (mainScene.checkMove(this)) {
-
 							mainScene.moveBushi(this);
 
 							// Reset stroke black for neighbor
@@ -219,31 +217,20 @@ public class Point {
 								mainScene.getPrevious_point().reset();
 								// RESET IF CAUGHT
 								mainScene.resetCaught();
-
 							}
-
 							resetValuesPoint();
-
 							if (mainScene.isOver()) {
 								mainScene.end();
 							}
-
-							// UPDATE NEW COLOR AND TEXT
-						}
-						//System.out.println("Change move");
+						}				
 						mainScene.setFirst_click(true);
 					} else {
-						//System.out.println("Change piece");
 						changePiece();
-
 					}
 				}
 			}
-
 			mainScene.updateBoard();
-
 		});
-
 	}
 
 	public void setUp() {
@@ -526,7 +513,6 @@ public class Point {
 		mainScene.getPrevious_point().text = null;
 		mainScene.getPrevious_point().color = null;
 		mainScene.getPrevious_point().used = false;
-		// mainScene.getPrevious_point().setUsed(false);
 		mainScene.setPrevious_point(null);
 
 	}
@@ -568,10 +554,6 @@ public class Point {
 		}
 	}
 
-	public void actionPerformed(java.awt.event.ActionEvent e) {
-		// showBack();
-
-	}
 
 	public void blink() {
 		KeyFrame kfP = new KeyFrame(Duration.seconds(0.5), new KeyValue(circle.strokeProperty(), Color.RED));
@@ -601,7 +583,7 @@ public class Point {
 		preReset();
 		ObservableList<Node> childs = stackP.getChildren();
 		this.stackP.getChildren().remove(childs.size() - 1);
-		// enlever couleur
+		// Remove color
 		this.player = 0;
 		this.circle.setFill(Color.WHITE);
 		this.circle.setStroke(Color.BLACK);
@@ -615,7 +597,7 @@ public class Point {
 		preReset();
 		ObservableList<Node> childs = stackP.getChildren();
 		this.stackP.getChildren().remove(childs.size() - 1);
-		// enlever couleur
+		// Remove color
 
 		setImagePortal1();
 		this.circle.setStroke(Color.BLACK);
@@ -629,7 +611,7 @@ public class Point {
 		preReset();
 		ObservableList<Node> childs = stackP.getChildren();
 		this.stackP.getChildren().remove(childs.size() - 1);
-		// enlever couleur
+		// remove color
 
 		setImagePortal2();
 		this.circle.setStroke(Color.BLACK);

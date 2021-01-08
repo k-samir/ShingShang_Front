@@ -11,6 +11,7 @@ public class Player {
 	private String name;
 	private int number;
 	private int lostDragons;
+	@SuppressWarnings("unused")
 	private String color;
 	
 	/* * * * * * * * * * *

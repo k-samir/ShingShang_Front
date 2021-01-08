@@ -63,7 +63,6 @@ public class ControlMoveBushi {
 	}
 	
 	public Bushi getMove() {
-	
 		return game.getSelectedMove1().getMovedBushi();
 	}
 	

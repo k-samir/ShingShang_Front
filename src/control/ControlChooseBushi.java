@@ -20,6 +20,7 @@ public class ControlChooseBushi {
 		
 		Bushi b = Console.askChoseBushi(game, row, col);
 			
+		// Set selected Bushi in Game
 		if(b != null) {
 			game.setSelectedBushi1(b);
 			game.getSelectedBushi1().calculateLegalMoves();
@@ -27,8 +28,11 @@ public class ControlChooseBushi {
 		
 		
 	}
+	
+	@SuppressWarnings("rawtypes")
 	public ArrayList<Tuple> getLegalMoves(){
 		
+		// Search and update legalMoves in Game
 		ArrayList<Tuple> legal = new ArrayList<Tuple>();
 		for(Move m: game.getBoard().getLegalMoves()) {
 			legal.add(new Tuple(m.getDestination().getRow(),m.getDestination().getCol()));
