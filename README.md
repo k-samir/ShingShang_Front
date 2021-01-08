@@ -12,7 +12,7 @@ Chaque joueur possède une armée de 12 Bushis ( Pièces ). Cette armée est com
 
 [Documentation du projet](https://docs.google.com/document/d/1ZtqhFwuuNymzyjvvDptcIIbRV_NNXb4CPYg6uDdT0ng/edit#)
 
-[Structure du Projet](https://github.com/k-samir/ShingShang/blob/main/src/UML3.jpg)
+[Structure du Projet](https://github.com/k-samir/ShingShang_Front/blob/master/image/struct.PNG?raw=true)
 
 ----------------
 # Objectifs pédagogiques
