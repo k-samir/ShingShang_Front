@@ -1,6 +1,5 @@
 package abstraction.game;
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import abstraction.board.Board;
@@ -21,54 +20,33 @@ public class Console {
 	 * 
 	 * @param game le jeu
 	 */
-	public static Bushi askChoseBushi(Game game){
+	public static Bushi askChoseBushi(Game game,int row,int col){
+	
 		Board board = game.getBoard();
-		int row = 0, col = 0;
+		//int row = 0, col = 0;
 		boolean ok = false;
 		boolean isInt;
 		
-		while(!ok) {
-			System.out.println("Choisissez une pièce.");
-			do {
-				isInt = true;
-				System.out.println("numéro de ligne : ");
-				try {
-				row = keyboard.nextInt();
-				} catch (InputMismatchException e) {
-					System.out.println("Erreur - La valeur saisie doit être un entier.");
-					keyboard.nextLine();
-					isInt = false;
-				}				
-			} while(isInt == false);
-			
-			do {
-				isInt = true;
-				System.out.println("numéro de colonne : ");
-				try {
-				col = keyboard.nextInt();
-				} catch (InputMismatchException e) {
-					System.out.println("Erreur - La valeur saisie doit être un entier.");
-					keyboard.nextLine();
-					isInt = false;
-				}				
-			} while(isInt == false);
-		
 			try {
+				 
 				TypingValidator.checkBushiChoice(game, row, col);
 				ok = true;
 				
 			} catch (InvalidPositionException e) {
 				System.out.println(e.getMessage() + " (row = " + row + ", col = " + col + ")"  );
+				return null;
 			} catch (NoBushiException e) {
 				System.out.println(e.getMessage() + " (row = " + row + ", col = " + col + ")" );
+				return null;
 			} catch (BushiHasMovedException e) {
 				System.out.println(e.getMessage() + " : " + board.getSquare(row, col).getBushi());
+				return null;
 			} catch (OpposingBushiMoveException e) {
 				System.out.println(e.getMessage()  + " : " + board.getSquare(row, col).getBushi());
+				return null;
 			}
-		
 
-		}
+			
 		return  board.getSquare(row, col).getBushi();
 	}
 	
@@ -78,37 +56,12 @@ public class Console {
 	 *  
 	 * @param board un plateau de jeu
 	 */
-	public static Move askChoseMove(Board board) {
-		int row = 0, col = 0;
-		boolean ok = false;
-		boolean isInt;
+	public static Move askChoseMove(Board board,int row,int col) {
 		
-		while(!ok) {
-			System.out.println("Choisissez une case d'arrivée. ");
-			do {
-				isInt = true;
-				System.out.println("numéro de ligne : ");
-				try {
-				row = keyboard.nextInt();
-				} catch (InputMismatchException e) {
-					System.out.println("Erreur - La valeur saisie doit être un entier.");
-					keyboard.nextLine();
-					isInt = false;
-				}				
-			} while(isInt == false);
-			
-			do {
-				isInt = true;
-				System.out.println("numéro de colonne : ");
-				try {
-				col = keyboard.nextInt();
-				} catch (InputMismatchException e) {
-					System.out.println("Erreur - La valeur saisie doit être un entier.");
-					keyboard.nextLine();
-					isInt = false;
-				}				
-			} while(isInt == false);
-
+		@SuppressWarnings("unused")
+		boolean ok = false;
+	
+		
 			try {
 				
 			TypingValidator.checkMoveChoice(board, row, col);	
@@ -119,7 +72,7 @@ public class Console {
 			} catch (IllegalMoveException e) {
 				System.out.println(e.getMessage() + " (row = " + row + ", col = " + col + ")"  );
 			}
-		}
+		
 		
 		return  board.findMove(row, col);
 	}
@@ -175,8 +128,8 @@ public class Console {
 	public static void askShingShangChoice(Board board, Bushi bushi) {
 		boolean keepGoing = askContinue();
 		
-		if(keepGoing)
-			board.executeShingShang(bushi);
+		if(keepGoing) {}
+		//	board.executeShingShang(bushi);
 	}
 
 	/**

@@ -11,6 +11,7 @@ public class Player {
 	private String name;
 	private int number;
 	private int lostDragons;
+	@SuppressWarnings("unused")
 	private String color;
 	
 	/* * * * * * * * * * *
@@ -72,6 +73,7 @@ public class Player {
 	 */
 	public void loseDragon() {
 		lostDragons++;
+		System.out.println("loose dragon");
 	}
 
 	/**

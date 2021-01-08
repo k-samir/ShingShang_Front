@@ -3,7 +3,6 @@ package abstraction.board;
 import java.util.ArrayList;
 import java.util.List;
 
-import abstraction.game.Console;
 import abstraction.game.Player;
 import abstraction.move.Jump;
 import abstraction.move.Move;
@@ -11,6 +10,7 @@ import abstraction.pawn.Bushi;
 import abstraction.pawn.Dragon;
 import abstraction.pawn.Lion;
 import abstraction.pawn.Monkey;
+import control.Tuple;
 
 /**
  * Le plateau de jeu
@@ -28,6 +28,10 @@ public class Board {
     private ArrayList<Move> legalMoves;
     private ArrayList<Bushi> movedBushis;
     private boolean additionalTurn;
+    @SuppressWarnings("unused")
+	private Player winner;
+    private ArrayList<Tuple<?,?>> caughtBushi = new ArrayList<Tuple<?,?>>(); 
+  
 	
     /* * * * * * * * * * *
 	 *	Constructeurs 
@@ -247,7 +251,10 @@ public class Board {
 		for(int line = 0 ; line < size ; line++) {
 			System.out.print(line);
 			for(int col = 0 ; col < size ; col++) {
-				if(array[line][col].isAccessible()) System.out.print( "    " + "[]");
+				if(array[line][col].isAccessible()) {
+					System.out.print( "    " + "[]");
+					
+				}
 				else System.out.print( "    " + array[line][col].toString());
 			}
 			System.out.print( "    " + line);
@@ -315,16 +322,26 @@ public class Board {
 		
 		//gestion du saut
 		if (move instanceof Jump) {
-			Jump jump = ((Jump)move);
+			
+			Jump jump = ((Jump)move); 
 			if(jump.isJumpEnemy()) {
 				
 				if(jump.getCaughtBushi() instanceof Dragon) 
 					jump.getCaughtBushi().getPlayer().loseDragon();
 				
+				// ADD LISTE CAUGHT PIECES
+				@SuppressWarnings("rawtypes")
+				Tuple caught = new Tuple(jump.getCaughtBushi().getRow(),jump.getCaughtBushi().getCol());
+				this.caughtBushi.add(caught);
+				
 				removeBushi(jump.getCaughtBushi());
+				
+				
 				move.getMovedBushi().setHasMoved(true);
 				movedBushis.add(move.getMovedBushi());
+				jump.setCaughtBushi(null);
 				setAdditionalTurn(true);
+				
 				
 			}
 		} else {
@@ -332,30 +349,39 @@ public class Board {
 		}
 		resetLegalModal();
 		
+		
 	}
 	
+	public ArrayList<Tuple<?, ?>> getCaughtBushi() {
+		return caughtBushi;
+	}
+
+	public void setCaughtBushi(ArrayList<Tuple<?, ?>> caughtBushi) {
+		this.caughtBushi = caughtBushi;
+	}
+
 	/**
 	 * Execute un déplacement propre à un shing shang
 	 *  
 	 * @param bushi la pièce courante pouvant effectuer le shing shang
 	 */
-	public void executeShingShang(Bushi bushi) {
-		boolean yesShowLegalMoves;
+	public void executeShingShang(Bushi bushi,Move shingshang_move) {
+	//	boolean yesShowLegalMoves;
 		bushi.calculateLegalJump();
 		
-		yesShowLegalMoves = Console.askShowLegalMoves();
-		if(yesShowLegalMoves)
-			showLegalMoves();
+	//	yesShowLegalMoves = Console.askShowLegalMoves();
+	//	if(yesShowLegalMoves)
+	//		showLegalMoves();
 		
-		Move move = Console.askChoseMove(this);
+		Move move = shingshang_move;
 		executeMove(move);
 
-		if(move.isShingShang())
-		Console.askShingShangChoice(this, move.getMovedBushi());
+		/**if(move.isShingShang())
+		Console.askShingShangChoice(this, move.getMovedBushi());*/
 	}
 	
-	/**
-	 * Vide la liste des déplacements possibles
+	
+	 /* Vide la liste des déplacements possibles
 	 */
 	public void resetLegalModal() {
 		for(Move m : legalMoves) {
@@ -408,10 +434,14 @@ public class Board {
 	 * 
 	 * @param p le joueur propriétaire des portails
 	 * 
-	 * @return true si le nombre de portails occupés est égal à 2
+	 * @return true si le nombre de portails occupés est égal à 1
 	 */
 	public boolean allPortalsOccupied(Player p) {
-		return counterOccupiedPortals(p) == 2 ;
+		if( counterOccupiedPortals(p) == 1 ) {	
+			return true;
+		}
+		return false;
+		
 	}
 
 	/**
@@ -429,9 +459,13 @@ public class Board {
 			for(int j = 0 ; j < size ; j++) {
 				if(array[i][j] instanceof Portal) {
 					portal = (Portal) array[i][j];
+					if(portal.getOwner() == p) {
 					if(portal.isOccupiedByEnemy()) {
 						counter++;
-					}
+						
+						
+						break;
+					}}
 				}
 			}
 		}
@@ -448,10 +482,10 @@ public class Board {
 	 */
 	
 	public Player winner() {
-		if(player2.getLostDragons() == 2 || allPortalsOccupied(player2))
-			return player1;
-		if(player1.getLostDragons() == 2 || allPortalsOccupied(player1))
-			return player2;
+		if((player1.getLostDragons() == 2) || (allPortalsOccupied(player1))) {
+			return player2;}
+		else if((player2.getLostDragons() == 2) || (allPortalsOccupied(player2))) {
+			return player1;}
 		return null; 
 	}
 	/**

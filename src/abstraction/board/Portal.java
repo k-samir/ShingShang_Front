@@ -54,12 +54,19 @@ public class Portal extends Square{
 	 */
 	public boolean isOccupiedByEnemy() {
 		if(!isVoid()) {
-			if(!bushi.getPlayer().equals(owner) && bushi instanceof Dragon) 
-				return true;
-		}
+			if(!(bushi.getPlayer().equals(owner))) {
+				if (bushi instanceof Dragon) {
+					return true;
+				}
+			}
+				
+			
+			}
+		
 		return false;
 	}		
 	
+	@Override
 	public String toString() {
 		if(isVoid()) {
 			return "P" + owner.getNumber();
