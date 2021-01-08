@@ -12,8 +12,6 @@ Chaque joueur possède une armée de 12 Bushis ( Pièces ). Cette armée est com
 
 [Documentation du projet](https://docs.google.com/document/d/1ZtqhFwuuNymzyjvvDptcIIbRV_NNXb4CPYg6uDdT0ng/edit#)
 
-[Lien de téléchargement du jeu](https://github.com/k-samir/ShingShang/blob/main/jar/ShingShang_SK.jar?raw=true)
-
 [Structure du Projet](https://github.com/k-samir/ShingShang/blob/main/src/UML3.jpg)
 
 ----------------
@@ -69,20 +67,6 @@ Un joueur remporte la partie lorsqu’il parvient à amener l’un de ses dragon
 
 ----------------
 
-# Lancement du jeu
-
-Pour lancer le jeu vous devez telecharger de l'exe ou du jar depuis github.
-[Lien de téléchargement du .exe](https://github.com/k-samir/ShingShang/blob/main/jar/ShingShang_SK.jar?raw=true)
-[Lien de téléchargement du .jar](https://github.com/k-samir/ShingShang/blob/main/jar/ShingShang_SK.jar?raw=true)
-
-
-----------------
-
-## Executer le jeu
-
-Sur Windows/Linux ou Mac : Ouvrir un command prompt/bash, rendez-vous à l'emplacement du .jar et taper : java -jar ShingShangSK.jar 
-
-----------------
 
 # Technologies utilisés
 
