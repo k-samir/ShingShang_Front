@@ -63,10 +63,12 @@ public class Main extends Application {
 
 	}
 
+	// Menu Scene
 	public void start1() throws Exception {
 		start(stage);
 	}
 
+	// Game Scene
 	@SuppressWarnings("unused")
 	public void start2() throws Exception {
 		String[] players = askPlayersName();
