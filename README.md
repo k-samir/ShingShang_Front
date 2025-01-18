@@ -3,73 +3,71 @@
 ![](https://github.com/k-samir/ShingShang/blob/main/image/board.png?raw=true)
 
 ----------------
-# Présentation
-Bienvenue sur le git de la partie FRONT du projet ShingShang !
+# Presentation
+Welcome to the FRONT repository of the ShingShang project!
 
-L’objectif de ce projet est d’implémenter un jeu de plateau, appelé SHING SHANG.
-Il s’agit d’un jeu à deux joueurs. 
-Chaque joueur possède une armée de 12 Bushis ( Pièces ). Cette armée est composée de 3 groupes : 2 dragons, 4 lions et 6 singes. 
+The objective of this project is to implement a board game called SHING SHANG.
+It is a two-player game.
+Each player has an army of 12 Bushis (Pieces). This army is composed of 3 groups: 2 dragons, 4 lions, and 6 monkeys.
 
-[Documentation du projet](https://docs.google.com/document/d/1ZtqhFwuuNymzyjvvDptcIIbRV_NNXb4CPYg6uDdT0ng/edit#)
+[Documentation of the projet](https://docs.google.com/document/d/1ZtqhFwuuNymzyjvvDptcIIbRV_NNXb4CPYg6uDdT0ng/edit#)
 
-[Structure du Projet](https://github.com/k-samir/ShingShang_Front/blob/master/image/struct.PNG?raw=true)
-
-----------------
-# Objectifs pédagogiques
-
-Prendre connaissance du projet, savoir déterminer les objectifs du projet. 
-
-L’accent est mis davantage sur les aspects conception logiciels (au sens documentation, réutilisabilité...) et suivi de projet que sur la difficulté technique du sujet.
+[Projet Structure](https://github.com/k-samir/ShingShang_Front/blob/master/image/struct.PNG?raw=true)
 
 ----------------
-# Base du jeu
+# Educational Objectives
 
-Les joueurs exécutent chacun leur tour une action parmi les deux actions suivantes :
+Understand the project and learn how to identify its goals.
 
-un joueur peut déplacer l’une de ses pièces présentes sur le plateau vers une autre case du plateau.
-
-un joueur peut sauter par-dessus une autre pièce si celle-ci est plus petite ou de même taille que la pièce du sauteur.
+The focus is more on software design aspects (in terms of documentation, reusability, etc.) and project tracking rather than on the technical difficulty of the subject.
 
 ----------------
+# Game Basics
 
-# Déplacement
+Players take turns performing one of the following two actions:
 
-Pour déplacer une pièce sur le plateau, il est nécessaire que la case d’arrivée soit libre. 
+A player can move one of their pieces on the board to a different square.
 
-On peut se déplacer horizontalement, verticalement ou en diagonale, aussi bien en avant qu’en arrière. 
-
-Pour sauter, la pièce du sauteur doit se trouver sur une case contiguë à une case occupée par l’une de ses propres pièces ou par celle du joueur adverse. 
-
-Le saut peut se faire verticalement, horizontalement ou en diagonale, à condition que la case suivante soit vide. 
+A player can jump over another piece if the piece being jumped over is smaller or of the same size as the jumping piece
 
 ----------------
 
-# Séquence Shing Shang
+# Moves
 
-On peut enchaîner plusieurs sauts au cours d’un même tour. Cet enchaînement de sauts s’appelle un SHING SHANG.
+To move a piece on the board, the destination square must be free.
 
-Si, lors d’un SHING SHANG, on saute par dessus une pièce adverse, on doit s’arrêter et la pièce de l’adversaire est retirée du plateau. Toutefois, on gagne un tour de jeu supplémentaire avec une autre pièce.
+Movement can be made horizontally, vertically, or diagonally, both forward and backward.
 
-----------------
+To jump, the jumping piece must be on a square adjacent to a square occupied by one of its own pieces or by the opponent's piece.
 
-
-# Règle spécifique
-
-Les singes peuvent se déplacer d’une ou deux cases dans n’importe quelle direction, horizontalement,verticalement ou en diagonale, mais sans changer de direction au cours du tour.
-Les lions peuvent se déplacer d’une case dans n’importe quelle direction, horizontalement, verticalement ou en diagonale.
-Les dragons ne peuvent se déplacer qu’en sautant.
+The jump can be made vertically, horizontally, or diagonally, as long as the next square is empty.
 
 ----------------
 
-# Fin de partie
+# Shing Shang Sequence
 
-Un joueur remporte la partie lorsqu’il parvient à amener l’un de ses dragons sur l’un des portails (cases spéciales) de son adversaire ou qu’il capture les deux dragons de son adversaire.
+Multiple jumps can be chained during the same turn. This chain of jumps is called a SHING SHANG.
+If, during a SHING SHANG, a player jumps over an opponent's piece, they must stop, and the opponent's piece is removed from the board. However, the player gains an additional turn with another piece.
 
 ----------------
 
 
-# Technologies utilisés
+# Specific Rule
 
-Le jeu a entièrement été développé sur [Eclipse](https://www.eclipse.org/) en `Java` JDK 14.0.2.
+Monkeys can move one or two squares in any direction—horizontally, vertically, or diagonally—but cannot change direction during the turn.
+Lions can move one square in any direction—horizontally, vertically, or diagonally.
+Dragons can only move by jumping.
+
+----------------
+
+# End of the Game
+A player wins the game when they manage to move one of their dragons to one of their opponent's portals (special squares) or when they capture both of their opponent's dragons.
+
+
+----------------
+
+
+# Technologies Used
+The game was fully developed on [Eclipse](https://www.eclipse.org/) using `Java` JDK 14.0.2.
 
 
